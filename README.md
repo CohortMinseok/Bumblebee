@@ -1,8 +1,8 @@
 # Bumblebee
 Bumblebee Bot
 
-pyinstaller --onefile --icon=icon.co main.py
-pyinstaller --onefile --noconsole --icon=icon.co main.py
+pyinstaller --onefile --icon=icon.co main.py \
+pyinstaller --onefile --noconsole --icon=icon.co main.py \
 
-Discord Link:
+Discord Link: \
 https://discord.gg/vWwbk4yA
