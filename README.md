@@ -18,5 +18,5 @@ pyinstaller --clean --onefile --add-binary "./gdi_capture/gdi_capture.dll;." --i
 - telegram function
 - 
 
-# Discord Link: \
+# Discord Link: 
 https://discord.gg/vWwbk4yA
