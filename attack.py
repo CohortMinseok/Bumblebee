@@ -9,7 +9,7 @@
 # import sys
 # import requests
 # import uuid
-# import random
+import random
 # import cv2
 # import time
 # from math import log10, floor
@@ -26,7 +26,7 @@ from time import perf_counter
 # from tkinter import *
 # import gdi_capture
 # from PIL import Image, ImageTk   
-# from configparser import ConfigParser
+from configparser import ConfigParser
 
 from theinterception import Interception
 from theinterception import KEYBOARD_MAPPING
@@ -68,6 +68,112 @@ def keyup(key):
     stroke = KeyStroke(keycode, KeyState.KEY_UP, 0)
     interception.send_key(stroke)
 
+
+# read player key settings on startup. 
+
+config = ConfigParser()
+config.read('keysettings.ini')
+atk = config.get('main', 'attack')
+jump = config.get('main', 'jump')
+teleport = config.get('main', 'teleport')
+ropeconnect = config.get('main', 'ropeconnect')
+
+async def leftp(x=31,y=101):
+    keydown('left')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def leftr(x=31,y=101):
+    keyup('left')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def rightp(x=31,y=101):
+    keydown('right')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def rightr(x=31,y=101):
+    keyup('right')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def upp(x=31,y=101):
+    keydown('up')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def upr(x=31,y=101):
+    keyup('up')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def downp(x=31,y=101):
+    keydown('down')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def downr(x=31,y=101):
+    keyup('down')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def jumpp(x=31,y=101):
+    keydown(jump)
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def jumpr(x=31,y=101):
+    keyup(jump)
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def teleportp(x=31,y=101):
+    keydown(teleport)
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def teleportr(x=31,y=101):
+    keyup(teleport)
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def attackp(x=31,y=101):
+    keydown(atk)
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def attackr(x=31,y=101):
+    keyup(atk)
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def ropeconnectp(x=31,y=101):
+    keydown(ropeconnect)
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def ropeconnectr(x=31,y=101):
+    keyup(ropeconnect)
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
 async def goleftattack():
     await leftp()
     await jumpp()
@@ -77,6 +183,32 @@ async def goleftattack():
     await attackp()
     await attackr()
     await leftr()
+
+async def gorightattack():
+    await rightp()
+    await jumpp()
+    await jumpr()    
+    await jumpp()
+    await jumpr()
+    await attackp()
+    await attackr()
+    await rightr()
+
+async def goupattack():
+    await rightp()
+    await ropeconnectp()
+    await ropeconnectr()
+    await attackp()
+    await attackr()
+    await rightr()
+
+async def godownattack():
+    await downp()    
+    await jumpp()
+    await jumpr()
+    await attackp()
+    await attackr()
+    await downr()
 
 
 

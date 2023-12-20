@@ -27,7 +27,7 @@ from tkinter import *
 import gdi_capture
 from PIL import Image, ImageTk   
 from configparser import ConfigParser
-from attack import goleftattack
+from attack import goleftattack, gorightattack, goupattack, godownattack
 
 # from theinterception.interception import Interception
 # from theinterception._keycodes import KEYBOARD_MAPPING
@@ -84,10 +84,10 @@ def keyup(key):
     interception.send_key(stroke)
 
 
-async def main(stop_event, left, right, top, btm):
+async def main(stop_event, left, right, top, btm, g):
     print(f'bot has started ..')
     time.sleep(.01)
-    
+
 
     xynotfound=0
     global pause
@@ -101,8 +101,9 @@ async def main(stop_event, left, right, top, btm):
                 if stop_event.is_set():
                     return
             print(f'script resumed ..')
-        #        
-        time.sleep(.011)
+        #
+        time.sleep(.511) # when testing ..
+        # time.sleep(.011) # when real botting ..
         g_variable = g.get_player_location()
         x, y = (None, None) if g_variable is None else g_variable
         if x == None or y == None:
@@ -111,7 +112,7 @@ async def main(stop_event, left, right, top, btm):
                 t = time.localtime()
                 currenttime = time.strftime("%H:%M:%S", t)
                 print(f'something is wrong .. character not found .. exiting .. {currenttime}')
-                stop_flag = True
+                # stop_flag = True
                 # randompicker_thread.join()
                 return
             print(f'x==None, pass ..')
@@ -132,9 +133,11 @@ async def main(stop_event, left, right, top, btm):
                 elif x > right+5:
                     await goleftattack()
                 elif x >= right-5 and x <= right+5:
-                    await downjumpatttack()
+                    await godownattack()
             elif y > top and not (y > btm-10 and y <= btm+5):
-                await downjumpatttack()
+                await godownattack()
+            else:
+                await godownattack()
 
 
         #
@@ -153,8 +156,9 @@ if __name__ == "__main__":
     initial_line_position = float(config.get('main', 'initial_line_position'))
     initial_line_position2 = float(config.get('main', 'initial_line_position2'))
     initial_line_position3 = float(config.get('main', 'initial_line_position3'))
-    print(f'{minimapX}, {minimapY}, {initial_line_position}, {initial_line_position2}, {initial_line_position3}')
-    g = None
+    initial_line_position4 = float(config.get('main', 'initial_line_position4'))
+    print(f'{minimapX}, {minimapY}, {initial_line_position}, {initial_line_position2}, {initial_line_position3}, {initial_line_position4}')
+    g = Game((8, 63, minimapX, minimapY)) # 
 
     
     def on_close():
@@ -172,6 +176,7 @@ if __name__ == "__main__":
         config.set('main', 'initial_line_position', str(line_position_slider.get()))
         config.set('main', 'initial_line_position2', str(line_position_slider2.get()))
         config.set('main', 'initial_line_position3', str(line_position_slider3.get()))
+        config.set('main', 'initial_line_position4', str(line_position_slider4.get()))
         with open('config.ini', 'w') as f:
             config.write(f)            
         for _, stop_event in threads:
@@ -197,7 +202,7 @@ if __name__ == "__main__":
     def start_the_main(stop_event):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        loop.run_until_complete(main(stop_event, line_position_slider, line_position_slider2, line_position_slider3))
+        loop.run_until_complete(main(stop_event, line_position_slider, line_position_slider2, line_position_slider3, line_position_slider4, g))
         loop.close()
 
     def entry_focus_in(event):
@@ -266,6 +271,12 @@ if __name__ == "__main__":
             vertical_line3 = canvas.create_line(2, initial_line_position, canvas_height, initial_line_position, fill="lime", width=2)
             line_position_slider3.config(to=canvas_height, length=canvas_height*2)
             update_line_position3(line_position_slider3.get())
+
+            vertical_line4 = canvas.create_line(2, initial_line_position, canvas_height, initial_line_position, fill="blue", width=2)
+            line_position_slider4.config(to=canvas_height, length=canvas_height*2)
+            update_line_position4(line_position_slider4.get())
+        
+        g = Game((8, 63, minimapX, minimapY)) # 
         
         # background_image = Image.open("bumblebee.gif")
         # background_image = background_image.resize((window_width, window_height),  Image.Resampling.LANCZOS)
@@ -285,6 +296,9 @@ if __name__ == "__main__":
 
     def update_line_position3(value):
         canvas.coords(vertical_line3, 0, float(value), canvas_width, float(value))
+    
+    def update_line_position4(value):
+        canvas.coords(vertical_line4, 0, float(value), canvas_width, float(value))
 
 
     # root start
@@ -371,14 +385,14 @@ if __name__ == "__main__":
     
     hwnd = gdi_capture.find_window_from_executable_name("MapleStory.exe")
     top, left, bottom, right = 8, 63, minimapX, minimapY
-    with gdi_capture.CaptureWindow(hwnd) as gdiimg:            
+    with gdi_capture.CaptureWindow(hwnd) as gdiimg:
         img_cropped = gdiimg[left:right, top:bottom]
         img_cropped = cv2.cvtColor(img_cropped, cv2.COLOR_BGR2RGB)
         img_cropped = Image.fromarray(img_cropped)
         tk_image = ImageTk.PhotoImage(img_cropped)
         canvas.delete("all")
-        canvas.config(width=minimapX-8,height=minimapY-63) 
-        canvas.create_image(0, 0, anchor=tk.NW, image=tk_image)        
+        canvas.config(width=minimapX-8,height=minimapY-63)
+        canvas.create_image(0, 0, anchor=tk.NW, image=tk_image)
         canvas.image = tk_image 
 
     canvas_width=minimapX-8
@@ -402,6 +416,11 @@ if __name__ == "__main__":
     line_position_slider3 = tk.Scale(frame2, from_=2, to=canvas_height, orient=tk.VERTICAL, length=canvas_height*2, resolution=1, command=update_line_position3)
     line_position_slider3.set(initial_line_position3)
     line_position_slider3.grid(row=0, column=1, rowspan=3, pady=(10,10), padx=(0,10))
+
+    vertical_line4 = canvas.create_line(2, initial_line_position, canvas_height, initial_line_position, fill="blue", width=2)
+    line_position_slider4 = tk.Scale(frame2, from_=2, to=canvas_height, orient=tk.VERTICAL, length=canvas_height*2, resolution=1, command=update_line_position4)
+    line_position_slider4.set(initial_line_position4)
+    line_position_slider4.grid(row=0, column=2, rowspan=3, pady=(10,10), padx=(0,10))
 
     root.protocol("WM_DELETE_WINDOW", on_close)
     threads = []
