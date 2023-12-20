@@ -15,6 +15,7 @@ pyinstaller --clean --onefile --add-binary "./gdi_capture/gdi_capture.dll;." --i
 - 
 
 # TODO:
+- runesolver
 - auto buff
 - auto feed pet
 - summons timer
