@@ -1,6 +1,7 @@
 
 *.toc
 *.pkg
+*.spec
 build/
 backup/
 dist/
