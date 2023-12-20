@@ -15,6 +15,10 @@ pyinstaller --clean --onefile --add-binary "./gdi_capture/gdi_capture.dll;." --i
 - 
 
 # TODO:
+- auto buff
+- auto feed pet
+- summons timer
+- other timer
 - telegram function
 - 
 
