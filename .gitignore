@@ -1,0 +1,7 @@
+
+*.toc
+*.pkg
+build/
+backup/
+dist/
+__pycache__/

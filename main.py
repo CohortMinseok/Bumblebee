@@ -87,6 +87,10 @@ def keyup(key):
 async def main(stop_event, left, right, top, btm, g):
     print(f'bot has started ..')
     time.sleep(.01)
+    left=left/2+0
+    right=right/2+0
+    top=top/2-8
+    btm=btm/2-8
 
 
     xynotfound=0
@@ -121,23 +125,25 @@ async def main(stop_event, left, right, top, btm, g):
         else:
             xynotfound=0
             if y > top and (y > btm-10 and y <= btm+5):
-                if x > left+5:
+                if x > left+15:
                     await goleftattack()
-                elif x < left-5:
+                elif x < left-15:
                     await gorightattack()
-                elif x >= left-5 and x <= left+5:
+                elif x >= left-15 and x <= left+15:
                     await goupattack()            
             elif y <= top and y > top-10:
-                if x < right-5:
+                if x < right-15:
                     await gorightattack()
-                elif x > right+5:
+                elif x > right+15:
                     await goleftattack()
-                elif x >= right-5 and x <= right+5:
+                elif x >= right-15 and x <= right+15:
                     await godownattack()
             elif y > top and not (y > btm-10 and y <= btm+5):
                 await godownattack()
             else:
                 await godownattack()
+        
+        print(f'{x=}, {y=}, {left=}, {top=}, {right=} {btm=}')
 
 
         #
@@ -200,9 +206,17 @@ if __name__ == "__main__":
             button.config(text='Pause', bg='lime')
 
     def start_the_main(stop_event):
+        g = Game((8, 63, minimapX, minimapY)) # 
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        loop.run_until_complete(main(stop_event, line_position_slider, line_position_slider2, line_position_slider3, line_position_slider4, g))
+        loop.run_until_complete(main(
+            stop_event, 
+            float(line_position_slider.get()), 
+            float(line_position_slider2.get()), 
+            float(line_position_slider3.get()), 
+            float(line_position_slider4.get()), 
+            g
+        ))
         loop.close()
 
     def entry_focus_in(event):
@@ -231,6 +245,7 @@ if __name__ == "__main__":
         global vertical_line
         global vertical_line2
         global vertical_line3
+        global vertical_line4
         global initial_line_position
         global canvas_width
         global canvas_height
@@ -248,16 +263,21 @@ if __name__ == "__main__":
         top, left, bottom, right = 8, 63, minimapX, minimapY
         with gdi_capture.CaptureWindow(hwnd) as img:            
             img_cropped = img[left:right, top:bottom]
+            height = (right-left)*2
+            width = (bottom-top)*2
+            img_cropped = cv2.resize(img_cropped, (width, height))
             img_cropped = cv2.cvtColor(img_cropped, cv2.COLOR_BGR2RGB)
             img_cropped = Image.fromarray(img_cropped)
             tk_image = ImageTk.PhotoImage(img_cropped)
             canvas.delete("all")
-            canvas.config(width=minimapX-8,height=minimapY-63)
+            canvas.config(width=width,height=height)
             canvas.create_image(0, 0, anchor=tk.NW, image=tk_image)        
             canvas.image = tk_image
             
-            canvas_width=minimapX-8
-            canvas_height=minimapY-63
+            canvas_width=width
+            canvas_height=height
+            # canvas_width=minimapX-8
+            # canvas_height=minimapY-63
             initial_line_position = canvas_width / 2
 
             vertical_line = canvas.create_line(initial_line_position, 2, initial_line_position, canvas_height, fill="red", width=2)
@@ -272,7 +292,7 @@ if __name__ == "__main__":
             line_position_slider3.config(to=canvas_height, length=canvas_height*2)
             update_line_position3(line_position_slider3.get())
 
-            vertical_line4 = canvas.create_line(2, initial_line_position, canvas_height, initial_line_position, fill="blue", width=2)
+            vertical_line4 = canvas.create_line(2, initial_line_position, canvas_height, initial_line_position, fill="lightblue", width=2)
             line_position_slider4.config(to=canvas_height, length=canvas_height*2)
             update_line_position4(line_position_slider4.get())
         
@@ -300,6 +320,22 @@ if __name__ == "__main__":
     def update_line_position4(value):
         canvas.coords(vertical_line4, 0, float(value), canvas_width, float(value))
 
+    def reset():        
+        global pause
+        pause=True
+        for _, stop_event in threads:
+            stop_event.set()
+        for thread, _ in threads:
+            thread.join()
+        stop_event = threading.Event()
+        thread = threading.Thread(target=start_the_main, args=(stop_event,))
+        thread.start()
+        threads.append((thread, stop_event))
+        label_currentleft.config(text=f"current left: {line_position_slider.get()}")
+        label_currentright.config(text=f"current right: {line_position_slider2.get()}")
+        label_currenttop.config(text=f"current top: {line_position_slider3.get()}")
+        label_currentbtm.config(text=f"current btm: {line_position_slider4.get()}")
+        
 
     # root start
     root = tk.Tk()
@@ -358,24 +394,33 @@ if __name__ == "__main__":
     frame = tk.Frame(root, bg='', bd=0)
     # frame = tk.Frame(root, bg='#ffbb29')
     frame.pack(padx=0, pady=0)
-    # label1 = tk.Label(frame, text="x:", fg="black", bg='#ffbb29')
-    # label1.grid(row=0, column=0, padx=(5,0), pady=0, sticky=tk.E)
-    entry1 = tk.Entry(frame, width=10, fg='Gray')
-    entry1.insert(0, 'Enter x...')
-    entry1.bind("<FocusIn>", entry_focus_in)
-    entry1.bind("<FocusOut>", entry_focus_out)
-    entry1.grid(row=0, column=0, padx=(0,1), pady=(0,1))
-    # label2 = tk.Label(frame, text="y:", fg="black", bg='#ffbb29')
-    # label2.grid(row=1, column=0, padx=(5,0), pady=0, sticky=tk.E)
-    entry2 = tk.Entry(frame, width=10, fg='Gray')
-    entry2.insert(0, 'Enter y...')
-    entry2.bind("<FocusIn>", entry2_focus_in)
-    entry2.bind("<FocusOut>", entry2_focus_out)
-    entry2.grid(row=0, column=1, padx=(1,0), pady=(0,1))
+    # # label1 = tk.Label(frame, text="x:", fg="black", bg='#ffbb29')
+    # # label1.grid(row=0, column=0, padx=(5,0), pady=0, sticky=tk.E)
+    # entry1 = tk.Entry(frame, width=10, fg='Gray')
+    # entry1.insert(0, 'Enter x...')
+    # entry1.bind("<FocusIn>", entry_focus_in)
+    # entry1.bind("<FocusOut>", entry_focus_out)
+    # entry1.grid(row=0, column=0, padx=(0,1), pady=(0,1))
+    # # label2 = tk.Label(frame, text="y:", fg="black", bg='#ffbb29')
+    # # label2.grid(row=1, column=0, padx=(5,0), pady=0, sticky=tk.E)
+    # entry2 = tk.Entry(frame, width=10, fg='Gray')
+    # entry2.insert(0, 'Enter y...')
+    # entry2.bind("<FocusIn>", entry2_focus_in)
+    # entry2.bind("<FocusOut>", entry2_focus_out)
+    # entry2.grid(row=0, column=1, padx=(1,0), pady=(0,1))
+    entry1 = Spinbox(frame, from_=100, to=400, font=("Helvetica", 16), width=5, increment=10)
+    entry1.delete(0,tk.END)
+    entry1.insert(0,minimapX)
+    entry1.grid(row=0,column=0, padx=(0,0), pady=(0,0))
+    entry2 = Spinbox(frame, from_=100, to=300, font=("Helvetica", 16), width=5, increment=10)
+    entry2.delete(0,tk.END)
+    entry2.insert(0,minimapY)
+    entry2.grid(row=0,column=1, padx=(0,0), pady=(0,0))
     button2 = tk.Button(frame, text="adjust minimap", command=button_adjustminimap)
     button2.grid(row=0, column=2, padx=(1,0), pady=(0,1))
     image_path = "minimap.png"  # Replace with the actual path to your image
     img = PhotoImage(file=image_path)
+
 
     frame2 = tk.Frame(root, bg='orange', bd=0)
     frame2.pack(padx=0, pady=0)
@@ -388,15 +433,23 @@ if __name__ == "__main__":
     with gdi_capture.CaptureWindow(hwnd) as gdiimg:
         img_cropped = gdiimg[left:right, top:bottom]
         img_cropped = cv2.cvtColor(img_cropped, cv2.COLOR_BGR2RGB)
+        height, width = img_cropped.shape[:2]
+        width = width*2
+        height = height*2
+        # width = (right-left)*2
+        # height = (bottom-top)*2
+        img_cropped = cv2.resize(img_cropped, (width, height))
         img_cropped = Image.fromarray(img_cropped)
         tk_image = ImageTk.PhotoImage(img_cropped)
         canvas.delete("all")
-        canvas.config(width=minimapX-8,height=minimapY-63)
+        canvas.config(width=width,height=height)
         canvas.create_image(0, 0, anchor=tk.NW, image=tk_image)
         canvas.image = tk_image 
 
-    canvas_width=minimapX-8
-    canvas_height=minimapY-63
+    canvas_width=width
+    canvas_height=height
+    # canvas_width=minimapX-8
+    # canvas_height=minimapY-63
 
     vertical_line = canvas.create_line(initial_line_position, 0, initial_line_position, minimapY-63, fill="red", width=2)    
     # slider_label = tk.Label(frame, text="left threshold:", bg='#ffbb29')
@@ -417,10 +470,25 @@ if __name__ == "__main__":
     line_position_slider3.set(initial_line_position3)
     line_position_slider3.grid(row=0, column=1, rowspan=3, pady=(10,10), padx=(0,10))
 
-    vertical_line4 = canvas.create_line(2, initial_line_position, canvas_height, initial_line_position, fill="blue", width=2)
+    vertical_line4 = canvas.create_line(2, initial_line_position, canvas_height, initial_line_position, fill="lightblue", width=2)
     line_position_slider4 = tk.Scale(frame2, from_=2, to=canvas_height, orient=tk.VERTICAL, length=canvas_height*2, resolution=1, command=update_line_position4)
     line_position_slider4.set(initial_line_position4)
     line_position_slider4.grid(row=0, column=2, rowspan=3, pady=(10,10), padx=(0,10))
+
+    
+    frame3 = tk.Frame(root, bg='', bd=0)
+    frame3.pack(padx=0, pady=0)  
+    label_currentleft = tk.Label(frame3, text=f"current left: {line_position_slider.get()}")
+    label_currentleft.grid(row=0, column=0, pady=0, padx=5)  
+    label_currenttop = tk.Label(frame3, text=f"current top: {line_position_slider3.get()}")
+    label_currenttop.grid(row=0, column=1, pady=0, padx=5)  
+    label_currentright = tk.Label(frame3, text=f"current right: {line_position_slider2.get()}")
+    label_currentright.grid(row=1, column=0, pady=0, padx=5)  
+    label_currentbtm = tk.Label(frame3, text=f"current btm: {line_position_slider4.get()}")
+    label_currentbtm.grid(row=1, column=1, pady=0, padx=5)  
+    button3 = tk.Button(frame3, text="Reset", command=reset, width=10, height=2, bg='yellow', font=('Helvetica', 8))
+    button3.grid(row=2, column=0, columnspan=2, pady=(10,10), padx=(20,20))
+
 
     root.protocol("WM_DELETE_WINDOW", on_close)
     threads = []
