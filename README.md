@@ -2,7 +2,7 @@
 Bumblebee Bot
 
 # Description: 
-a bot for maplestorysea (gms/kms also can use). 
+a bot for master dungeon 2d. 
 
 # Rules:
 - only have one rule: bot at your own risk!
