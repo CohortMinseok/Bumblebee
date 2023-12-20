@@ -19,7 +19,9 @@
 <span class="moduletype">Script</span>  <div class="import">
 imports:
     <a href="#PIL">PIL</a>
+ &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageGrab">PIL.ImageGrab</a>
+ &#8226;   <a href="#PIL.ImageTk">PIL.ImageTk</a>
  &#8226;   <a href="#_collections_abc">_collections_abc</a>
  &#8226;   <a href="#_weakrefset">_weakrefset</a>
  &#8226;   <a href="#abc">abc</a>
@@ -27,6 +29,7 @@ imports:
  &#8226;   <a href="#codecs">codecs</a>
  &#8226;   <a href="#collections">collections</a>
  &#8226;   <a href="#collections.abc">collections.abc</a>
+ &#8226;   <a href="#configparser">configparser</a>
  &#8226;   <a href="#copyreg">copyreg</a>
  &#8226;   <a href="#cv2">cv2</a>
  &#8226;   <a href="#datetime">datetime</a>
@@ -155,10 +158,10 @@ imports:
  &#8226;   <a href="#enum">enum</a>
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#game">game</a>
+ &#8226;   <a href="#gdi_capture">gdi_capture</a>
  &#8226;   <a href="#genericpath">genericpath</a>
  &#8226;   <a href="#heapq">heapq</a>
  &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#json">json</a>
  &#8226;   <a href="#keyword">keyword</a>
  &#8226;   <a href="#linecache">linecache</a>
  &#8226;   <a href="#locale">locale</a>
@@ -168,7 +171,6 @@ imports:
  &#8226;   <a href="#operator">operator</a>
  &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#posixpath">posixpath</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#pyi_rth__tkinter.py">pyi_rth__tkinter.py</a>
  &#8226;   <a href="#pyi_rth_inspect.py">pyi_rth_inspect.py</a>
  &#8226;   <a href="#pyi_rth_multiprocessing.py">pyi_rth_multiprocessing.py</a>
@@ -184,26 +186,21 @@ imports:
  &#8226;   <a href="#re._constants">re._constants</a>
  &#8226;   <a href="#re._parser">re._parser</a>
  &#8226;   <a href="#reprlib">reprlib</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#signal">signal</a>
- &#8226;   <a href="#socket">socket</a>
  &#8226;   <a href="#sre_compile">sre_compile</a>
  &#8226;   <a href="#sre_constants">sre_constants</a>
  &#8226;   <a href="#sre_parse">sre_parse</a>
  &#8226;   <a href="#stat">stat</a>
- &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception._utils">theinterception._utils</a>
+ &#8226;   <a href="#theinterception.exceptions">theinterception.exceptions</a>
  &#8226;   <a href="#threading">threading</a>
  &#8226;   <a href="#time">time</a>
  &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#tkinter.messagebox">tkinter.messagebox</a>
  &#8226;   <a href="#traceback">traceback</a>
  &#8226;   <a href="#types">types</a>
- &#8226;   <a href="#uuid">uuid</a>
  &#8226;   <a href="#warnings">warnings</a>
  &#8226;   <a href="#weakref">weakref</a>
- &#8226;   <a href="#win32api">win32api</a>
- &#8226;   <a href="#win32con">win32con</a>
- &#8226;   <a href="#win32gui">win32gui</a>
 
   </div>
 
@@ -327,17 +324,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="'OpenSSL.crypto'"></a>
-  <a target="code" href="" type="text/plain"><tt>'OpenSSL.crypto'</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="'Xlib.X'"></a>
   <a target="code" href="" type="text/plain"><tt>'Xlib.X'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
@@ -354,8 +340,7 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>'Xlib.XK'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#pyautogui._pyautogui_x11">pyautogui._pyautogui_x11</a>
- &#8226;   <a href="#pynput._util.xorg">pynput._util.xorg</a>
+    <a href="#pynput._util.xorg">pynput._util.xorg</a>
  &#8226;   <a href="#pynput.keyboard._xorg">pynput.keyboard._xorg</a>
 
   </div>
@@ -367,9 +352,7 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>'Xlib.display'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#pyautogui._pyautogui_x11">pyautogui._pyautogui_x11</a>
- &#8226;   <a href="#pynput._util.xorg">pynput._util.xorg</a>
- &#8226;   <a href="#pynput.keyboard._xorg">pynput.keyboard._xorg</a>
+    <a href="#pynput.keyboard._xorg">pynput.keyboard._xorg</a>
  &#8226;   <a href="#pynput.mouse._xorg">pynput.mouse._xorg</a>
 
   </div>
@@ -381,8 +364,7 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>'Xlib.ext'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#pyautogui._pyautogui_x11">pyautogui._pyautogui_x11</a>
- &#8226;   <a href="#pynput.keyboard._xorg">pynput.keyboard._xorg</a>
+    <a href="#pynput.keyboard._xorg">pynput.keyboard._xorg</a>
  &#8226;   <a href="#pynput.mouse._xorg">pynput.mouse._xorg</a>
 
   </div>
@@ -419,17 +401,6 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#pynput._util.xorg">pynput._util.xorg</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="'cryptography.x509'"></a>
-  <a target="code" href="" type="text/plain"><tt>'cryptography.x509'</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
 
   </div>
 
@@ -486,17 +457,6 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#pkg_resources._vendor.jaraco.functools">pkg_resources._vendor.jaraco.functools</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="'rubicon.objc'"></a>
-  <a target="code" href="" type="text/plain"><tt>'rubicon.objc'</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#mouseinfo">mouseinfo</a>
 
   </div>
 
@@ -626,9 +586,7 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>AppKit</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#pyautogui._pyautogui_osx">pyautogui._pyautogui_osx</a>
- &#8226;   <a href="#pynput.mouse._darwin">pynput.mouse._darwin</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
+    <a href="#pynput.mouse._darwin">pynput.mouse._darwin</a>
 
   </div>
 
@@ -646,33 +604,11 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="Foundation"></a>
-  <a target="code" href="" type="text/plain"><tt>Foundation</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#pyperclip">pyperclip</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="HIServices"></a>
   <a target="code" href="" type="text/plain"><tt>HIServices</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#pynput._util.darwin">pynput._util.darwin</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="OpenSSL"></a>
-  <a target="code" href="" type="text/plain"><tt>OpenSSL</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
 
   </div>
 
@@ -693,16 +629,12 @@ imports:
  &#8226;   <a href="#PIL.ImageChops">PIL.ImageChops</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
  &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
- &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
- &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageGrab">PIL.ImageGrab</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
  &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
- &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageSequence">PIL.ImageSequence</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
@@ -718,9 +650,7 @@ imports:
  &#8226;   <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
  &#8226;   <a href="#PIL.TiffTags">PIL.TiffTags</a>
  &#8226;   <a href="#PIL._imaging">PIL._imaging</a>
- &#8226;   <a href="#PIL._imagingagg">PIL._imagingagg</a>
  &#8226;   <a href="#PIL._imagingcms">PIL._imagingcms</a>
- &#8226;   <a href="#PIL._imagingft">PIL._imagingft</a>
  &#8226;   <a href="#PIL._imagingtk">PIL._imagingtk</a>
  &#8226;   <a href="#PIL._version">PIL._version</a>
  &#8226;   <a href="#PIL._webp">PIL._webp</a>
@@ -755,16 +685,12 @@ imported by:
  &#8226;   <a href="#PIL.ImageChops">PIL.ImageChops</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
  &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
- &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
- &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageGrab">PIL.ImageGrab</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
  &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
- &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageSequence">PIL.ImageSequence</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
@@ -807,15 +733,12 @@ imported by:
  &#8226;   <a href="#PIL._deprecate">PIL._deprecate</a>
  &#8226;   <a href="#PIL._imaging">PIL._imaging</a>
  &#8226;   <a href="#PIL._imagingcms">PIL._imagingcms</a>
- &#8226;   <a href="#PIL._imagingft">PIL._imagingft</a>
  &#8226;   <a href="#PIL._imagingtk">PIL._imagingtk</a>
  &#8226;   <a href="#PIL._util">PIL._util</a>
  &#8226;   <a href="#PIL._version">PIL._version</a>
  &#8226;   <a href="#PIL._webp">PIL._webp</a>
  &#8226;   <a href="#PIL.features">PIL.features</a>
  &#8226;   <a href="#main.py">main.py</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
 
   </div>
 
@@ -1377,14 +1300,10 @@ imported by:
  &#8226;   <a href="#PIL.ImageChops">PIL.ImageChops</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
  &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
- &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
- &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
  &#8226;   <a href="#PIL.ImageFilter">PIL.ImageFilter</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageGrab">PIL.ImageGrab</a>
  &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
- &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
  &#8226;   <a href="#PIL.ImageTk">PIL.ImageTk</a>
@@ -1418,8 +1337,7 @@ imported by:
  &#8226;   <a href="#PIL.XbmImagePlugin">PIL.XbmImagePlugin</a>
  &#8226;   <a href="#PIL.XpmImagePlugin">PIL.XpmImagePlugin</a>
  &#8226;   <a href="#PIL.features">PIL.features</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
+ &#8226;   <a href="#main.py">main.py</a>
 
   </div>
 
@@ -1482,57 +1400,8 @@ imports:
 imported by:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
- &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
- &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
  &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
  &#8226;   <a href="#PIL.ImagePalette">PIL.ImagePalette</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="PIL.ImageDraw"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/PIL/ImageDraw.py" type="text/plain"><tt>PIL.ImageDraw</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.Image">PIL.Image</a>
- &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
- &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
- &#8226;   <a href="#PIL._imagingagg">PIL._imagingagg</a>
- &#8226;   <a href="#math">math</a>
- &#8226;   <a href="#numbers">numbers</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="PIL.ImageDraw2"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/PIL/ImageDraw2.py" type="text/plain"><tt>PIL.ImageDraw2</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.Image">PIL.Image</a>
- &#8226;   <a href="#PIL.ImageColor">PIL.ImageColor</a>
- &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
- &#8226;   <a href="#PIL.ImagePath">PIL.ImagePath</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
 
   </div>
 
@@ -1624,33 +1493,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="PIL.ImageFont"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/PIL/ImageFont.py" type="text/plain"><tt>PIL.ImageFont</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.Image">PIL.Image</a>
- &#8226;   <a href="#PIL._imagingft">PIL._imagingft</a>
- &#8226;   <a href="#PIL._util">PIL._util</a>
- &#8226;   <a href="#base64">base64</a>
- &#8226;   <a href="#enum">enum</a>
- &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
- &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="PIL.ImageGrab"></a>
   <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/PIL/ImageGrab.py" type="text/plain"><tt>PIL.ImageGrab</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -1672,8 +1514,6 @@ imports:
 imported by:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#main.py">main.py</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
 
   </div>
 
@@ -1716,7 +1556,6 @@ imports:
 imported by:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
 
   </div>
 
@@ -1754,24 +1593,6 @@ imported by:
  &#8226;   <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
  &#8226;   <a href="#PIL.XVThumbImagePlugin">PIL.XVThumbImagePlugin</a>
  &#8226;   <a href="#PIL.XpmImagePlugin">PIL.XpmImagePlugin</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="PIL.ImagePath"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/PIL/ImagePath.py" type="text/plain"><tt>PIL.ImagePath</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.Image">PIL.Image</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.ImageDraw2">PIL.ImageDraw2</a>
 
   </div>
 
@@ -1856,6 +1677,7 @@ imports:
 imported by:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#PIL.SpiderImagePlugin">PIL.SpiderImagePlugin</a>
+ &#8226;   <a href="#main.py">main.py</a>
 
   </div>
 
@@ -2691,18 +2513,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="PIL._imagingagg"></a>
-  <a target="code" href="" type="text/plain"><tt>PIL._imagingagg</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="PIL._imagingcms"></a>
   <tt>PIL._imagingcms</tt> <span class="moduletype"><tt>C:\Users\Screwdriver\AppData\Local\Programs\Python\Python312\Lib\site-packages\PIL\_imagingcms.cp312-win_amd64.pyd</tt></span>  <div class="import">
 imports:
@@ -2713,22 +2523,6 @@ imports:
 imported by:
     <a href="#PIL">PIL</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="PIL._imagingft"></a>
-  <tt>PIL._imagingft</tt> <span class="moduletype"><tt>C:\Users\Screwdriver\AppData\Local\Programs\Python\Python312\Lib\site-packages\PIL\_imagingft.cp312-win_amd64.pyd</tt></span>  <div class="import">
-imports:
-    <a href="#PIL">PIL</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
 
   </div>
 
@@ -2765,7 +2559,6 @@ imported by:
     <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.PyAccess">PIL.PyAccess</a>
 
@@ -2829,35 +2622,11 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="PyQt4"></a>
-  <a target="code" href="" type="text/plain"><tt>PyQt4</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#pyperclip">pyperclip</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="PyQt5"></a>
-  <a target="code" href="" type="text/plain"><tt>PyQt5</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#pyperclip">pyperclip</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="Quartz"></a>
   <a target="code" href="" type="text/plain"><tt>Quartz</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#pyautogui._pyautogui_osx">pyautogui._pyautogui_osx</a>
- &#8226;   <a href="#pygetwindow._pygetwindow_macos">pygetwindow._pygetwindow_macos</a>
- &#8226;   <a href="#pynput._util.darwin">pynput._util.darwin</a>
+    <a href="#pynput._util.darwin">pynput._util.darwin</a>
  &#8226;   <a href="#pynput.keyboard._darwin">pynput.keyboard._darwin</a>
  &#8226;   <a href="#pynput.mouse._darwin">pynput.mouse._darwin</a>
 
@@ -2877,24 +2646,11 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="Tkinter"></a>
-  <a target="code" href="" type="text/plain"><tt>Tkinter</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#mouseinfo">mouseinfo</a>
- &#8226;   <a href="#pymsgbox">pymsgbox</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="Xlib"></a>
   <a target="code" href="" type="text/plain"><tt>Xlib</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#mouseinfo">mouseinfo</a>
- &#8226;   <a href="#pyautogui._pyautogui_x11">pyautogui._pyautogui_x11</a>
+    <a href="#pynput._util.xorg">pynput._util.xorg</a>
 
   </div>
 
@@ -2931,39 +2687,12 @@ imported by:
  &#8226;   <a href="#pkg_resources._vendor.platformdirs.macos">pkg_resources._vendor.platformdirs.macos</a>
  &#8226;   <a href="#pkg_resources._vendor.platformdirs.unix">pkg_resources._vendor.platformdirs.unix</a>
  &#8226;   <a href="#pkg_resources._vendor.platformdirs.windows">pkg_resources._vendor.platformdirs.windows</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#pydoc">pydoc</a>
- &#8226;   <a href="#pytweening">pytweening</a>
  &#8226;   <a href="#setuptools._vendor.tomli._parser">setuptools._vendor.tomli._parser</a>
  &#8226;   <a href="#setuptools._vendor.tomli._re">setuptools._vendor.tomli._re</a>
  &#8226;   <a href="#six">six</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3._request_methods">urllib3._request_methods</a>
- &#8226;   <a href="#urllib3._version">urllib3._version</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.fields">urllib3.fields</a>
- &#8226;   <a href="#urllib3.filepost">urllib3.filepost</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
- &#8226;   <a href="#urllib3.util.proxy">urllib3.util.proxy</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.response">urllib3.util.response</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#urllib3.util.ssl_match_hostname">urllib3.util.ssl_match_hostname</a>
- &#8226;   <a href="#urllib3.util.ssltransport">urllib3.util.ssltransport</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
- &#8226;   <a href="#urllib3.util.util">urllib3.util.util</a>
- &#8226;   <a href="#urllib3.util.wait">urllib3.util.wait</a>
+ &#8226;   <a href="#theinterception._consts">theinterception._consts</a>
+ &#8226;   <a href="#theinterception.device">theinterception.device</a>
 
   </div>
 
@@ -3485,8 +3214,7 @@ imported by:
   <a name="_multibytecodec"></a>
   <tt>_multibytecodec</tt> <span class="moduletype"><i>(builtin module)</i></span>  <div class="import">
 imported by:
-    <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
- &#8226;   <a href="#encodings.big5">encodings.big5</a>
+    <a href="#encodings.big5">encodings.big5</a>
  &#8226;   <a href="#encodings.big5hkscs">encodings.big5hkscs</a>
  &#8226;   <a href="#encodings.cp932">encodings.cp932</a>
  &#8226;   <a href="#encodings.cp949">encodings.cp949</a>
@@ -3984,16 +3712,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="_uuid"></a>
-  <tt>_uuid</tt> <span class="moduletype"><tt>C:\Users\Screwdriver\AppData\Local\Programs\Python\Python312\DLLs\_uuid.pyd</tt></span>  <div class="import">
-imported by:
-    <a href="#uuid">uuid</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="_warnings"></a>
   <tt>_warnings</tt> <span class="moduletype"><i>(builtin module)</i></span>  <div class="import">
 imported by:
@@ -4159,7 +3877,6 @@ imported by:
  &#8226;   <a href="#tarfile">tarfile</a>
  &#8226;   <a href="#tokenize">tokenize</a>
  &#8226;   <a href="#unittest.main">unittest.main</a>
- &#8226;   <a href="#uuid">uuid</a>
  &#8226;   <a href="#zipfile.__main__">zipfile.__main__</a>
 
   </div>
@@ -5181,19 +4898,16 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#PIL.ImageFont">PIL.ImageFont</a>
- &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
+    <a href="#email._encoded_words">email._encoded_words</a>
  &#8226;   <a href="#email.base64mime">email.base64mime</a>
  &#8226;   <a href="#email.encoders">email.encoders</a>
  &#8226;   <a href="#encodings.base64_codec">encodings.base64_codec</a>
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#pycparser.ply.yacc">pycparser.ply.yacc</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
  &#8226;   <a href="#secrets">secrets</a>
  &#8226;   <a href="#setuptools._distutils.command.upload">setuptools._distutils.command.upload</a>
  &#8226;   <a href="#ssl">ssl</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
  &#8226;   <a href="#xmlrpc.client">xmlrpc.client</a>
 
   </div>
@@ -5237,8 +4951,6 @@ imported by:
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#plistlib">plistlib</a>
  &#8226;   <a href="#quopri">quopri</a>
- &#8226;   <a href="#urllib3.filepost">urllib3.filepost</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
  &#8226;   <a href="#zipfile">zipfile</a>
 
   </div>
@@ -5255,36 +4967,10 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#idna.core">idna.core</a>
- &#8226;   <a href="#idna.intranges">idna.intranges</a>
- &#8226;   <a href="#multiprocessing.heap">multiprocessing.heap</a>
+    <a href="#multiprocessing.heap">multiprocessing.heap</a>
  &#8226;   <a href="#random">random</a>
  &#8226;   <a href="#statistics">statistics</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="brotli"></a>
-  <a target="code" href="" type="text/plain"><tt>brotli</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="brotlicffi"></a>
-  <a target="code" href="" type="text/plain"><tt>brotlicffi</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
 
   </div>
 
@@ -5390,46 +5076,7 @@ imported by:
  &#8226;   <a href="#_strptime">_strptime</a>
  &#8226;   <a href="#email._parseaddr">email._parseaddr</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
  &#8226;   <a href="#ssl">ssl</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="certifi"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/certifi/__init__.py" type="text/plain"><tt>certifi</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#certifi.core">certifi.core</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#certifi.core">certifi.core</a>
- &#8226;   <a href="#requests.certs">requests.certs</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="certifi.core"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/certifi/core.py" type="text/plain"><tt>certifi.core</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#certifi">certifi</a>
- &#8226;   <a href="#importlib.resources">importlib.resources</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#types">types</a>
- &#8226;   <a href="#typing">typing</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#certifi">certifi</a>
 
   </div>
 
@@ -5891,248 +5538,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="chardet"></a>
-  <a target="code" href="" type="text/plain"><tt>chardet</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#requests.packages">requests.packages</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="charset_normalizer"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/charset_normalizer/__init__.py" type="text/plain"><tt>charset_normalizer</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#charset_normalizer.api">charset_normalizer.api</a>
- &#8226;   <a href="#charset_normalizer.legacy">charset_normalizer.legacy</a>
- &#8226;   <a href="#charset_normalizer.md__mypyc">charset_normalizer.md__mypyc</a>
- &#8226;   <a href="#charset_normalizer.models">charset_normalizer.models</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
- &#8226;   <a href="#charset_normalizer.version">charset_normalizer.version</a>
- &#8226;   <a href="#logging">logging</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#charset_normalizer.api">charset_normalizer.api</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
- &#8226;   <a href="#charset_normalizer.constant">charset_normalizer.constant</a>
- &#8226;   <a href="#charset_normalizer.legacy">charset_normalizer.legacy</a>
- &#8226;   <a href="#charset_normalizer.md">charset_normalizer.md</a>
- &#8226;   <a href="#charset_normalizer.md__mypyc">charset_normalizer.md__mypyc</a>
- &#8226;   <a href="#charset_normalizer.models">charset_normalizer.models</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
- &#8226;   <a href="#charset_normalizer.version">charset_normalizer.version</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#requests.packages">requests.packages</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="charset_normalizer.api"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/charset_normalizer/api.py" type="text/plain"><tt>charset_normalizer.api</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
- &#8226;   <a href="#charset_normalizer.constant">charset_normalizer.constant</a>
- &#8226;   <a href="#charset_normalizer.md">charset_normalizer.md</a>
- &#8226;   <a href="#charset_normalizer.models">charset_normalizer.models</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#typing">typing</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#charset_normalizer.legacy">charset_normalizer.legacy</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="charset_normalizer.cd"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/charset_normalizer/cd.py" type="text/plain"><tt>charset_normalizer.cd</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#charset_normalizer.constant">charset_normalizer.constant</a>
- &#8226;   <a href="#charset_normalizer.md">charset_normalizer.md</a>
- &#8226;   <a href="#charset_normalizer.models">charset_normalizer.models</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
- &#8226;   <a href="#codecs">codecs</a>
- &#8226;   <a href="#collections">collections</a>
- &#8226;   <a href="#functools">functools</a>
- &#8226;   <a href="#importlib">importlib</a>
- &#8226;   <a href="#typing">typing</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#charset_normalizer.api">charset_normalizer.api</a>
- &#8226;   <a href="#charset_normalizer.models">charset_normalizer.models</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="charset_normalizer.constant"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/charset_normalizer/constant.py" type="text/plain"><tt>charset_normalizer.constant</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#codecs">codecs</a>
- &#8226;   <a href="#encodings.aliases">encodings.aliases</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#typing">typing</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#charset_normalizer.api">charset_normalizer.api</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
- &#8226;   <a href="#charset_normalizer.legacy">charset_normalizer.legacy</a>
- &#8226;   <a href="#charset_normalizer.models">charset_normalizer.models</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="charset_normalizer.legacy"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/charset_normalizer/legacy.py" type="text/plain"><tt>charset_normalizer.legacy</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#charset_normalizer.api">charset_normalizer.api</a>
- &#8226;   <a href="#charset_normalizer.constant">charset_normalizer.constant</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#charset_normalizer">charset_normalizer</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="charset_normalizer.md"></a>
-  <tt>charset_normalizer.md</tt> <span class="moduletype"><tt>C:\Users\Screwdriver\AppData\Local\Programs\Python\Python312\Lib\site-packages\charset_normalizer\md.cp312-win_amd64.pyd</tt></span>  <div class="import">
-imports:
-    <a href="#charset_normalizer">charset_normalizer</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#charset_normalizer.api">charset_normalizer.api</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="charset_normalizer.md__mypyc"></a>
-  <tt>charset_normalizer.md__mypyc</tt> <span class="moduletype"><tt>C:\Users\Screwdriver\AppData\Local\Programs\Python\Python312\Lib\site-packages\charset_normalizer\md__mypyc.cp312-win_amd64.pyd</tt></span>  <div class="import">
-imports:
-    <a href="#charset_normalizer">charset_normalizer</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#charset_normalizer">charset_normalizer</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="charset_normalizer.models"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/charset_normalizer/models.py" type="text/plain"><tt>charset_normalizer.models</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
- &#8226;   <a href="#charset_normalizer.constant">charset_normalizer.constant</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
- &#8226;   <a href="#encodings.aliases">encodings.aliases</a>
- &#8226;   <a href="#hashlib">hashlib</a>
- &#8226;   <a href="#json">json</a>
- &#8226;   <a href="#typing">typing</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#charset_normalizer.api">charset_normalizer.api</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="charset_normalizer.utils"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/charset_normalizer/utils.py" type="text/plain"><tt>charset_normalizer.utils</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#_multibytecodec">_multibytecodec</a>
- &#8226;   <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#charset_normalizer.constant">charset_normalizer.constant</a>
- &#8226;   <a href="#codecs">codecs</a>
- &#8226;   <a href="#encodings.aliases">encodings.aliases</a>
- &#8226;   <a href="#functools">functools</a>
- &#8226;   <a href="#importlib">importlib</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#unicodedata">unicodedata</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#charset_normalizer.api">charset_normalizer.api</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
- &#8226;   <a href="#charset_normalizer.models">charset_normalizer.models</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="charset_normalizer.version"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/charset_normalizer/version.py" type="text/plain"><tt>charset_normalizer.version</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#charset_normalizer">charset_normalizer</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#charset_normalizer">charset_normalizer</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="cmd"></a>
   <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/cmd.py" type="text/plain"><tt>cmd</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -6185,9 +5590,6 @@ imports:
 imported by:
     <a href="#PIL.PdfParser">PIL.PdfParser</a>
  &#8226;   <a href="#_pickle">_pickle</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
- &#8226;   <a href="#charset_normalizer.constant">charset_normalizer.constant</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
  &#8226;   <a href="#encodings">encodings</a>
  &#8226;   <a href="#encodings.ascii">encodings.ascii</a>
  &#8226;   <a href="#encodings.base64_codec">encodings.base64_codec</a>
@@ -6313,9 +5715,7 @@ imported by:
  &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#pickle">pickle</a>
  &#8226;   <a href="#plistlib">plistlib</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#tokenize">tokenize</a>
- &#8226;   <a href="#urllib3.filepost">urllib3.filepost</a>
  &#8226;   <a href="#xml.sax.saxutils">xml.sax.saxutils</a>
 
   </div>
@@ -6375,7 +5775,6 @@ imported by:
  &#8226;   <a href="#asyncio.sslproto">asyncio.sslproto</a>
  &#8226;   <a href="#asyncio.streams">asyncio.streams</a>
  &#8226;   <a href="#cffi.api">cffi.api</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
  &#8226;   <a href="#collections.abc">collections.abc</a>
  &#8226;   <a href="#concurrent.futures._base">concurrent.futures._base</a>
  &#8226;   <a href="#configparser">configparser</a>
@@ -6409,16 +5808,8 @@ imported by:
  &#8226;   <a href="#pkgutil">pkgutil</a>
  &#8226;   <a href="#platform">platform</a>
  &#8226;   <a href="#pprint">pprint</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#pydoc">pydoc</a>
- &#8226;   <a href="#pygetwindow">pygetwindow</a>
- &#8226;   <a href="#pyrect">pyrect</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
  &#8226;   <a href="#queue">queue</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
- &#8226;   <a href="#requests.structures">requests.structures</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#selectors">selectors</a>
  &#8226;   <a href="#setuptools._distutils._collections">setuptools._distutils._collections</a>
  &#8226;   <a href="#setuptools._vendor.importlib_metadata">setuptools._vendor.importlib_metadata</a>
@@ -6448,8 +5839,6 @@ imported by:
  &#8226;   <a href="#unittest.case">unittest.case</a>
  &#8226;   <a href="#unittest.util">unittest.util</a>
  &#8226;   <a href="#urllib.parse">urllib.parse</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
 
   </div>
 
@@ -6485,7 +5874,6 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#collections">collections</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#setuptools._vendor.ordered_set">setuptools._vendor.ordered_set</a>
 
   </div>
@@ -6526,8 +5914,6 @@ imported by:
  &#8226;   <a href="#pkg_resources._vendor.more_itertools.more">pkg_resources._vendor.more_itertools.more</a>
  &#8226;   <a href="#pkg_resources._vendor.more_itertools.recipes">pkg_resources._vendor.more_itertools.recipes</a>
  &#8226;   <a href="#pkg_resources._vendor.typing_extensions">pkg_resources._vendor.typing_extensions</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
  &#8226;   <a href="#selectors">selectors</a>
  &#8226;   <a href="#setuptools._distutils._functools">setuptools._distutils._functools</a>
  &#8226;   <a href="#setuptools._vendor.more_itertools.more">setuptools._vendor.more_itertools.more</a>
@@ -6683,7 +6069,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#pkg_resources._vendor.platformdirs.unix">pkg_resources._vendor.platformdirs.unix</a>
+    <a href="#main.py">main.py</a>
+ &#8226;   <a href="#pkg_resources._vendor.platformdirs.unix">pkg_resources._vendor.platformdirs.unix</a>
  &#8226;   <a href="#setuptools._distutils.config">setuptools._distutils.config</a>
  &#8226;   <a href="#setuptools._distutils.dist">setuptools._distutils.dist</a>
  &#8226;   <a href="#setuptools.command.setopt">setuptools.command.setopt</a>
@@ -6738,16 +6125,12 @@ imported by:
  &#8226;   <a href="#pkg_resources._vendor.packaging._manylinux">pkg_resources._vendor.packaging._manylinux</a>
  &#8226;   <a href="#pkg_resources._vendor.packaging._tokenizer">pkg_resources._vendor.packaging._tokenizer</a>
  &#8226;   <a href="#pkg_resources._vendor.zipp">pkg_resources._vendor.zipp</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#pynput._util">pynput._util</a>
  &#8226;   <a href="#pynput._util.darwin">pynput._util.darwin</a>
  &#8226;   <a href="#pynput._util.win32">pynput._util.win32</a>
  &#8226;   <a href="#pynput._util.xorg">pynput._util.xorg</a>
  &#8226;   <a href="#pynput.keyboard._base">pynput.keyboard._base</a>
  &#8226;   <a href="#pynput.keyboard._win32">pynput.keyboard._win32</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#setuptools._distutils._msvccompiler">setuptools._distutils._msvccompiler</a>
  &#8226;   <a href="#setuptools._distutils.command.build_ext">setuptools._distutils.command.build_ext</a>
  &#8226;   <a href="#setuptools._distutils.command.check">setuptools._distutils.command.check</a>
@@ -6772,12 +6155,12 @@ imported by:
  &#8226;   <a href="#setuptools.msvc">setuptools.msvc</a>
  &#8226;   <a href="#setuptools.wheel">setuptools.wheel</a>
  &#8226;   <a href="#subprocess">subprocess</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
  &#8226;   <a href="#traceback">traceback</a>
  &#8226;   <a href="#typing">typing</a>
  &#8226;   <a href="#unittest.case">unittest.case</a>
  &#8226;   <a href="#unittest.mock">unittest.mock</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
  &#8226;   <a href="#zipfile._path">zipfile._path</a>
 
   </div>
@@ -6831,7 +6214,6 @@ imported by:
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#numpy.ma.core">numpy.ma.core</a>
  &#8226;   <a href="#pycparser.ply.lex">pycparser.ply.lex</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
  &#8226;   <a href="#setuptools._distutils.cygwinccompiler">setuptools._distutils.cygwinccompiler</a>
  &#8226;   <a href="#tarfile">tarfile</a>
  &#8226;   <a href="#weakref">weakref</a>
@@ -6866,18 +6248,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="cryptography"></a>
-  <a target="code" href="" type="text/plain"><tt>cryptography</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="csv"></a>
   <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/csv.py" type="text/plain"><tt>csv</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -6904,7 +6274,6 @@ imported by:
 imports:
     <a href="#_ctypes">_ctypes</a>
  &#8226;   <a href="#ctypes._endian">ctypes._endian</a>
- &#8226;   <a href="#ctypes.wintypes">ctypes.wintypes</a>
  &#8226;   <a href="#nt">nt</a>
  &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#struct">struct</a>
@@ -6919,7 +6288,6 @@ imported by:
  &#8226;   <a href="#ctypes.macholib">ctypes.macholib</a>
  &#8226;   <a href="#ctypes.util">ctypes.util</a>
  &#8226;   <a href="#ctypes.wintypes">ctypes.wintypes</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#multiprocessing.sharedctypes">multiprocessing.sharedctypes</a>
  &#8226;   <a href="#numpy.core._dtype_ctypes">numpy.core._dtype_ctypes</a>
  &#8226;   <a href="#numpy.core._internal">numpy.core._internal</a>
@@ -6927,17 +6295,15 @@ imported by:
  &#8226;   <a href="#packaging._manylinux">packaging._manylinux</a>
  &#8226;   <a href="#pkg_resources._vendor.packaging._manylinux">pkg_resources._vendor.packaging._manylinux</a>
  &#8226;   <a href="#pkg_resources._vendor.platformdirs.windows">pkg_resources._vendor.platformdirs.windows</a>
- &#8226;   <a href="#pyautogui._pyautogui_win">pyautogui._pyautogui_win</a>
- &#8226;   <a href="#pygetwindow._pygetwindow_win">pygetwindow._pygetwindow_win</a>
- &#8226;   <a href="#pymsgbox._native_win">pymsgbox._native_win</a>
  &#8226;   <a href="#pynput._util.darwin">pynput._util.darwin</a>
  &#8226;   <a href="#pynput._util.win32">pynput._util.win32</a>
  &#8226;   <a href="#pynput.keyboard._win32">pynput.keyboard._win32</a>
  &#8226;   <a href="#pynput.mouse._win32">pynput.mouse._win32</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
  &#8226;   <a href="#setuptools._vendor.packaging._manylinux">setuptools._vendor.packaging._manylinux</a>
  &#8226;   <a href="#setuptools.windows_support">setuptools.windows_support</a>
+ &#8226;   <a href="#theinterception._keycodes">theinterception._keycodes</a>
+ &#8226;   <a href="#theinterception.device">theinterception.device</a>
+ &#8226;   <a href="#theinterception.interception">theinterception.interception</a>
 
   </div>
 
@@ -7074,7 +6440,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#cffi.api">cffi.api</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#pynput._util.darwin">pynput._util.darwin</a>
 
   </div>
@@ -7091,14 +6456,11 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#ctypes">ctypes</a>
- &#8226;   <a href="#gdi_capture.gdi_capture">gdi_capture.gdi_capture</a>
- &#8226;   <a href="#pyautogui._pyautogui_win">pyautogui._pyautogui_win</a>
- &#8226;   <a href="#pygetwindow._pygetwindow_win">pygetwindow._pygetwindow_win</a>
+    <a href="#gdi_capture.gdi_capture">gdi_capture.gdi_capture</a>
  &#8226;   <a href="#pynput._util.win32">pynput._util.win32</a>
  &#8226;   <a href="#pynput.keyboard._win32">pynput.keyboard._win32</a>
  &#8226;   <a href="#pynput.mouse._win32">pynput.mouse._win32</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
+ &#8226;   <a href="#theinterception._keycodes">theinterception._keycodes</a>
 
   </div>
 
@@ -7149,7 +6511,6 @@ imported by:
  &#8226;   <a href="#cv2.version">cv2.version</a>
  &#8226;   <a href="#game">game</a>
  &#8226;   <a href="#main.py">main.py</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
 
   </div>
 
@@ -7440,6 +6801,8 @@ imported by:
  &#8226;   <a href="#pkg_resources._vendor.packaging._tokenizer">pkg_resources._vendor.packaging._tokenizer</a>
  &#8226;   <a href="#pprint">pprint</a>
  &#8226;   <a href="#setuptools._vendor.packaging._tokenizer">setuptools._vendor.packaging._tokenizer</a>
+ &#8226;   <a href="#theinterception.device">theinterception.device</a>
+ &#8226;   <a href="#theinterception.strokes">theinterception.strokes</a>
 
   </div>
 
@@ -7463,15 +6826,9 @@ imported by:
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#main.py">main.py</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#plistlib">plistlib</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
  &#8226;   <a href="#setuptools._vendor.tomli._re">setuptools._vendor.tomli._re</a>
  &#8226;   <a href="#setuptools.warnings">setuptools.warnings</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
  &#8226;   <a href="#xmlrpc.client">xmlrpc.client</a>
 
   </div>
@@ -8147,7 +7504,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#numpy.testing._private.utils">numpy.testing._private.utils</a>
- &#8226;   <a href="#pyrect">pyrect</a>
 
   </div>
 
@@ -8159,17 +7515,6 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#cffi.lock">cffi.lock</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="dummy_threading"></a>
-  <a target="code" href="" type="text/plain"><tt>dummy_threading</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#requests.cookies">requests.cookies</a>
 
   </div>
 
@@ -8214,7 +7559,6 @@ imported by:
  &#8226;   <a href="#setuptools._vendor.importlib_metadata">setuptools._vendor.importlib_metadata</a>
  &#8226;   <a href="#setuptools.wheel">setuptools.wheel</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
 
   </div>
 
@@ -8412,8 +7756,6 @@ imported by:
  &#8226;   <a href="#email.header">email.header</a>
  &#8226;   <a href="#email.headerregistry">email.headerregistry</a>
  &#8226;   <a href="#email.message">email.message</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.util.response">urllib3.util.response</a>
 
   </div>
 
@@ -8671,7 +8013,6 @@ imported by:
  &#8226;   <a href="#email.policy">email.policy</a>
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.fields">urllib3.fields</a>
 
   </div>
 
@@ -8951,10 +8292,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#charset_normalizer.constant">charset_normalizer.constant</a>
- &#8226;   <a href="#charset_normalizer.models">charset_normalizer.models</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
- &#8226;   <a href="#encodings">encodings</a>
+    <a href="#encodings">encodings</a>
  &#8226;   <a href="#locale">locale</a>
  &#8226;   <a href="#main.py">main.py</a>
 
@@ -10015,7 +9353,6 @@ imports:
 imported by:
     <a href="#encodings">encodings</a>
  &#8226;   <a href="#main.py">main.py</a>
- &#8226;   <a href="#requests.models">requests.models</a>
 
   </div>
 
@@ -11206,7 +10543,6 @@ imported by:
  &#8226;   <a href="#PIL.GifImagePlugin">PIL.GifImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.PngImagePlugin">PIL.PngImagePlugin</a>
  &#8226;   <a href="#ast">ast</a>
  &#8226;   <a href="#asyncio.constants">asyncio.constants</a>
@@ -11239,11 +10575,8 @@ imported by:
  &#8226;   <a href="#signal">signal</a>
  &#8226;   <a href="#socket">socket</a>
  &#8226;   <a href="#ssl">ssl</a>
+ &#8226;   <a href="#theinterception._consts">theinterception._consts</a>
  &#8226;   <a href="#tkinter">tkinter</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#uuid">uuid</a>
 
   </div>
 
@@ -11259,14 +10592,12 @@ imported by:
  &#8226;   <a href="#gettext">gettext</a>
  &#8226;   <a href="#gzip">gzip</a>
  &#8226;   <a href="#http.client">http.client</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#multiprocessing.forkserver">multiprocessing.forkserver</a>
  &#8226;   <a href="#multiprocessing.queues">multiprocessing.queues</a>
  &#8226;   <a href="#multiprocessing.shared_memory">multiprocessing.shared_memory</a>
  &#8226;   <a href="#pathlib">pathlib</a>
  &#8226;   <a href="#pkg_resources">pkg_resources</a>
  &#8226;   <a href="#pynput.keyboard._uinput">pynput.keyboard._uinput</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
  &#8226;   <a href="#setuptools._distutils.dir_util">setuptools._distutils.dir_util</a>
  &#8226;   <a href="#setuptools._distutils.file_util">setuptools._distutils.file_util</a>
  &#8226;   <a href="#shutil">shutil</a>
@@ -11274,7 +10605,6 @@ imported by:
  &#8226;   <a href="#ssl">ssl</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#tempfile">tempfile</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
  &#8226;   <a href="#xmlrpc.client">xmlrpc.client</a>
 
   </div>
@@ -11400,8 +10730,6 @@ imported by:
  &#8226;   <a href="#asyncio.selector_events">asyncio.selector_events</a>
  &#8226;   <a href="#asyncio.tasks">asyncio.tasks</a>
  &#8226;   <a href="#asyncio.threads">asyncio.threads</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
  &#8226;   <a href="#concurrent.futures.process">concurrent.futures.process</a>
  &#8226;   <a href="#configparser">configparser</a>
  &#8226;   <a href="#contextlib">contextlib</a>
@@ -11471,11 +10799,9 @@ imported by:
  &#8226;   <a href="#pkg_resources._vendor.typing_extensions">pkg_resources._vendor.typing_extensions</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
  &#8226;   <a href="#platform">platform</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#pynput._util">pynput._util</a>
  &#8226;   <a href="#pynput._util.xorg">pynput._util.xorg</a>
  &#8226;   <a href="#pynput.keyboard._uinput">pynput.keyboard._uinput</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
  &#8226;   <a href="#re">re</a>
  &#8226;   <a href="#setuptools">setuptools</a>
  &#8226;   <a href="#setuptools._distutils._collections">setuptools._distutils._collections</a>
@@ -11512,6 +10838,8 @@ imported by:
  &#8226;   <a href="#six">six</a>
  &#8226;   <a href="#statistics">statistics</a>
  &#8226;   <a href="#tempfile">tempfile</a>
+ &#8226;   <a href="#theinterception._utils">theinterception._utils</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
  &#8226;   <a href="#threading">threading</a>
  &#8226;   <a href="#tokenize">tokenize</a>
  &#8226;   <a href="#tracemalloc">tracemalloc</a>
@@ -11523,8 +10851,6 @@ imported by:
  &#8226;   <a href="#unittest.result">unittest.result</a>
  &#8226;   <a href="#unittest.signals">unittest.signals</a>
  &#8226;   <a href="#urllib.parse">urllib.parse</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.util.wait">urllib3.util.wait</a>
 
   </div>
 
@@ -11577,6 +10903,7 @@ imports:
 imported by:
     <a href="#game">game</a>
  &#8226;   <a href="#gdi_capture.gdi_capture">gdi_capture.gdi_capture</a>
+ &#8226;   <a href="#main.py">main.py</a>
 
   </div>
 
@@ -11738,17 +11065,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="gtk"></a>
-  <a target="code" href="" type="text/plain"><tt>gtk</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#pyperclip">pyperclip</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="gzip"></a>
   <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/gzip.py" type="text/plain"><tt>gzip</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -11792,14 +11108,10 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#charset_normalizer.models">charset_normalizer.models</a>
- &#8226;   <a href="#hmac">hmac</a>
+    <a href="#hmac">hmac</a>
  &#8226;   <a href="#random">random</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
  &#8226;   <a href="#setuptools._distutils.command.upload">setuptools._distutils.command.upload</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#uuid">uuid</a>
 
   </div>
 
@@ -11843,7 +11155,6 @@ imports:
 imported by:
     <a href="#multiprocessing.connection">multiprocessing.connection</a>
  &#8226;   <a href="#secrets">secrets</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
 
   </div>
 
@@ -11896,9 +11207,7 @@ imports:
 imported by:
     <a href="#http.client">http.client</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
- &#8226;   <a href="#http.cookies">http.cookies</a>
  &#8226;   <a href="#http.server">http.server</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
 
   </div>
 
@@ -11927,10 +11236,6 @@ imported by:
     <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.response">urllib3.util.response</a>
  &#8226;   <a href="#xmlrpc.client">xmlrpc.client</a>
 
   </div>
@@ -11961,28 +11266,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#urllib.request">urllib.request</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="http.cookies"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/http/cookies.py" type="text/plain"><tt>http.cookies</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#http">http</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#string">string</a>
- &#8226;   <a href="#time">time</a>
- &#8226;   <a href="#types">types</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.compat">requests.compat</a>
+    <a href="#urllib.request">urllib.request</a>
 
   </div>
 
@@ -12028,126 +11312,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="idna"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/idna/__init__.py" type="text/plain"><tt>idna</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#idna">idna</a>
- &#8226;   <a href="#idna.core">idna.core</a>
- &#8226;   <a href="#idna.idnadata">idna.idnadata</a>
- &#8226;   <a href="#idna.intranges">idna.intranges</a>
- &#8226;   <a href="#idna.package_data">idna.package_data</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#idna">idna</a>
- &#8226;   <a href="#idna.core">idna.core</a>
- &#8226;   <a href="#idna.idnadata">idna.idnadata</a>
- &#8226;   <a href="#idna.intranges">idna.intranges</a>
- &#8226;   <a href="#idna.package_data">idna.package_data</a>
- &#8226;   <a href="#idna.uts46data">idna.uts46data</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="idna.core"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/idna/core.py" type="text/plain"><tt>idna.core</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#bisect">bisect</a>
- &#8226;   <a href="#idna">idna</a>
- &#8226;   <a href="#idna.idnadata">idna.idnadata</a>
- &#8226;   <a href="#idna.intranges">idna.intranges</a>
- &#8226;   <a href="#idna.uts46data">idna.uts46data</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#unicodedata">unicodedata</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#idna">idna</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="idna.idnadata"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/idna/idnadata.py" type="text/plain"><tt>idna.idnadata</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#idna">idna</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#idna">idna</a>
- &#8226;   <a href="#idna.core">idna.core</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="idna.intranges"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/idna/intranges.py" type="text/plain"><tt>idna.intranges</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#bisect">bisect</a>
- &#8226;   <a href="#idna">idna</a>
- &#8226;   <a href="#typing">typing</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#idna">idna</a>
- &#8226;   <a href="#idna.core">idna.core</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="idna.package_data"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/idna/package_data.py" type="text/plain"><tt>idna.package_data</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#idna">idna</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#idna">idna</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="idna.uts46data"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/idna/uts46data.py" type="text/plain"><tt>idna.uts46data</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#idna">idna</a>
- &#8226;   <a href="#typing">typing</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#idna.core">idna.core</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="imp"></a>
   <a target="code" href="" type="text/plain"><tt>imp</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
@@ -12171,6 +11335,7 @@ imports:
  &#8226;   <a href="#importlib">importlib</a>
  &#8226;   <a href="#importlib._bootstrap">importlib._bootstrap</a>
  &#8226;   <a href="#importlib._bootstrap_external">importlib._bootstrap_external</a>
+ &#8226;   <a href="#importlib.machinery">importlib.machinery</a>
  &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#warnings">warnings</a>
 
@@ -12179,8 +11344,6 @@ imports:
 imported by:
     <a href="#_distutils_hack">_distutils_hack</a>
  &#8226;   <a href="#cffi._imp_emulation">cffi._imp_emulation</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
  &#8226;   <a href="#cv2">cv2</a>
  &#8226;   <a href="#importlib">importlib</a>
  &#8226;   <a href="#importlib._abc">importlib._abc</a>
@@ -12324,6 +11487,7 @@ imported by:
     <a href="#cffi._imp_emulation">cffi._imp_emulation</a>
  &#8226;   <a href="#cffi.verifier">cffi.verifier</a>
  &#8226;   <a href="#ctypes.util">ctypes.util</a>
+ &#8226;   <a href="#importlib">importlib</a>
  &#8226;   <a href="#importlib.abc">importlib.abc</a>
  &#8226;   <a href="#inspect">inspect</a>
  &#8226;   <a href="#numpy.compat.py3k">numpy.compat.py3k</a>
@@ -12533,8 +11697,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#certifi.core">certifi.core</a>
- &#8226;   <a href="#importlib.abc">importlib.abc</a>
+    <a href="#importlib.abc">importlib.abc</a>
  &#8226;   <a href="#importlib.resources">importlib.resources</a>
  &#8226;   <a href="#importlib.resources._adapters">importlib.resources._adapters</a>
  &#8226;   <a href="#importlib.resources._common">importlib.resources._common</a>
@@ -12819,7 +11982,6 @@ imported by:
  &#8226;   <a href="#PIL.IcoImagePlugin">PIL.IcoImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageGrab">PIL.ImageGrab</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
  &#8226;   <a href="#PIL.ImageTk">PIL.ImageTk</a>
@@ -12884,9 +12046,6 @@ imported by:
  &#8226;   <a href="#pycparser">pycparser</a>
  &#8226;   <a href="#pydoc">pydoc</a>
  &#8226;   <a href="#quopri">quopri</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#runpy">runpy</a>
  &#8226;   <a href="#setuptools._distutils.command.register">setuptools._distutils.command.register</a>
  &#8226;   <a href="#setuptools._distutils.command.upload">setuptools._distutils.command.upload</a>
@@ -12911,12 +12070,6 @@ imported by:
  &#8226;   <a href="#unittest.result">unittest.result</a>
  &#8226;   <a href="#urllib.error">urllib.error</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
- &#8226;   <a href="#urllib3.filepost">urllib3.filepost</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.ssltransport">urllib3.util.ssltransport</a>
- &#8226;   <a href="#uuid">uuid</a>
  &#8226;   <a href="#xml.sax">xml.sax</a>
  &#8226;   <a href="#xml.sax.saxutils">xml.sax.saxutils</a>
  &#8226;   <a href="#xmlrpc.client">xmlrpc.client</a>
@@ -12939,7 +12092,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#urllib.parse">urllib.parse</a>
- &#8226;   <a href="#urllib3.util.ssl_match_hostname">urllib3.util.ssl_match_hostname</a>
 
   </div>
 
@@ -13040,7 +12192,6 @@ imported by:
  &#8226;   <a href="#threading">threading</a>
  &#8226;   <a href="#tokenize">tokenize</a>
  &#8226;   <a href="#traceback">traceback</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
  &#8226;   <a href="#weakref">weakref</a>
  &#8226;   <a href="#zipfile._path">zipfile._path</a>
 
@@ -13083,17 +12234,12 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#charset_normalizer.models">charset_normalizer.models</a>
- &#8226;   <a href="#json.decoder">json.decoder</a>
+    <a href="#json.decoder">json.decoder</a>
  &#8226;   <a href="#json.encoder">json.encoder</a>
  &#8226;   <a href="#json.scanner">json.scanner</a>
- &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#numpy.__config__">numpy.__config__</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
  &#8226;   <a href="#setuptools.config._validate_pyproject.error_reporting">setuptools.config._validate_pyproject.error_reporting</a>
  &#8226;   <a href="#setuptools.msvc">setuptools.msvc</a>
- &#8226;   <a href="#urllib3._request_methods">urllib3._request_methods</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
 
   </div>
 
@@ -13260,9 +12406,6 @@ imported by:
  &#8226;   <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
  &#8226;   <a href="#asyncio.futures">asyncio.futures</a>
  &#8226;   <a href="#asyncio.log">asyncio.log</a>
- &#8226;   <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#charset_normalizer.api">charset_normalizer.api</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
  &#8226;   <a href="#concurrent.futures._base">concurrent.futures._base</a>
  &#8226;   <a href="#hashlib">hashlib</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
@@ -13270,7 +12413,6 @@ imported by:
  &#8226;   <a href="#packaging.tags">packaging.tags</a>
  &#8226;   <a href="#pkg_resources._vendor.packaging.tags">pkg_resources._vendor.packaging.tags</a>
  &#8226;   <a href="#pynput">pynput</a>
- &#8226;   <a href="#requests">requests</a>
  &#8226;   <a href="#setuptools._distutils._log">setuptools._distutils._log</a>
  &#8226;   <a href="#setuptools._distutils.cmd">setuptools._distutils.cmd</a>
  &#8226;   <a href="#setuptools._distutils.command.register">setuptools._distutils.command.register</a>
@@ -13284,13 +12426,6 @@ imported by:
  &#8226;   <a href="#setuptools.config.pyprojecttoml">setuptools.config.pyprojecttoml</a>
  &#8226;   <a href="#setuptools.logging">setuptools.logging</a>
  &#8226;   <a href="#unittest._log">unittest._log</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
 
   </div>
 
@@ -13342,7 +12477,6 @@ imported by:
  &#8226;   <a href="#PIL.GimpGradientFile">PIL.GimpGradientFile</a>
  &#8226;   <a href="#PIL.IcoImagePlugin">PIL.IcoImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
- &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
  &#8226;   <a href="#PIL.JpegImagePlugin">PIL.JpegImagePlugin</a>
  &#8226;   <a href="#PIL.PdfImagePlugin">PIL.PdfImagePlugin</a>
  &#8226;   <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
@@ -13357,7 +12491,6 @@ imported by:
  &#8226;   <a href="#numpy.lib.index_tricks">numpy.lib.index_tricks</a>
  &#8226;   <a href="#pkg_resources._vendor.more_itertools.more">pkg_resources._vendor.more_itertools.more</a>
  &#8226;   <a href="#pkg_resources._vendor.more_itertools.recipes">pkg_resources._vendor.more_itertools.recipes</a>
- &#8226;   <a href="#pytweening">pytweening</a>
  &#8226;   <a href="#random">random</a>
  &#8226;   <a href="#selectors">selectors</a>
  &#8226;   <a href="#setuptools._vendor.more_itertools.more">setuptools._vendor.more_itertools.more</a>
@@ -13386,7 +12519,6 @@ imports:
 imported by:
     <a href="#http.server">http.server</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.fields">urllib3.fields</a>
 
   </div>
 
@@ -13401,40 +12533,6 @@ imported by:
  &#8226;   <a href="#multiprocessing.heap">multiprocessing.heap</a>
  &#8226;   <a href="#multiprocessing.shared_memory">multiprocessing.shared_memory</a>
  &#8226;   <a href="#numpy.core.memmap">numpy.core.memmap</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="mouseinfo"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/mouseinfo/__init__.py" type="text/plain"><tt>mouseinfo</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#'rubicon.objc'">'rubicon.objc'</a>
- &#8226;   <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.Image">PIL.Image</a>
- &#8226;   <a href="#PIL.ImageGrab">PIL.ImageGrab</a>
- &#8226;   <a href="#Tkinter">Tkinter</a>
- &#8226;   <a href="#Xlib">Xlib</a>
- &#8226;   <a href="#ctypes">ctypes</a>
- &#8226;   <a href="#ctypes.util">ctypes.util</a>
- &#8226;   <a href="#datetime">datetime</a>
- &#8226;   <a href="#errno">errno</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#platform">platform</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
- &#8226;   <a href="#rubicon">rubicon</a>
- &#8226;   <a href="#subprocess">subprocess</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#tkinter">tkinter</a>
- &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
- &#8226;   <a href="#webbrowser">webbrowser</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pyautogui">pyautogui</a>
 
   </div>
 
@@ -14267,7 +13365,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#ftplib">ftplib</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
 
   </div>
 
@@ -14331,7 +13428,6 @@ imported by:
  &#8226;   <a href="#pkgutil">pkgutil</a>
  &#8226;   <a href="#py_compile">py_compile</a>
  &#8226;   <a href="#pycparser.ply.yacc">pycparser.ply.yacc</a>
- &#8226;   <a href="#requests.adapters">requests.adapters</a>
  &#8226;   <a href="#setuptools._distutils._modified">setuptools._distutils._modified</a>
  &#8226;   <a href="#setuptools._distutils.file_util">setuptools._distutils.file_util</a>
  &#8226;   <a href="#setuptools.msvc">setuptools.msvc</a>
@@ -14370,8 +13466,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
- &#8226;   <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
+    <a href="#PIL.TiffImagePlugin">PIL.TiffImagePlugin</a>
  &#8226;   <a href="#_pydecimal">_pydecimal</a>
  &#8226;   <a href="#fractions">fractions</a>
  &#8226;   <a href="#numpy.core.arrayprint">numpy.core.arrayprint</a>
@@ -14544,7 +13639,6 @@ imported by:
  &#8226;   <a href="#numpy.testing.overrides">numpy.testing.overrides</a>
  &#8226;   <a href="#numpy.typing">numpy.typing</a>
  &#8226;   <a href="#numpy.version">numpy.version</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
 
   </div>
 
@@ -19435,7 +18529,6 @@ imported by:
  &#8226;   <a href="#PIL.IcnsImagePlugin">PIL.IcnsImagePlugin</a>
  &#8226;   <a href="#PIL.ImImagePlugin">PIL.ImImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageGrab">PIL.ImageGrab</a>
  &#8226;   <a href="#PIL.ImageShow">PIL.ImageShow</a>
  &#8226;   <a href="#PIL.IptcImagePlugin">PIL.IptcImagePlugin</a>
@@ -19464,7 +18557,6 @@ imported by:
  &#8226;   <a href="#asyncio.windows_utils">asyncio.windows_utils</a>
  &#8226;   <a href="#bdb">bdb</a>
  &#8226;   <a href="#bz2">bz2</a>
- &#8226;   <a href="#certifi.core">certifi.core</a>
  &#8226;   <a href="#cffi._imp_emulation">cffi._imp_emulation</a>
  &#8226;   <a href="#cffi.api">cffi.api</a>
  &#8226;   <a href="#cffi.ffiplatform">cffi.ffiplatform</a>
@@ -19473,7 +18565,6 @@ imported by:
  &#8226;   <a href="#cffi.vengine_gen">cffi.vengine_gen</a>
  &#8226;   <a href="#cffi.verifier">cffi.verifier</a>
  &#8226;   <a href="#cgi">cgi</a>
- &#8226;   <a href="#charset_normalizer.api">charset_normalizer.api</a>
  &#8226;   <a href="#concurrent.futures.process">concurrent.futures.process</a>
  &#8226;   <a href="#concurrent.futures.thread">concurrent.futures.thread</a>
  &#8226;   <a href="#configparser">configparser</a>
@@ -19509,7 +18600,6 @@ imported by:
  &#8226;   <a href="#lzma">lzma</a>
  &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#mimetypes">mimetypes</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#multiprocessing.connection">multiprocessing.connection</a>
  &#8226;   <a href="#multiprocessing.context">multiprocessing.context</a>
  &#8226;   <a href="#multiprocessing.forkserver">multiprocessing.forkserver</a>
@@ -19568,8 +18658,6 @@ imported by:
  &#8226;   <a href="#plistlib">plistlib</a>
  &#8226;   <a href="#posixpath">posixpath</a>
  &#8226;   <a href="#py_compile">py_compile</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#pyautogui._pyautogui_x11">pyautogui._pyautogui_x11</a>
  &#8226;   <a href="#pycparser.ply.lex">pycparser.ply.lex</a>
  &#8226;   <a href="#pydoc">pydoc</a>
  &#8226;   <a href="#pyi_rth__tkinter.py">pyi_rth__tkinter.py</a>
@@ -19579,12 +18667,7 @@ imported by:
  &#8226;   <a href="#pyi_rth_setuptools.py">pyi_rth_setuptools.py</a>
  &#8226;   <a href="#pynput._util">pynput._util</a>
  &#8226;   <a href="#pynput.keyboard._uinput">pynput.keyboard._uinput</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
  &#8226;   <a href="#random">random</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#runpy">runpy</a>
  &#8226;   <a href="#setuptools">setuptools</a>
  &#8226;   <a href="#setuptools._core_metadata">setuptools._core_metadata</a>
@@ -19669,10 +18752,6 @@ imported by:
  &#8226;   <a href="#unittest.loader">unittest.loader</a>
  &#8226;   <a href="#unittest.main">unittest.main</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.filepost">urllib3.filepost</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#uuid">uuid</a>
  &#8226;   <a href="#webbrowser">webbrowser</a>
  &#8226;   <a href="#xml.sax">xml.sax</a>
  &#8226;   <a href="#xml.sax.saxutils">xml.sax.saxutils</a>
@@ -21387,7 +20466,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#cv2">cv2</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#numpy.lib.utils">numpy.lib.utils</a>
  &#8226;   <a href="#numpy.testing._private.utils">numpy.testing._private.utils</a>
  &#8226;   <a href="#packaging.markers">packaging.markers</a>
@@ -21395,9 +20473,7 @@ imported by:
  &#8226;   <a href="#pkg_resources">pkg_resources</a>
  &#8226;   <a href="#pkg_resources._vendor.packaging.markers">pkg_resources._vendor.packaging.markers</a>
  &#8226;   <a href="#pkg_resources._vendor.packaging.tags">pkg_resources._vendor.packaging.tags</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#pydoc">pydoc</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
  &#8226;   <a href="#setuptools._distutils.py39compat">setuptools._distutils.py39compat</a>
  &#8226;   <a href="#setuptools._vendor.importlib_metadata._compat">setuptools._vendor.importlib_metadata._compat</a>
  &#8226;   <a href="#setuptools._vendor.packaging.markers">setuptools._vendor.packaging.markers</a>
@@ -21405,7 +20481,6 @@ imported by:
  &#8226;   <a href="#setuptools.monkey">setuptools.monkey</a>
  &#8226;   <a href="#setuptools.msvc">setuptools.msvc</a>
  &#8226;   <a href="#setuptools.windows_support">setuptools.windows_support</a>
- &#8226;   <a href="#uuid">uuid</a>
 
   </div>
 
@@ -21581,108 +20656,6 @@ imports:
 imported by:
     <a href="#setuptools._distutils.util">setuptools._distutils.util</a>
  &#8226;   <a href="#zipfile">zipfile</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pyautogui"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pyautogui/__init__.py" type="text/plain"><tt>pyautogui</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#collections">collections</a>
- &#8226;   <a href="#collections.Sequence">collections.Sequence</a>
- &#8226;   <a href="#collections.abc">collections.abc</a>
- &#8226;   <a href="#contextlib">contextlib</a>
- &#8226;   <a href="#datetime">datetime</a>
- &#8226;   <a href="#functools">functools</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#platform">platform</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#pyautogui._pyautogui_osx">pyautogui._pyautogui_osx</a>
- &#8226;   <a href="#pyautogui._pyautogui_win">pyautogui._pyautogui_win</a>
- &#8226;   <a href="#pyautogui._pyautogui_x11">pyautogui._pyautogui_x11</a>
- &#8226;   <a href="#pygetwindow">pygetwindow</a>
- &#8226;   <a href="#pymsgbox">pymsgbox</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
- &#8226;   <a href="#pytweening">pytweening</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#time">time</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#main.py">main.py</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#pyautogui._pyautogui_osx">pyautogui._pyautogui_osx</a>
- &#8226;   <a href="#pyautogui._pyautogui_win">pyautogui._pyautogui_win</a>
- &#8226;   <a href="#pyautogui._pyautogui_x11">pyautogui._pyautogui_x11</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pyautogui._pyautogui_osx"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pyautogui/_pyautogui_osx.py" type="text/plain"><tt>pyautogui._pyautogui_osx</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#AppKit">AppKit</a>
- &#8226;   <a href="#Quartz">Quartz</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#time">time</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pyautogui">pyautogui</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pyautogui._pyautogui_win"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pyautogui/_pyautogui_win.py" type="text/plain"><tt>pyautogui._pyautogui_win</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#ctypes">ctypes</a>
- &#8226;   <a href="#ctypes.wintypes">ctypes.wintypes</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#sys">sys</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pyautogui">pyautogui</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pyautogui._pyautogui_x11"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pyautogui/_pyautogui_x11.py" type="text/plain"><tt>pyautogui._pyautogui_x11</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#'Xlib.XK'">'Xlib.XK'</a>
- &#8226;   <a href="#'Xlib.display'">'Xlib.display'</a>
- &#8226;   <a href="#'Xlib.ext'">'Xlib.ext'</a>
- &#8226;   <a href="#Xlib">Xlib</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#subprocess">subprocess</a>
- &#8226;   <a href="#sys">sys</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pyautogui">pyautogui</a>
 
   </div>
 
@@ -22008,110 +20981,12 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="pygetwindow"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pygetwindow/__init__.py" type="text/plain"><tt>pygetwindow</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#collections">collections</a>
- &#8226;   <a href="#pygetwindow._pygetwindow_macos">pygetwindow._pygetwindow_macos</a>
- &#8226;   <a href="#pygetwindow._pygetwindow_win">pygetwindow._pygetwindow_win</a>
- &#8226;   <a href="#pyrect">pyrect</a>
- &#8226;   <a href="#sys">sys</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#pygetwindow._pygetwindow_macos">pygetwindow._pygetwindow_macos</a>
- &#8226;   <a href="#pygetwindow._pygetwindow_win">pygetwindow._pygetwindow_win</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pygetwindow._pygetwindow_macos"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pygetwindow/_pygetwindow_macos.py" type="text/plain"><tt>pygetwindow._pygetwindow_macos</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#Quartz">Quartz</a>
- &#8226;   <a href="#pygetwindow">pygetwindow</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pygetwindow">pygetwindow</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pygetwindow._pygetwindow_win"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pygetwindow/_pygetwindow_win.py" type="text/plain"><tt>pygetwindow._pygetwindow_win</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#ctypes">ctypes</a>
- &#8226;   <a href="#ctypes.wintypes">ctypes.wintypes</a>
- &#8226;   <a href="#pygetwindow">pygetwindow</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pygetwindow">pygetwindow</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="pyimod02_importers"></a>
   <a target="code" href="" type="text/plain"><tt>pyimod02_importers</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#pyi_rth_pkgres.py">pyi_rth_pkgres.py</a>
  &#8226;   <a href="#pyi_rth_pkgutil.py">pyi_rth_pkgutil.py</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pymsgbox"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pymsgbox/__init__.py" type="text/plain"><tt>pymsgbox</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#Tkinter">Tkinter</a>
- &#8226;   <a href="#pymsgbox">pymsgbox</a>
- &#8226;   <a href="#pymsgbox._native_win">pymsgbox._native_win</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#tkinter">tkinter</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#pymsgbox">pymsgbox</a>
- &#8226;   <a href="#pymsgbox._native_win">pymsgbox._native_win</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pymsgbox._native_win"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pymsgbox/_native_win.py" type="text/plain"><tt>pymsgbox._native_win</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#ctypes">ctypes</a>
- &#8226;   <a href="#pymsgbox">pymsgbox</a>
- &#8226;   <a href="#sys">sys</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pymsgbox">pymsgbox</a>
 
   </div>
 
@@ -22332,9 +21207,9 @@ imported by:
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#'Xlib.XK'">'Xlib.XK'</a>
- &#8226;   <a href="#'Xlib.display'">'Xlib.display'</a>
  &#8226;   <a href="#'Xlib.keysymdef'">'Xlib.keysymdef'</a>
  &#8226;   <a href="#'Xlib.threaded'">'Xlib.threaded'</a>
+ &#8226;   <a href="#Xlib">Xlib</a>
  &#8226;   <a href="#contextlib">contextlib</a>
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#itertools">itertools</a>
@@ -22394,6 +21269,7 @@ imported by:
  &#8226;   <a href="#pynput.keyboard._uinput">pynput.keyboard._uinput</a>
  &#8226;   <a href="#pynput.keyboard._win32">pynput.keyboard._win32</a>
  &#8226;   <a href="#pynput.keyboard._xorg">pynput.keyboard._xorg</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
 
   </div>
 
@@ -22565,6 +21441,7 @@ imported by:
  &#8226;   <a href="#pynput.mouse._dummy">pynput.mouse._dummy</a>
  &#8226;   <a href="#pynput.mouse._win32">pynput.mouse._win32</a>
  &#8226;   <a href="#pynput.mouse._xorg">pynput.mouse._xorg</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
 
   </div>
 
@@ -22677,116 +21554,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="pyperclip"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pyperclip/__init__.py" type="text/plain"><tt>pyperclip</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#AppKit">AppKit</a>
- &#8226;   <a href="#Foundation">Foundation</a>
- &#8226;   <a href="#PyQt4">PyQt4</a>
- &#8226;   <a href="#PyQt5">PyQt5</a>
- &#8226;   <a href="#contextlib">contextlib</a>
- &#8226;   <a href="#ctypes">ctypes</a>
- &#8226;   <a href="#ctypes.wintypes">ctypes.wintypes</a>
- &#8226;   <a href="#gtk">gtk</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#platform">platform</a>
- &#8226;   <a href="#qtpy">qtpy</a>
- &#8226;   <a href="#shutil">shutil</a>
- &#8226;   <a href="#subprocess">subprocess</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#time">time</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#mouseinfo">mouseinfo</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pyrect"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pyrect/__init__.py" type="text/plain"><tt>pyrect</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#collections">collections</a>
- &#8226;   <a href="#doctest">doctest</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pygetwindow">pygetwindow</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pyscreeze"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pyscreeze/__init__.py" type="text/plain"><tt>pyscreeze</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#PIL">PIL</a>
- &#8226;   <a href="#PIL.Image">PIL.Image</a>
- &#8226;   <a href="#PIL.ImageDraw">PIL.ImageDraw</a>
- &#8226;   <a href="#PIL.ImageGrab">PIL.ImageGrab</a>
- &#8226;   <a href="#PIL.ImageOps">PIL.ImageOps</a>
- &#8226;   <a href="#collections">collections</a>
- &#8226;   <a href="#contextlib">contextlib</a>
- &#8226;   <a href="#ctypes">ctypes</a>
- &#8226;   <a href="#cv2">cv2</a>
- &#8226;   <a href="#datetime">datetime</a>
- &#8226;   <a href="#errno">errno</a>
- &#8226;   <a href="#functools">functools</a>
- &#8226;   <a href="#numpy">numpy</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#pygetwindow">pygetwindow</a>
- &#8226;   <a href="#subprocess">subprocess</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#time">time</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pyautogui">pyautogui</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="pytweening"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/pytweening/__init__.py" type="text/plain"><tt>pytweening</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#math">math</a>
- &#8226;   <a href="#typing">typing</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#pyautogui">pyautogui</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="qtpy"></a>
-  <a target="code" href="" type="text/plain"><tt>qtpy</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#pyperclip">pyperclip</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="queue"></a>
   <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/queue.py" type="text/plain"><tt>queue</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -22811,7 +21578,6 @@ imported by:
  &#8226;   <a href="#pkg_resources._vendor.more_itertools.more">pkg_resources._vendor.more_itertools.more</a>
  &#8226;   <a href="#queue">queue</a>
  &#8226;   <a href="#setuptools._vendor.more_itertools.more">setuptools._vendor.more_itertools.more</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
 
   </div>
 
@@ -22887,8 +21653,7 @@ imported by:
  &#8226;   <a href="#setuptools._vendor.more_itertools.recipes">setuptools._vendor.more_itertools.recipes</a>
  &#8226;   <a href="#statistics">statistics</a>
  &#8226;   <a href="#tempfile">tempfile</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#uuid">uuid</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
 
   </div>
 
@@ -22933,8 +21698,6 @@ imported by:
  &#8226;   <a href="#cffi.api">cffi.api</a>
  &#8226;   <a href="#cffi.cparser">cffi.cparser</a>
  &#8226;   <a href="#cgi">cgi</a>
- &#8226;   <a href="#charset_normalizer.constant">charset_normalizer.constant</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
  &#8226;   <a href="#configparser">configparser</a>
  &#8226;   <a href="#csv">csv</a>
  &#8226;   <a href="#ctypes._aix">ctypes._aix</a>
@@ -22962,8 +21725,6 @@ imported by:
  &#8226;   <a href="#html">html</a>
  &#8226;   <a href="#http.client">http.client</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
- &#8226;   <a href="#http.cookies">http.cookies</a>
- &#8226;   <a href="#idna.core">idna.core</a>
  &#8226;   <a href="#importlib.metadata">importlib.metadata</a>
  &#8226;   <a href="#importlib.metadata._adapters">importlib.metadata._adapters</a>
  &#8226;   <a href="#importlib.metadata._text">importlib.metadata._text</a>
@@ -23007,7 +21768,6 @@ imported by:
  &#8226;   <a href="#plistlib">plistlib</a>
  &#8226;   <a href="#posixpath">posixpath</a>
  &#8226;   <a href="#pprint">pprint</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
  &#8226;   <a href="#pycparser.c_lexer">pycparser.c_lexer</a>
  &#8226;   <a href="#pycparser.ply.lex">pycparser.ply.lex</a>
  &#8226;   <a href="#pycparser.ply.yacc">pycparser.ply.yacc</a>
@@ -23018,9 +21778,6 @@ imported by:
  &#8226;   <a href="#re._compiler">re._compiler</a>
  &#8226;   <a href="#re._constants">re._constants</a>
  &#8226;   <a href="#re._parser">re._parser</a>
- &#8226;   <a href="#requests._internal_utils">requests._internal_utils</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#rlcompleter">rlcompleter</a>
  &#8226;   <a href="#setuptools">setuptools</a>
  &#8226;   <a href="#setuptools._distutils.ccompiler">setuptools._distutils.ccompiler</a>
@@ -23076,11 +21833,6 @@ imported by:
  &#8226;   <a href="#unittest.loader">unittest.loader</a>
  &#8226;   <a href="#urllib.parse">urllib.parse</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.ssl_match_hostname">urllib3.util.ssl_match_hostname</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
  &#8226;   <a href="#warnings">warnings</a>
  &#8226;   <a href="#zipfile._path">zipfile._path</a>
  &#8226;   <a href="#zipfile._path.glob">zipfile._path.glob</a>
@@ -23213,465 +21965,6 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="requests"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/__init__.py" type="text/plain"><tt>requests</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#chardet">chardet</a>
- &#8226;   <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#cryptography">cryptography</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests.__version__">requests.__version__</a>
- &#8226;   <a href="#requests.api">requests.api</a>
- &#8226;   <a href="#requests.certs">requests.certs</a>
- &#8226;   <a href="#requests.exceptions">requests.exceptions</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.packages">requests.packages</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
- &#8226;   <a href="#requests.status_codes">requests.status_codes</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
- &#8226;   <a href="#ssl">ssl</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.contrib">urllib3.contrib</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#main.py">main.py</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests.__version__">requests.__version__</a>
- &#8226;   <a href="#requests._internal_utils">requests._internal_utils</a>
- &#8226;   <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.api">requests.api</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.certs">requests.certs</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
- &#8226;   <a href="#requests.exceptions">requests.exceptions</a>
- &#8226;   <a href="#requests.hooks">requests.hooks</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.packages">requests.packages</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
- &#8226;   <a href="#requests.status_codes">requests.status_codes</a>
- &#8226;   <a href="#requests.structures">requests.structures</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.__version__"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/__version__.py" type="text/plain"><tt>requests.__version__</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#requests">requests</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests._internal_utils"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/_internal_utils.py" type="text/plain"><tt>requests._internal_utils</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#re">re</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.adapters"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/adapters.py" type="text/plain"><tt>requests.adapters</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#ntpath">ntpath</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
- &#8226;   <a href="#requests.exceptions">requests.exceptions</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.structures">requests.structures</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.sessions">requests.sessions</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.api"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/api.py" type="text/plain"><tt>requests.api</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.auth"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/auth.py" type="text/plain"><tt>requests.auth</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#base64">base64</a>
- &#8226;   <a href="#hashlib">hashlib</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests._internal_utils">requests._internal_utils</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
- &#8226;   <a href="#threading">threading</a>
- &#8226;   <a href="#time">time</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.certs"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/certs.py" type="text/plain"><tt>requests.certs</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#certifi">certifi</a>
- &#8226;   <a href="#requests">requests</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.compat"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/compat.py" type="text/plain"><tt>requests.compat</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#chardet">chardet</a>
- &#8226;   <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#collections">collections</a>
- &#8226;   <a href="#collections.abc">collections.abc</a>
- &#8226;   <a href="#http">http</a>
- &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
- &#8226;   <a href="#http.cookies">http.cookies</a>
- &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#json">json</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#simplejson">simplejson</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#urllib.parse">urllib.parse</a>
- &#8226;   <a href="#urllib.request">urllib.request</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests._internal_utils">requests._internal_utils</a>
- &#8226;   <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
- &#8226;   <a href="#requests.exceptions">requests.exceptions</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
- &#8226;   <a href="#requests.structures">requests.structures</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.cookies"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/cookies.py" type="text/plain"><tt>requests.cookies</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#calendar">calendar</a>
- &#8226;   <a href="#copy">copy</a>
- &#8226;   <a href="#dummy_threading">dummy_threading</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests._internal_utils">requests._internal_utils</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#threading">threading</a>
- &#8226;   <a href="#time">time</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.exceptions"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/exceptions.py" type="text/plain"><tt>requests.exceptions</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.hooks"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/hooks.py" type="text/plain"><tt>requests.hooks</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#requests">requests</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.models"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/models.py" type="text/plain"><tt>requests.models</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#datetime">datetime</a>
- &#8226;   <a href="#encodings.idna">encodings.idna</a>
- &#8226;   <a href="#idna">idna</a>
- &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests._internal_utils">requests._internal_utils</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
- &#8226;   <a href="#requests.exceptions">requests.exceptions</a>
- &#8226;   <a href="#requests.hooks">requests.hooks</a>
- &#8226;   <a href="#requests.status_codes">requests.status_codes</a>
- &#8226;   <a href="#requests.structures">requests.structures</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.fields">urllib3.fields</a>
- &#8226;   <a href="#urllib3.filepost">urllib3.filepost</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.packages"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/packages.py" type="text/plain"><tt>requests.packages</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#chardet">chardet</a>
- &#8226;   <a href="#charset_normalizer">charset_normalizer</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.sessions"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/sessions.py" type="text/plain"><tt>requests.sessions</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#collections">collections</a>
- &#8226;   <a href="#datetime">datetime</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests._internal_utils">requests._internal_utils</a>
- &#8226;   <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
- &#8226;   <a href="#requests.exceptions">requests.exceptions</a>
- &#8226;   <a href="#requests.hooks">requests.hooks</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.status_codes">requests.status_codes</a>
- &#8226;   <a href="#requests.structures">requests.structures</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#time">time</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.api">requests.api</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.status_codes"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/status_codes.py" type="text/plain"><tt>requests.status_codes</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.structures">requests.structures</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.structures"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/structures.py" type="text/plain"><tt>requests.structures</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#collections">collections</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
- &#8226;   <a href="#requests.status_codes">requests.status_codes</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="requests.utils"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/requests/utils.py" type="text/plain"><tt>requests.utils</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#codecs">codecs</a>
- &#8226;   <a href="#collections">collections</a>
- &#8226;   <a href="#contextlib">contextlib</a>
- &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#netrc">netrc</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests.__version__">requests.__version__</a>
- &#8226;   <a href="#requests._internal_utils">requests._internal_utils</a>
- &#8226;   <a href="#requests.certs">requests.certs</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
- &#8226;   <a href="#requests.exceptions">requests.exceptions</a>
- &#8226;   <a href="#requests.structures">requests.structures</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#struct">struct</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#tempfile">tempfile</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#warnings">warnings</a>
- &#8226;   <a href="#winreg">winreg</a>
- &#8226;   <a href="#zipfile">zipfile</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="resource"></a>
   <a target="code" href="" type="text/plain"><tt>resource</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
@@ -23698,17 +21991,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#site">site</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="rubicon"></a>
-  <a target="code" href="" type="text/plain"><tt>rubicon</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#mouseinfo">mouseinfo</a>
 
   </div>
 
@@ -23763,7 +22045,6 @@ imported by:
  &#8226;   <a href="#pydoc">pydoc</a>
  &#8226;   <a href="#selectors">selectors</a>
  &#8226;   <a href="#subprocess">subprocess</a>
- &#8226;   <a href="#urllib3.util.wait">urllib3.util.wait</a>
 
   </div>
 
@@ -27928,12 +26209,10 @@ imported by:
  &#8226;   <a href="#numpy.lib._datasource">numpy.lib._datasource</a>
  &#8226;   <a href="#numpy.testing._private.utils">numpy.testing._private.utils</a>
  &#8226;   <a href="#pkg_resources._vendor.jaraco.context">pkg_resources._vendor.jaraco.context</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
  &#8226;   <a href="#setuptools._vendor.jaraco.context">setuptools._vendor.jaraco.context</a>
  &#8226;   <a href="#setuptools.archive_util">setuptools.archive_util</a>
  &#8226;   <a href="#tarfile">tarfile</a>
  &#8226;   <a href="#tempfile">tempfile</a>
- &#8226;   <a href="#uuid">uuid</a>
  &#8226;   <a href="#webbrowser">webbrowser</a>
  &#8226;   <a href="#zipfile">zipfile</a>
 
@@ -27956,7 +26235,6 @@ imported by:
  &#8226;   <a href="#asyncio.proactor_events">asyncio.proactor_events</a>
  &#8226;   <a href="#asyncio.runners">asyncio.runners</a>
  &#8226;   <a href="#asyncio.unix_events">asyncio.unix_events</a>
- &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#multiprocessing.forkserver">multiprocessing.forkserver</a>
  &#8226;   <a href="#multiprocessing.managers">multiprocessing.managers</a>
  &#8226;   <a href="#multiprocessing.popen_fork">multiprocessing.popen_fork</a>
@@ -27967,17 +26245,6 @@ imported by:
  &#8226;   <a href="#pdb">pdb</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#unittest.signals">unittest.signals</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="simplejson"></a>
-  <a target="code" href="" type="text/plain"><tt>simplejson</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#requests.compat">requests.compat</a>
 
   </div>
 
@@ -28098,29 +26365,14 @@ imported by:
  &#8226;   <a href="#ftplib">ftplib</a>
  &#8226;   <a href="#http.client">http.client</a>
  &#8226;   <a href="#http.server">http.server</a>
- &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#multiprocessing.connection">multiprocessing.connection</a>
  &#8226;   <a href="#multiprocessing.forkserver">multiprocessing.forkserver</a>
  &#8226;   <a href="#multiprocessing.reduction">multiprocessing.reduction</a>
  &#8226;   <a href="#multiprocessing.resource_sharer">multiprocessing.resource_sharer</a>
  &#8226;   <a href="#platform">platform</a>
- &#8226;   <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#socketserver">socketserver</a>
  &#8226;   <a href="#ssl">ssl</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#urllib3.util.ssltransport">urllib3.util.ssltransport</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#urllib3.util.wait">urllib3.util.wait</a>
- &#8226;   <a href="#uuid">uuid</a>
 
   </div>
 
@@ -28144,17 +26396,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#http.server">http.server</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="socks"></a>
-  <a target="code" href="" type="text/plain"><tt>socks</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
 
   </div>
 
@@ -28239,18 +26480,8 @@ imported by:
  &#8226;   <a href="#asyncio.sslproto">asyncio.sslproto</a>
  &#8226;   <a href="#ftplib">ftplib</a>
  &#8226;   <a href="#http.client">http.client</a>
- &#8226;   <a href="#requests">requests</a>
  &#8226;   <a href="#setuptools.config._validate_pyproject.formats">setuptools.config._validate_pyproject.formats</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#urllib3.util.ssltransport">urllib3.util.ssltransport</a>
 
   </div>
 
@@ -28332,7 +26563,6 @@ imported by:
  &#8226;   <a href="#email._encoded_words">email._encoded_words</a>
  &#8226;   <a href="#email._header_value_parser">email._header_value_parser</a>
  &#8226;   <a href="#email.quoprimime">email.quoprimime</a>
- &#8226;   <a href="#http.cookies">http.cookies</a>
  &#8226;   <a href="#logging">logging</a>
  &#8226;   <a href="#ntpath">ntpath</a>
  &#8226;   <a href="#nturl2path">nturl2path</a>
@@ -28406,10 +26636,10 @@ imported by:
  &#8226;   <a href="#pkg_resources._vendor.packaging._elffile">pkg_resources._vendor.packaging._elffile</a>
  &#8226;   <a href="#platform">platform</a>
  &#8226;   <a href="#plistlib">plistlib</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#setuptools._vendor.packaging._elffile">setuptools._vendor.packaging._elffile</a>
  &#8226;   <a href="#six">six</a>
  &#8226;   <a href="#tarfile">tarfile</a>
+ &#8226;   <a href="#theinterception.strokes">theinterception.strokes</a>
  &#8226;   <a href="#zipfile">zipfile</a>
 
   </div>
@@ -28461,7 +26691,6 @@ imported by:
  &#8226;   <a href="#ctypes._aix">ctypes._aix</a>
  &#8226;   <a href="#ctypes.util">ctypes.util</a>
  &#8226;   <a href="#http.server">http.server</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#multiprocessing.util">multiprocessing.util</a>
  &#8226;   <a href="#numpy.testing._private.extbuild">numpy.testing._private.extbuild</a>
  &#8226;   <a href="#numpy.testing._private.utils">numpy.testing._private.utils</a>
@@ -28472,13 +26701,10 @@ imported by:
  &#8226;   <a href="#pkg_resources._vendor.packaging._musllinux">pkg_resources._vendor.packaging._musllinux</a>
  &#8226;   <a href="#pkg_resources._vendor.packaging.tags">pkg_resources._vendor.packaging.tags</a>
  &#8226;   <a href="#platform">platform</a>
- &#8226;   <a href="#pyautogui._pyautogui_x11">pyautogui._pyautogui_x11</a>
  &#8226;   <a href="#pycparser">pycparser</a>
  &#8226;   <a href="#pydoc">pydoc</a>
  &#8226;   <a href="#pyi_rth_multiprocessing.py">pyi_rth_multiprocessing.py</a>
  &#8226;   <a href="#pynput.keyboard._uinput">pynput.keyboard._uinput</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
  &#8226;   <a href="#setuptools._distutils._msvccompiler">setuptools._distutils._msvccompiler</a>
  &#8226;   <a href="#setuptools._distutils.command._framework_compat">setuptools._distutils.command._framework_compat</a>
  &#8226;   <a href="#setuptools._distutils.command.bdist_rpm">setuptools._distutils.command.bdist_rpm</a>
@@ -28491,7 +26717,6 @@ imported by:
  &#8226;   <a href="#setuptools._vendor.packaging.tags">setuptools._vendor.packaging.tags</a>
  &#8226;   <a href="#setuptools.installer">setuptools.installer</a>
  &#8226;   <a href="#setuptools.msvc">setuptools.msvc</a>
- &#8226;   <a href="#uuid">uuid</a>
  &#8226;   <a href="#webbrowser">webbrowser</a>
 
   </div>
@@ -28507,7 +26732,6 @@ imported by:
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
  &#8226;   <a href="#PIL.ImageCms">PIL.ImageCms</a>
  &#8226;   <a href="#PIL.ImageFile">PIL.ImageFile</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.ImageGrab">PIL.ImageGrab</a>
  &#8226;   <a href="#PIL.ImageMode">PIL.ImageMode</a>
  &#8226;   <a href="#PIL.ImageQt">PIL.ImageQt</a>
@@ -28540,7 +26764,6 @@ imported by:
  &#8226;   <a href="#base64">base64</a>
  &#8226;   <a href="#bdb">bdb</a>
  &#8226;   <a href="#calendar">calendar</a>
- &#8226;   <a href="#certifi.core">certifi.core</a>
  &#8226;   <a href="#cffi._imp_emulation">cffi._imp_emulation</a>
  &#8226;   <a href="#cffi._shimmed_dist_utils">cffi._shimmed_dist_utils</a>
  &#8226;   <a href="#cffi.api">cffi.api</a>
@@ -28599,9 +26822,7 @@ imported by:
  &#8226;   <a href="#linecache">linecache</a>
  &#8226;   <a href="#locale">locale</a>
  &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#mimetypes">mimetypes</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#multiprocessing">multiprocessing</a>
  &#8226;   <a href="#multiprocessing.connection">multiprocessing.connection</a>
  &#8226;   <a href="#multiprocessing.context">multiprocessing.context</a>
@@ -28667,31 +26888,18 @@ imported by:
  &#8226;   <a href="#posixpath">posixpath</a>
  &#8226;   <a href="#pprint">pprint</a>
  &#8226;   <a href="#py_compile">py_compile</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#pyautogui._pyautogui_osx">pyautogui._pyautogui_osx</a>
- &#8226;   <a href="#pyautogui._pyautogui_win">pyautogui._pyautogui_win</a>
- &#8226;   <a href="#pyautogui._pyautogui_x11">pyautogui._pyautogui_x11</a>
  &#8226;   <a href="#pycparser.c_ast">pycparser.c_ast</a>
  &#8226;   <a href="#pycparser.ply.lex">pycparser.ply.lex</a>
  &#8226;   <a href="#pycparser.ply.yacc">pycparser.ply.yacc</a>
  &#8226;   <a href="#pydoc">pydoc</a>
- &#8226;   <a href="#pygetwindow">pygetwindow</a>
  &#8226;   <a href="#pyi_rth__tkinter.py">pyi_rth__tkinter.py</a>
  &#8226;   <a href="#pyi_rth_inspect.py">pyi_rth_inspect.py</a>
  &#8226;   <a href="#pyi_rth_multiprocessing.py">pyi_rth_multiprocessing.py</a>
  &#8226;   <a href="#pyi_rth_pkgres.py">pyi_rth_pkgres.py</a>
  &#8226;   <a href="#pyi_rth_pkgutil.py">pyi_rth_pkgutil.py</a>
- &#8226;   <a href="#pymsgbox">pymsgbox</a>
- &#8226;   <a href="#pymsgbox._native_win">pymsgbox._native_win</a>
  &#8226;   <a href="#pynput._util">pynput._util</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
  &#8226;   <a href="#quopri">quopri</a>
  &#8226;   <a href="#re._compiler">re._compiler</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
- &#8226;   <a href="#requests.packages">requests.packages</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#runpy">runpy</a>
  &#8226;   <a href="#selectors">selectors</a>
  &#8226;   <a href="#setuptools._distutils">setuptools._distutils</a>
@@ -28773,11 +26981,6 @@ imported by:
  &#8226;   <a href="#unittest.runner">unittest.runner</a>
  &#8226;   <a href="#unittest.suite">unittest.suite</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#uuid">uuid</a>
  &#8226;   <a href="#warnings">warnings</a>
  &#8226;   <a href="#weakref">weakref</a>
  &#8226;   <a href="#webbrowser">webbrowser</a>
@@ -28910,7 +27113,6 @@ imported by:
  &#8226;   <a href="#pkg_resources._vendor.importlib_resources._common">pkg_resources._vendor.importlib_resources._common</a>
  &#8226;   <a href="#pkg_resources._vendor.jaraco.context">pkg_resources._vendor.jaraco.context</a>
  &#8226;   <a href="#pydoc">pydoc</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#setuptools._core_metadata">setuptools._core_metadata</a>
  &#8226;   <a href="#setuptools._distutils.ccompiler">setuptools._distutils.ccompiler</a>
  &#8226;   <a href="#setuptools._distutils.util">setuptools._distutils.util</a>
@@ -28965,6 +27167,230 @@ imported by:
  &#8226;   <a href="#setuptools.warnings">setuptools.warnings</a>
  &#8226;   <a href="#site">site</a>
  &#8226;   <a href="#traceback">traceback</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="theinterception"></a>
+  <a target="code" href="///C:/Users/Screwdriver/Desktop/python/github/Bumblebee/theinterception/__init__.py" type="text/plain"><tt>theinterception</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception._consts">theinterception._consts</a>
+ &#8226;   <a href="#theinterception._keycodes">theinterception._keycodes</a>
+ &#8226;   <a href="#theinterception._utils">theinterception._utils</a>
+ &#8226;   <a href="#theinterception.device">theinterception.device</a>
+ &#8226;   <a href="#theinterception.exceptions">theinterception.exceptions</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
+ &#8226;   <a href="#theinterception.interception">theinterception.interception</a>
+ &#8226;   <a href="#theinterception.strokes">theinterception.strokes</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
+ &#8226;   <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception._consts">theinterception._consts</a>
+ &#8226;   <a href="#theinterception._keycodes">theinterception._keycodes</a>
+ &#8226;   <a href="#theinterception._utils">theinterception._utils</a>
+ &#8226;   <a href="#theinterception.device">theinterception.device</a>
+ &#8226;   <a href="#theinterception.exceptions">theinterception.exceptions</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
+ &#8226;   <a href="#theinterception.interception">theinterception.interception</a>
+ &#8226;   <a href="#theinterception.strokes">theinterception.strokes</a>
+ &#8226;   <a href="#theinterception.types">theinterception.types</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="theinterception._consts"></a>
+  <a target="code" href="///C:/Users/Screwdriver/Desktop/python/github/Bumblebee/theinterception/_consts.py" type="text/plain"><tt>theinterception._consts</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#__future__">__future__</a>
+ &#8226;   <a href="#enum">enum</a>
+ &#8226;   <a href="#theinterception">theinterception</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="theinterception._keycodes"></a>
+  <a target="code" href="///C:/Users/Screwdriver/Desktop/python/github/Bumblebee/theinterception/_keycodes.py" type="text/plain"><tt>theinterception._keycodes</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#ctypes">ctypes</a>
+ &#8226;   <a href="#ctypes.wintypes">ctypes.wintypes</a>
+ &#8226;   <a href="#theinterception">theinterception</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="theinterception._utils"></a>
+  <a target="code" href="///C:/Users/Screwdriver/Desktop/python/github/Bumblebee/theinterception/_utils.py" type="text/plain"><tt>theinterception._utils</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#functools">functools</a>
+ &#8226;   <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#threading">threading</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#win32api">win32api</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
+ &#8226;   <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="theinterception.device"></a>
+  <a target="code" href="///C:/Users/Screwdriver/Desktop/python/github/Bumblebee/theinterception/device.py" type="text/plain"><tt>theinterception.device</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#__future__">__future__</a>
+ &#8226;   <a href="#ctypes">ctypes</a>
+ &#8226;   <a href="#dataclasses">dataclasses</a>
+ &#8226;   <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception.strokes">theinterception.strokes</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception.interception">theinterception.interception</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="theinterception.exceptions"></a>
+  <a target="code" href="///C:/Users/Screwdriver/Desktop/python/github/Bumblebee/theinterception/exceptions.py" type="text/plain"><tt>theinterception.exceptions</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#theinterception">theinterception</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
+ &#8226;   <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="theinterception.inputs"></a>
+  <a target="code" href="///C:/Users/Screwdriver/Desktop/python/github/Bumblebee/theinterception/inputs.py" type="text/plain"><tt>theinterception.inputs</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#contextlib">contextlib</a>
+ &#8226;   <a href="#functools">functools</a>
+ &#8226;   <a href="#pynput.keyboard">pynput.keyboard</a>
+ &#8226;   <a href="#pynput.mouse">pynput.mouse</a>
+ &#8226;   <a href="#random">random</a>
+ &#8226;   <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception._consts">theinterception._consts</a>
+ &#8226;   <a href="#theinterception._keycodes">theinterception._keycodes</a>
+ &#8226;   <a href="#theinterception._utils">theinterception._utils</a>
+ &#8226;   <a href="#theinterception.exceptions">theinterception.exceptions</a>
+ &#8226;   <a href="#theinterception.interception">theinterception.interception</a>
+ &#8226;   <a href="#theinterception.strokes">theinterception.strokes</a>
+ &#8226;   <a href="#theinterception.types">theinterception.types</a>
+ &#8226;   <a href="#time">time</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#theinterception">theinterception</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="theinterception.interception"></a>
+  <a target="code" href="///C:/Users/Screwdriver/Desktop/python/github/Bumblebee/theinterception/interception.py" type="text/plain"><tt>theinterception.interception</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#ctypes">ctypes</a>
+ &#8226;   <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception.device">theinterception.device</a>
+ &#8226;   <a href="#theinterception.strokes">theinterception.strokes</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="theinterception.strokes"></a>
+  <a target="code" href="///C:/Users/Screwdriver/Desktop/python/github/Bumblebee/theinterception/strokes.py" type="text/plain"><tt>theinterception.strokes</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#dataclasses">dataclasses</a>
+ &#8226;   <a href="#struct">struct</a>
+ &#8226;   <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#theinterception.device">theinterception.device</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
+ &#8226;   <a href="#theinterception.interception">theinterception.interception</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="theinterception.types"></a>
+  <a target="code" href="///C:/Users/Screwdriver/Desktop/python/github/Bumblebee/theinterception/types.py" type="text/plain"><tt>theinterception.types</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#theinterception">theinterception</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#theinterception.inputs">theinterception.inputs</a>
 
   </div>
 
@@ -29035,13 +27461,11 @@ imported by:
  &#8226;   <a href="#pynput.keyboard._base">pynput.keyboard._base</a>
  &#8226;   <a href="#pynput.keyboard._xorg">pynput.keyboard._xorg</a>
  &#8226;   <a href="#queue">queue</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
  &#8226;   <a href="#socketserver">socketserver</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#sysconfig">sysconfig</a>
+ &#8226;   <a href="#theinterception._utils">theinterception._utils</a>
  &#8226;   <a href="#unittest.mock">unittest.mock</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
  &#8226;   <a href="#webbrowser">webbrowser</a>
  &#8226;   <a href="#zipfile">zipfile</a>
 
@@ -29084,7 +27508,6 @@ imported by:
  &#8226;   <a href="#gc">gc</a>
  &#8226;   <a href="#gzip">gzip</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
- &#8226;   <a href="#http.cookies">http.cookies</a>
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#logging">logging</a>
  &#8226;   <a href="#main.py">main.py</a>
@@ -29097,16 +27520,9 @@ imported by:
  &#8226;   <a href="#pkg_resources">pkg_resources</a>
  &#8226;   <a href="#pkg_resources._vendor.jaraco.functools">pkg_resources._vendor.jaraco.functools</a>
  &#8226;   <a href="#pkg_resources._vendor.more_itertools.more">pkg_resources._vendor.more_itertools.more</a>
- &#8226;   <a href="#pyautogui">pyautogui</a>
- &#8226;   <a href="#pyautogui._pyautogui_osx">pyautogui._pyautogui_osx</a>
  &#8226;   <a href="#pydoc">pydoc</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
- &#8226;   <a href="#pyscreeze">pyscreeze</a>
  &#8226;   <a href="#queue">queue</a>
  &#8226;   <a href="#random">random</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.cookies">requests.cookies</a>
- &#8226;   <a href="#requests.sessions">requests.sessions</a>
  &#8226;   <a href="#setuptools._vendor.jaraco.functools">setuptools._vendor.jaraco.functools</a>
  &#8226;   <a href="#setuptools._vendor.more_itertools.more">setuptools._vendor.more_itertools.more</a>
  &#8226;   <a href="#setuptools.command.egg_info">setuptools.command.egg_info</a>
@@ -29114,13 +27530,11 @@ imported by:
  &#8226;   <a href="#ssl">ssl</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#tarfile">tarfile</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
  &#8226;   <a href="#threading">threading</a>
  &#8226;   <a href="#unittest.case">unittest.case</a>
  &#8226;   <a href="#unittest.runner">unittest.runner</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#uuid">uuid</a>
  &#8226;   <a href="#xmlrpc.client">xmlrpc.client</a>
  &#8226;   <a href="#zipfile">zipfile</a>
  &#8226;   <a href="#zipimport">zipimport</a>
@@ -29142,7 +27556,6 @@ imports:
  &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#tkinter.constants">tkinter.constants</a>
  &#8226;   <a href="#tkinter.messagebox">tkinter.messagebox</a>
- &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
  &#8226;   <a href="#traceback">traceback</a>
  &#8226;   <a href="#types">types</a>
 
@@ -29150,12 +27563,9 @@ imports:
   <div class="import">
 imported by:
     <a href="#main.py">main.py</a>
- &#8226;   <a href="#mouseinfo">mouseinfo</a>
- &#8226;   <a href="#pymsgbox">pymsgbox</a>
  &#8226;   <a href="#tkinter.commondialog">tkinter.commondialog</a>
  &#8226;   <a href="#tkinter.constants">tkinter.constants</a>
  &#8226;   <a href="#tkinter.messagebox">tkinter.messagebox</a>
- &#8226;   <a href="#tkinter.ttk">tkinter.ttk</a>
 
   </div>
 
@@ -29205,23 +27615,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#main.py">main.py</a>
- &#8226;   <a href="#tkinter">tkinter</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="tkinter.ttk"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/tkinter/ttk.py" type="text/plain"><tt>tkinter.ttk</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#tkinter">tkinter</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#mouseinfo">mouseinfo</a>
  &#8226;   <a href="#tkinter">tkinter</a>
 
   </div>
@@ -29390,7 +27783,6 @@ imported by:
  &#8226;   <a href="#asyncio.queues">asyncio.queues</a>
  &#8226;   <a href="#asyncio.tasks">asyncio.tasks</a>
  &#8226;   <a href="#asyncio.timeouts">asyncio.timeouts</a>
- &#8226;   <a href="#certifi.core">certifi.core</a>
  &#8226;   <a href="#cffi.api">cffi.api</a>
  &#8226;   <a href="#cffi.model">cffi.model</a>
  &#8226;   <a href="#cffi.vengine_gen">cffi.vengine_gen</a>
@@ -29406,7 +27798,6 @@ imported by:
  &#8226;   <a href="#email.headerregistry">email.headerregistry</a>
  &#8226;   <a href="#enum">enum</a>
  &#8226;   <a href="#functools">functools</a>
- &#8226;   <a href="#http.cookies">http.cookies</a>
  &#8226;   <a href="#importlib.metadata._functools">importlib.metadata._functools</a>
  &#8226;   <a href="#importlib.resources._common">importlib.resources._common</a>
  &#8226;   <a href="#importlib.resources._legacy">importlib.resources._legacy</a>
@@ -29454,10 +27845,6 @@ imported by:
  &#8226;   <a href="#unittest.loader">unittest.loader</a>
  &#8226;   <a href="#unittest.mock">unittest.mock</a>
  &#8226;   <a href="#urllib.parse">urllib.parse</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.util">urllib3.util.util</a>
 
   </div>
 
@@ -29487,18 +27874,8 @@ imports:
 imported by:
     <a href="#asyncio.staggered">asyncio.staggered</a>
  &#8226;   <a href="#asyncio.timeouts">asyncio.timeouts</a>
- &#8226;   <a href="#certifi.core">certifi.core</a>
- &#8226;   <a href="#charset_normalizer.api">charset_normalizer.api</a>
- &#8226;   <a href="#charset_normalizer.cd">charset_normalizer.cd</a>
- &#8226;   <a href="#charset_normalizer.constant">charset_normalizer.constant</a>
- &#8226;   <a href="#charset_normalizer.legacy">charset_normalizer.legacy</a>
- &#8226;   <a href="#charset_normalizer.models">charset_normalizer.models</a>
- &#8226;   <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
  &#8226;   <a href="#cv2.typing">cv2.typing</a>
  &#8226;   <a href="#functools">functools</a>
- &#8226;   <a href="#idna.core">idna.core</a>
- &#8226;   <a href="#idna.intranges">idna.intranges</a>
- &#8226;   <a href="#idna.uts46data">idna.uts46data</a>
  &#8226;   <a href="#importlib.metadata">importlib.metadata</a>
  &#8226;   <a href="#importlib.metadata._meta">importlib.metadata._meta</a>
  &#8226;   <a href="#importlib.resources._common">importlib.resources._common</a>
@@ -29560,7 +27937,6 @@ imported by:
  &#8226;   <a href="#pkg_resources._vendor.platformdirs.api">pkg_resources._vendor.platformdirs.api</a>
  &#8226;   <a href="#pkg_resources._vendor.platformdirs.windows">pkg_resources._vendor.platformdirs.windows</a>
  &#8226;   <a href="#pkg_resources._vendor.typing_extensions">pkg_resources._vendor.typing_extensions</a>
- &#8226;   <a href="#pytweening">pytweening</a>
  &#8226;   <a href="#setuptools._core_metadata">setuptools._core_metadata</a>
  &#8226;   <a href="#setuptools._normalization">setuptools._normalization</a>
  &#8226;   <a href="#setuptools._path">setuptools._path</a>
@@ -29606,29 +27982,12 @@ imported by:
  &#8226;   <a href="#setuptools.discovery">setuptools.discovery</a>
  &#8226;   <a href="#setuptools.dist">setuptools.dist</a>
  &#8226;   <a href="#setuptools.warnings">setuptools.warnings</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3._request_methods">urllib3._request_methods</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.fields">urllib3.fields</a>
- &#8226;   <a href="#urllib3.filepost">urllib3.filepost</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
- &#8226;   <a href="#urllib3.util.proxy">urllib3.util.proxy</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#urllib3.util.ssl_match_hostname">urllib3.util.ssl_match_hostname</a>
- &#8226;   <a href="#urllib3.util.ssltransport">urllib3.util.ssltransport</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
- &#8226;   <a href="#urllib3.util.util">urllib3.util.util</a>
+ &#8226;   <a href="#theinterception._utils">theinterception._utils</a>
+ &#8226;   <a href="#theinterception.device">theinterception.device</a>
+ &#8226;   <a href="#theinterception.inputs">theinterception.inputs</a>
+ &#8226;   <a href="#theinterception.interception">theinterception.interception</a>
+ &#8226;   <a href="#theinterception.strokes">theinterception.strokes</a>
+ &#8226;   <a href="#theinterception.types">theinterception.types</a>
 
   </div>
 
@@ -29644,16 +28003,6 @@ imported by:
  &#8226;   <a href="#setuptools._vendor.packaging.metadata">setuptools._vendor.packaging.metadata</a>
  &#8226;   <a href="#setuptools.command.build">setuptools.command.build</a>
  &#8226;   <a href="#setuptools.config._validate_pyproject.formats">setuptools.config._validate_pyproject.formats</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#urllib3.util.ssltransport">urllib3.util.ssltransport</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
 
   </div>
 
@@ -29663,9 +28012,7 @@ imported by:
   <a name="unicodedata"></a>
   <tt>unicodedata</tt> <span class="moduletype"><tt>C:\Users\Screwdriver\AppData\Local\Programs\Python\Python312\DLLs\unicodedata.pyd</tt></span>  <div class="import">
 imported by:
-    <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
- &#8226;   <a href="#encodings.idna">encodings.idna</a>
- &#8226;   <a href="#idna.core">idna.core</a>
+    <a href="#encodings.idna">encodings.idna</a>
  &#8226;   <a href="#pynput.keyboard._base">pynput.keyboard._base</a>
  &#8226;   <a href="#re._parser">re._parser</a>
  &#8226;   <a href="#setuptools.unicode_utils">setuptools.unicode_utils</a>
@@ -30044,14 +28391,11 @@ imported by:
  &#8226;   <a href="#pathlib">pathlib</a>
  &#8226;   <a href="#pkg_resources._vendor.packaging.requirements">pkg_resources._vendor.packaging.requirements</a>
  &#8226;   <a href="#pydoc">pydoc</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
  &#8226;   <a href="#setuptools._distutils.command.register">setuptools._distutils.command.register</a>
  &#8226;   <a href="#setuptools._distutils.command.upload">setuptools._distutils.command.upload</a>
  &#8226;   <a href="#setuptools._vendor.packaging.requirements">setuptools._vendor.packaging.requirements</a>
  &#8226;   <a href="#setuptools.config._validate_pyproject.formats">setuptools.config._validate_pyproject.formats</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3._request_methods">urllib3._request_methods</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
  &#8226;   <a href="#xml.sax.saxutils">xml.sax.saxutils</a>
  &#8226;   <a href="#xmlrpc.client">xmlrpc.client</a>
 
@@ -30099,7 +28443,6 @@ imports:
 imported by:
     <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#numpy.lib._datasource">numpy.lib._datasource</a>
- &#8226;   <a href="#requests.compat">requests.compat</a>
  &#8226;   <a href="#setuptools._distutils.command.register">setuptools._distutils.command.register</a>
  &#8226;   <a href="#setuptools._distutils.command.upload">setuptools._distutils.command.upload</a>
  &#8226;   <a href="#setuptools.config._validate_pyproject.formats">setuptools.config._validate_pyproject.formats</a>
@@ -30128,905 +28471,11 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="urllib3"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/__init__.py" type="text/plain"><tt>urllib3</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#ssl">ssl</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3._version">urllib3._version</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.filepost">urllib3.filepost</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#urllib3_secure_extra">urllib3_secure_extra</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3._request_methods">urllib3._request_methods</a>
- &#8226;   <a href="#urllib3._version">urllib3._version</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.contrib">urllib3.contrib</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.fields">urllib3.fields</a>
- &#8226;   <a href="#urllib3.filepost">urllib3.filepost</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3._base_connection"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/_base_connection.py" type="text/plain"><tt>urllib3._base_connection</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#ssl">ssl</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#typing_extensions">typing_extensions</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._request_methods">urllib3._request_methods</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3._collections"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/_collections.py" type="text/plain"><tt>urllib3._collections</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#collections">collections</a>
- &#8226;   <a href="#enum">enum</a>
- &#8226;   <a href="#threading">threading</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#typing_extensions">typing_extensions</a>
- &#8226;   <a href="#urllib3">urllib3</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._request_methods">urllib3._request_methods</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3._request_methods"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/_request_methods.py" type="text/plain"><tt>urllib3._request_methods</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#json">json</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib.parse">urllib.parse</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3.filepost">urllib3.filepost</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3._version"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/_version.py" type="text/plain"><tt>urllib3._version</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#urllib3">urllib3</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.connection"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/connection.py" type="text/plain"><tt>urllib3.connection</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#datetime">datetime</a>
- &#8226;   <a href="#http.client">http.client</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#ssl">ssl</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#typing_extensions">typing_extensions</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3._version">urllib3._version</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.response">urllib3.util.response</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#urllib3.util.ssl_match_hostname">urllib3.util.ssl_match_hostname</a>
- &#8226;   <a href="#urllib3.util.ssltransport">urllib3.util.ssltransport</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
- &#8226;   <a href="#urllib3.util.util">urllib3.util.util</a>
- &#8226;   <a href="#urllib3.util.wait">urllib3.util.wait</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.proxy">urllib3.util.proxy</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.connectionpool"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/connectionpool.py" type="text/plain"><tt>urllib3.connectionpool</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#errno">errno</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#queue">queue</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#ssl">ssl</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#types">types</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#typing_extensions">typing_extensions</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3._request_methods">urllib3._request_methods</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
- &#8226;   <a href="#urllib3.util.proxy">urllib3.util.proxy</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.ssl_match_hostname">urllib3.util.ssl_match_hostname</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
- &#8226;   <a href="#urllib3.util.util">urllib3.util.util</a>
- &#8226;   <a href="#warnings">warnings</a>
- &#8226;   <a href="#weakref">weakref</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.contrib"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/contrib/__init__.py" type="text/plain"><tt>urllib3.contrib</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.contrib.pyopenssl"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/contrib/pyopenssl.py" type="text/plain"><tt>urllib3.contrib.pyopenssl</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#'OpenSSL.crypto'">'OpenSSL.crypto'</a>
- &#8226;   <a href="#'cryptography.x509'">'cryptography.x509'</a>
- &#8226;   <a href="#OpenSSL">OpenSSL</a>
- &#8226;   <a href="#__future__">__future__</a>
- &#8226;   <a href="#cryptography">cryptography</a>
- &#8226;   <a href="#idna">idna</a>
- &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#ssl">ssl</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.contrib">urllib3.contrib</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#urllib3.contrib">urllib3.contrib</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.contrib.socks"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/contrib/socks.py" type="text/plain"><tt>urllib3.contrib.socks</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#socks">socks</a>
- &#8226;   <a href="#ssl">ssl</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.contrib">urllib3.contrib</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.adapters">requests.adapters</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.exceptions"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/exceptions.py" type="text/plain"><tt>urllib3.exceptions</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#email.errors">email.errors</a>
- &#8226;   <a href="#http.client">http.client</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests">requests</a>
- &#8226;   <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.exceptions">requests.exceptions</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.response">urllib3.util.response</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#urllib3.util.ssltransport">urllib3.util.ssltransport</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.fields"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/fields.py" type="text/plain"><tt>urllib3.fields</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#email.utils">email.utils</a>
- &#8226;   <a href="#mimetypes">mimetypes</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#urllib3.filepost">urllib3.filepost</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.filepost"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/filepost.py" type="text/plain"><tt>urllib3.filepost</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#binascii">binascii</a>
- &#8226;   <a href="#codecs">codecs</a>
- &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.fields">urllib3.fields</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._request_methods">urllib3._request_methods</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.poolmanager"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/poolmanager.py" type="text/plain"><tt>urllib3.poolmanager</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#functools">functools</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#ssl">ssl</a>
- &#8226;   <a href="#types">types</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#typing_extensions">typing_extensions</a>
- &#8226;   <a href="#urllib.parse">urllib.parse</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3._request_methods">urllib3._request_methods</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
- &#8226;   <a href="#urllib3.util.proxy">urllib3.util.proxy</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.response"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/response.py" type="text/plain"><tt>urllib3.response</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#brotli">brotli</a>
- &#8226;   <a href="#brotlicffi">brotlicffi</a>
- &#8226;   <a href="#collections">collections</a>
- &#8226;   <a href="#contextlib">contextlib</a>
- &#8226;   <a href="#http.client">http.client</a>
- &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#json">json</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#typing_extensions">typing_extensions</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3._collections">urllib3._collections</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.response">urllib3.util.response</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#warnings">warnings</a>
- &#8226;   <a href="#zlib">zlib</a>
- &#8226;   <a href="#zstandard">zstandard</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3._request_methods">urllib3._request_methods</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/__init__.py" type="text/plain"><tt>urllib3.util</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.response">urllib3.util.response</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
- &#8226;   <a href="#urllib3.util.wait">urllib3.util.wait</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#requests.models">requests.models</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
- &#8226;   <a href="#urllib3.util.proxy">urllib3.util.proxy</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.response">urllib3.util.response</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
- &#8226;   <a href="#urllib3.util.ssl_match_hostname">urllib3.util.ssl_match_hostname</a>
- &#8226;   <a href="#urllib3.util.ssltransport">urllib3.util.ssltransport</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
- &#8226;   <a href="#urllib3.util.util">urllib3.util.util</a>
- &#8226;   <a href="#urllib3.util.wait">urllib3.util.wait</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.connection"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/connection.py" type="text/plain"><tt>urllib3.util.connection</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.timeout">urllib3.util.timeout</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.proxy"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/proxy.py" type="text/plain"><tt>urllib3.util.proxy</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.request"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/request.py" type="text/plain"><tt>urllib3.util.request</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#base64">base64</a>
- &#8226;   <a href="#brotli">brotli</a>
- &#8226;   <a href="#brotlicffi">brotlicffi</a>
- &#8226;   <a href="#enum">enum</a>
- &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#typing_extensions">typing_extensions</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.util">urllib3.util.util</a>
- &#8226;   <a href="#zstandard">zstandard</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.response"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/response.py" type="text/plain"><tt>urllib3.util.response</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#email.errors">email.errors</a>
- &#8226;   <a href="#http.client">http.client</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.retry"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/retry.py" type="text/plain"><tt>urllib3.util.retry</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#email">email</a>
- &#8226;   <a href="#itertools">itertools</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#random">random</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#time">time</a>
- &#8226;   <a href="#types">types</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.util">urllib3.util.util</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#requests.adapters">requests.adapters</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.ssl_"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/ssl_.py" type="text/plain"><tt>urllib3.util.ssl_</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#binascii">binascii</a>
- &#8226;   <a href="#hashlib">hashlib</a>
- &#8226;   <a href="#hmac">hmac</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#ssl">ssl</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#typing_extensions">typing_extensions</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.ssltransport">urllib3.util.ssltransport</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.ssl_match_hostname">urllib3.util.ssl_match_hostname</a>
- &#8226;   <a href="#urllib3.util.ssltransport">urllib3.util.ssltransport</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.ssl_match_hostname"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/ssl_match_hostname.py" type="text/plain"><tt>urllib3.util.ssl_match_hostname</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#ipaddress">ipaddress</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.ssltransport"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/ssltransport.py" type="text/plain"><tt>urllib3.util.ssltransport</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#ssl">ssl</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#typing_extensions">typing_extensions</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.timeout"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/timeout.py" type="text/plain"><tt>urllib3.util.timeout</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#enum">enum</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#time">time</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#typing_extensions">typing_extensions</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.connection">urllib3.util.connection</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.url"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/url.py" type="text/plain"><tt>urllib3.util.url</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#idna">idna</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.util">urllib3.util.util</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3._base_connection">urllib3._base_connection</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
- &#8226;   <a href="#urllib3.util.proxy">urllib3.util.proxy</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.util"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/util.py" type="text/plain"><tt>urllib3.util.util</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#types">types</a>
- &#8226;   <a href="#typing">typing</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
- &#8226;   <a href="#urllib3.util.retry">urllib3.util.retry</a>
- &#8226;   <a href="#urllib3.util.url">urllib3.util.url</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3.util.wait"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/urllib3/util/wait.py" type="text/plain"><tt>urllib3.util.wait</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#__future__">__future__</a>
- &#8226;   <a href="#functools">functools</a>
- &#8226;   <a href="#select">select</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.util">urllib3.util</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib3_secure_extra"></a>
-  <a target="code" href="" type="text/plain"><tt>urllib3_secure_extra</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#urllib3">urllib3</a>
-
-  </div>
-
-</div>
-
-<div class="node">
   <a name="usercustomize"></a>
   <a target="code" href="" type="text/plain"><tt>usercustomize</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#site">site</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="uuid"></a>
-  <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/uuid.py" type="text/plain"><tt>uuid</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#_uuid">_uuid</a>
- &#8226;   <a href="#argparse">argparse</a>
- &#8226;   <a href="#enum">enum</a>
- &#8226;   <a href="#hashlib">hashlib</a>
- &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#platform">platform</a>
- &#8226;   <a href="#random">random</a>
- &#8226;   <a href="#shutil">shutil</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#subprocess">subprocess</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#time">time</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#main.py">main.py</a>
 
   </div>
 
@@ -31061,7 +28510,6 @@ imports:
 imported by:
     <a href="#PIL.IcoImagePlugin">PIL.IcoImagePlugin</a>
  &#8226;   <a href="#PIL.Image">PIL.Image</a>
- &#8226;   <a href="#PIL.ImageFont">PIL.ImageFont</a>
  &#8226;   <a href="#PIL.JpegImagePlugin">PIL.JpegImagePlugin</a>
  &#8226;   <a href="#PIL.PngImagePlugin">PIL.PngImagePlugin</a>
  &#8226;   <a href="#PIL.TgaImagePlugin">PIL.TgaImagePlugin</a>
@@ -31087,7 +28535,6 @@ imported by:
  &#8226;   <a href="#cffi.model">cffi.model</a>
  &#8226;   <a href="#cffi.vengine_cpy">cffi.vengine_cpy</a>
  &#8226;   <a href="#cgi">cgi</a>
- &#8226;   <a href="#charset_normalizer.legacy">charset_normalizer.legacy</a>
  &#8226;   <a href="#codeop">codeop</a>
  &#8226;   <a href="#configparser">configparser</a>
  &#8226;   <a href="#email.utils">email.utils</a>
@@ -31157,14 +28604,9 @@ imported by:
  &#8226;   <a href="#pycparser.ply.yacc">pycparser.ply.yacc</a>
  &#8226;   <a href="#pycparser.plyparser">pycparser.plyparser</a>
  &#8226;   <a href="#pydoc">pydoc</a>
- &#8226;   <a href="#pyperclip">pyperclip</a>
  &#8226;   <a href="#random">random</a>
  &#8226;   <a href="#re">re</a>
  &#8226;   <a href="#re._parser">re._parser</a>
- &#8226;   <a href="#requests">requests</a>
- &#8226;   <a href="#requests.auth">requests.auth</a>
- &#8226;   <a href="#requests.packages">requests.packages</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#runpy">runpy</a>
  &#8226;   <a href="#setuptools._distutils._msvccompiler">setuptools._distutils._msvccompiler</a>
  &#8226;   <a href="#setuptools._distutils.archive_util">setuptools._distutils.archive_util</a>
@@ -31212,15 +28654,6 @@ imported by:
  &#8226;   <a href="#unittest.runner">unittest.runner</a>
  &#8226;   <a href="#urllib.parse">urllib.parse</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib3">urllib3</a>
- &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
- &#8226;   <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
- &#8226;   <a href="#urllib3.exceptions">urllib3.exceptions</a>
- &#8226;   <a href="#urllib3.fields">urllib3.fields</a>
- &#8226;   <a href="#urllib3.poolmanager">urllib3.poolmanager</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.ssl_">urllib3.util.ssl_</a>
  &#8226;   <a href="#webbrowser">webbrowser</a>
  &#8226;   <a href="#zipfile">zipfile</a>
 
@@ -31266,7 +28699,6 @@ imported by:
  &#8226;   <a href="#numpy.lib.npyio">numpy.lib.npyio</a>
  &#8226;   <a href="#tempfile">tempfile</a>
  &#8226;   <a href="#unittest.signals">unittest.signals</a>
- &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
  &#8226;   <a href="#xml.sax.expatreader">xml.sax.expatreader</a>
 
   </div>
@@ -31291,8 +28723,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#mouseinfo">mouseinfo</a>
- &#8226;   <a href="#pydoc">pydoc</a>
+    <a href="#pydoc">pydoc</a>
 
   </div>
 
@@ -31302,8 +28733,8 @@ imported by:
   <a name="win32api"></a>
   <tt>win32api</tt> <span class="moduletype"><tt>C:\Users\Screwdriver\AppData\Local\Programs\Python\Python312\Lib\site-packages\win32\win32api.pyd</tt></span>  <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
- &#8226;   <a href="#setuptools._distutils.msvccompiler">setuptools._distutils.msvccompiler</a>
+    <a href="#setuptools._distutils.msvccompiler">setuptools._distutils.msvccompiler</a>
+ &#8226;   <a href="#theinterception._utils">theinterception._utils</a>
 
   </div>
 
@@ -31314,18 +28745,7 @@ imported by:
   <a target="code" href="///C:/Users/Screwdriver/AppData/Local/Programs/Python/Python312/Lib/site-packages/win32/lib/win32con.py" type="text/plain"><tt>win32con</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imported by:
-    <a href="#main.py">main.py</a>
- &#8226;   <a href="#setuptools._distutils.msvccompiler">setuptools._distutils.msvccompiler</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="win32gui"></a>
-  <tt>win32gui</tt> <span class="moduletype"><tt>C:\Users\Screwdriver\AppData\Local\Programs\Python\Python312\Lib\site-packages\win32\win32gui.pyd</tt></span>  <div class="import">
-imported by:
-    <a href="#main.py">main.py</a>
+    <a href="#setuptools._distutils.msvccompiler">setuptools._distutils.msvccompiler</a>
 
   </div>
 
@@ -31349,7 +28769,6 @@ imported by:
  &#8226;   <a href="#mimetypes">mimetypes</a>
  &#8226;   <a href="#pkg_resources._vendor.platformdirs.windows">pkg_resources._vendor.platformdirs.windows</a>
  &#8226;   <a href="#platform">platform</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#setuptools._distutils._msvccompiler">setuptools._distutils._msvccompiler</a>
  &#8226;   <a href="#setuptools._distutils.msvc9compiler">setuptools._distutils.msvc9compiler</a>
  &#8226;   <a href="#setuptools._distutils.msvccompiler">setuptools._distutils.msvccompiler</a>
@@ -31384,6 +28803,7 @@ imported by:
 <span class="moduletype">Package</span>  <div class="import">
 imports:
     <a href="#xml">xml</a>
+ &#8226;   <a href="#xml.parsers.expat">xml.parsers.expat</a>
 
   </div>
   <div class="import">
@@ -31409,6 +28829,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#plistlib">plistlib</a>
+ &#8226;   <a href="#xml.parsers">xml.parsers</a>
  &#8226;   <a href="#xml.sax.expatreader">xml.sax.expatreader</a>
  &#8226;   <a href="#xmlrpc.client">xmlrpc.client</a>
 
@@ -31639,7 +29060,6 @@ imported by:
  &#8226;   <a href="#pkg_resources">pkg_resources</a>
  &#8226;   <a href="#pkg_resources._vendor.importlib_resources._compat">pkg_resources._vendor.importlib_resources._compat</a>
  &#8226;   <a href="#pkg_resources._vendor.zipp">pkg_resources._vendor.zipp</a>
- &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#setuptools._distutils.archive_util">setuptools._distutils.archive_util</a>
  &#8226;   <a href="#setuptools._vendor.importlib_resources._compat">setuptools._vendor.importlib_resources._compat</a>
  &#8226;   <a href="#setuptools._vendor.zipp">setuptools._vendor.zipp</a>
@@ -31751,21 +29171,8 @@ imported by:
  &#8226;   <a href="#gzip">gzip</a>
  &#8226;   <a href="#shutil">shutil</a>
  &#8226;   <a href="#tarfile">tarfile</a>
- &#8226;   <a href="#urllib3.response">urllib3.response</a>
  &#8226;   <a href="#zipfile">zipfile</a>
  &#8226;   <a href="#zipimport">zipimport</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="zstandard"></a>
-  <a target="code" href="" type="text/plain"><tt>zstandard</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#urllib3.response">urllib3.response</a>
- &#8226;   <a href="#urllib3.util.request">urllib3.util.request</a>
 
   </div>
 

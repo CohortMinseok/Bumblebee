@@ -27,6 +27,7 @@ from tkinter import *
 import gdi_capture
 from PIL import Image, ImageTk   
 from configparser import ConfigParser
+from attack import goleftattack
 
 # from theinterception.interception import Interception
 # from theinterception._keycodes import KEYBOARD_MAPPING
@@ -83,35 +84,61 @@ def keyup(key):
     interception.send_key(stroke)
 
 
-async def main(stop_event):
-    print(f'script starting ..')
-    time.sleep(1)
+async def main(stop_event, left, right, top, btm):
+    print(f'bot has started ..')
+    time.sleep(.01)
     
+
+    xynotfound=0
+    global pause
+    pause = True
     while True:
-        #
-        # time.sleep(1)
-        now=perf_counter()
-        for i in range(1):
-            keydown('a')
-            await sleep(.002)
-            keyup('a')
-            await sleep(.002)
-        print(f'{perf_counter()-now:.10f}')
-        keydown('enter')
-        await sleep(.002)
-        keyup('enter')
-        await sleep(.002)
-        #
-        print(f'time.sleep ..')
-        await sleep(2.002)
         if pause:
-            print(f'script paused ..')
+            print(f'script is paused .. click resume to resume. ')
             while pause:
                 # do nothing
                 time.sleep(1)
                 if stop_event.is_set():
                     return
-            print(f'resume script ..')
+            print(f'script resumed ..')
+        #        
+        time.sleep(.011)
+        g_variable = g.get_player_location()
+        x, y = (None, None) if g_variable is None else g_variable
+        if x == None or y == None:
+            xynotfound+=1
+            if xynotfound > 30:
+                t = time.localtime()
+                currenttime = time.strftime("%H:%M:%S", t)
+                print(f'something is wrong .. character not found .. exiting .. {currenttime}')
+                stop_flag = True
+                # randompicker_thread.join()
+                return
+            print(f'x==None, pass ..')
+            time.sleep(.1)
+            pass
+        else:
+            xynotfound=0
+            if y > top and (y > btm-10 and y <= btm+5):
+                if x > left+5:
+                    await goleftattack()
+                elif x < left-5:
+                    await gorightattack()
+                elif x >= left-5 and x <= left+5:
+                    await goupattack()            
+            elif y <= top and y > top-10:
+                if x < right-5:
+                    await gorightattack()
+                elif x > right+5:
+                    await goleftattack()
+                elif x >= right-5 and x <= right+5:
+                    await downjumpatttack()
+            elif y > top and not (y > btm-10 and y <= btm+5):
+                await downjumpatttack()
+
+
+        #
+        #
 
 
 
@@ -132,6 +159,9 @@ if __name__ == "__main__":
     
     def on_close():
         print("Closing the window")
+        #
+        global pause
+        pause=True
         # Add your code here to run before closing the window
         # config.add_section('main')
         config.set('main', 'key1', 'value1')
@@ -152,30 +182,45 @@ if __name__ == "__main__":
 
     def on_button_click():
         stop_event = threading.Event()
-        thread = threading.Thread(target=between_main, args=(stop_event,))
+        thread = threading.Thread(target=start_the_main, args=(stop_event,))
         thread.start()
         threads.append((thread, stop_event))
-        # label.config(text="Working...")
-        root.after(0, lambda: update_label("Task completed!"))
-
-    def update_label(text):
-        # label.config(text=text)
-        pass
 
     def thepause():
-        # messagebox.showinfo("Hello", "Hello, GUI!")
         global pause
-        # print(f'{pause=}')
         pause = not pause
-        print(f'{pause=}')
+        if pause:
+            button.config(text='Resume', bg='tomato')
+        else:
+            button.config(text='Pause', bg='lime')
 
-    def between_main(stop_event):
+    def start_the_main(stop_event):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        loop.run_until_complete(main(stop_event))
+        loop.run_until_complete(main(stop_event, line_position_slider, line_position_slider2, line_position_slider3))
         loop.close()
 
-    def button_adjustminimap():    
+    def entry_focus_in(event):
+        if entry1.get()=="Enter x...":
+            entry1.delete(0,'end')
+            entry1.config(fg='Black')
+
+    def entry_focus_out(event):
+        if entry1.get()=="":
+            entry1.insert(0,'Enter x...')
+            entry1.config(fg='gray')
+
+    def entry2_focus_in(event):
+        if entry2.get()=="Enter y...":
+            entry2.delete(0,'end')
+            entry2.config(fg='Black')
+
+    def entry2_focus_out(event):
+        if entry2.get()=="":
+            entry2.insert(0,'Enter y...')
+            entry2.config(fg='gray')
+
+    def button_adjustminimap():
         global minimapX    
         global minimapY
         global vertical_line
@@ -186,16 +231,21 @@ if __name__ == "__main__":
         global canvas_height
         minimapX = int(entry1.get())
         minimapY = int(entry2.get())
+        if minimapX > 400:
+            minimapX=400
+        if minimapY > 300:
+            minimapY=300
+        if minimapX < 100:
+            minimapX=100
+        if minimapY < 100:
+            minimapY=100
         hwnd = gdi_capture.find_window_from_executable_name("MapleStory.exe")
         top, left, bottom, right = 8, 63, minimapX, minimapY
         with gdi_capture.CaptureWindow(hwnd) as img:            
             img_cropped = img[left:right, top:bottom]
-            # height, width = img_cropped.shape[0], img_cropped.shape[1]
             img_cropped = cv2.cvtColor(img_cropped, cv2.COLOR_BGR2RGB)
             img_cropped = Image.fromarray(img_cropped)
             tk_image = ImageTk.PhotoImage(img_cropped)
-            # image_label.config(image=tk_image)
-            # image_label.image = tk_image     
             canvas.delete("all")
             canvas.config(width=minimapX-8,height=minimapY-63)
             canvas.create_image(0, 0, anchor=tk.NW, image=tk_image)        
@@ -216,6 +266,15 @@ if __name__ == "__main__":
             vertical_line3 = canvas.create_line(2, initial_line_position, canvas_height, initial_line_position, fill="lime", width=2)
             line_position_slider3.config(to=canvas_height, length=canvas_height*2)
             update_line_position3(line_position_slider3.get())
+        
+        # background_image = Image.open("bumblebee.gif")
+        # background_image = background_image.resize((window_width, window_height),  Image.Resampling.LANCZOS)
+        # background_photo = ImageTk.PhotoImage(background_image)
+        # background_label = tk.Label(root, image=background_photo)
+        # background_label.place(relwidth=1, relheight=1)
+        # background_label.image = background_photo
+        # root.configure(bg='orange')
+        # frame2.config(bg='', bd=0)
 
 
     def update_line_position(value):
@@ -228,10 +287,7 @@ if __name__ == "__main__":
         canvas.coords(vertical_line3, 0, float(value), canvas_width, float(value))
 
 
-    # def update_label(value):
-    #     valuestr = f"Horizontal: {horizontal_slider.get()}, Vertical: {vertical_slider.get()}"
-    #     label.config(text=valuestr)
-
+    # root start
     root = tk.Tk()
     root.title("Bumblebee")
     photo=PhotoImage(file='icon.ico')
@@ -243,66 +299,83 @@ if __name__ == "__main__":
     window_x = screen_width - window_width
     window_y = 0
     root.geometry(f"{window_width}x{window_height}+{window_x}+{window_y}")
-    button = tk.Button(root, text="Start", command=on_button_click, width=10, height=2, bg='lightblue')
-    button.pack(pady=(10,5))
-    button = tk.Button(root, text="Pause", command=thepause, width=30, height=8, bg='lightblue')
+    # # background_image = tk.PhotoImage(file="bumblebee.gif")
+    # background_image = Image.open("bumblebee.gif")
+    # background_image = background_image.resize((window_width, window_height),  Image.Resampling.LANCZOS)
+    # background_photo = ImageTk.PhotoImage(background_image)
+    # background_label = tk.Label(root, image=background_photo)
+    # background_label.place(relwidth=1, relheight=1)
+    # background_label.image = background_photo
+    
+    # # very cool title bar
+    # root.overrideredirect(True)  # Remove the title bar
+    # # Create a frame for a custom title bar
+    # title_bar = tk.Frame(root, bg="blue", height=30, relief="raised", bd=0)
+    # title_bar.pack(fill="x")
+    # # Create a custom font for title text
+    # title_font = ("Helvetica", 14)
+    # # Set the width and height of the button
+    # button_width = 15
+    # button_height = 3
+    # # Choose a brighter green color
+    # button_color = "lime"
+    # # Create a button with the custom font, width, height, and color
+    # button = tk.Button(title_bar, text="Click me!", command=on_button_click, font=title_font, width=button_width, height=button_height, bg=button_color)
+    # button.pack(side="left", padx=10)
+    # # Close button
+    # close_button = tk.Button(title_bar, text="X", command=root.destroy, font=title_font, width=2, height=1, bg="red", relief="flat")
+    # close_button.pack(side="right", padx=10)
+    # # Make the window draggable
+    # def start_drag(event):
+    #     root.x = event.x
+    #     root.y = event.y
+    # def drag(event):
+    #     deltax = event.x - root.x
+    #     deltay = event.y - root.y
+    #     x = root.winfo_x() + deltax
+    #     y = root.winfo_y() + deltay
+    #     root.geometry(f"+{x}+{y}")
+    # title_bar.bind("<ButtonPress-1>", start_drag)
+    # title_bar.bind("<B1-Motion>", drag)
+
+    button = tk.Button(root, text="Resume", command=thepause, width=20, height=5, bg='tomato', font=('Helvetica', 16))
     button.pack(pady=(10,20))
-    # button = tk.Button(root, text="Adjust Minimap", command=button_adjustminimap, width=30, height=8, bg='lightblue')
-    # button.pack(pady=(10,20))
 
-    # image_label = tk.Label(root)
-    # image_path = "minimap.PNG"
-    # img = PhotoImage(file=image_path)
-    # image_label.config(image=img)
-    # image_label.image = img
-    # image_label.pack(pady=20)    
-
-    # # Horizontal Slider
-    # horizontal_slider = tk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL, command=update_label)
-    # horizontal_slider.pack(pady=10)
-    # # Vertical Slider
-    # vertical_slider = tk.Scale(root, from_=0, to=100, orient=tk.VERTICAL, command=update_label)
-    # vertical_slider.pack(side=tk.LEFT, padx=10)
-    # # Label to display slider values
-    # label = tk.Label(root, text="Horizontal: 0, Vertical: 0")
-    # label.pack(pady=10)
-    # entry = tk.Entry(root, width=30)
-    # entry.pack(pady=10)   
-
-    frame = tk.Frame(root, bg='#ADD8E6')
+    frame = tk.Frame(root, bg='', bd=0)
+    # frame = tk.Frame(root, bg='#ffbb29')
     frame.pack(padx=0, pady=0)
-    label1 = tk.Label(frame, text="x:", bg="#ADD8E6", fg="black")
-    label1.grid(row=0, column=0, padx=(5,0), pady=0, sticky=tk.E)
-    entry1 = tk.Entry(frame, width=10)
-    entry1.grid(row=0, column=1, padx=(0,0), pady=(5,0))
-    label2 = tk.Label(frame, text="y:", bg="#ADD8E6", fg="black")
-    label2.grid(row=1, column=0, padx=(5,0), pady=0, sticky=tk.E)
-    entry2 = tk.Entry(frame, width=10)
-    entry2.grid(row=1, column=1, padx=(0,0), pady=0)
-    button = tk.Button(frame, text="adjust minimap", command=button_adjustminimap)
-    button.grid(row=2, column=0, pady=(2,4), padx=(5,0), columnspan=2)
-    # result_label = tk.Label(frame, text="")
-    # result_label.grid(row=0, column=1, rowspan=3, padx=10)
+    # label1 = tk.Label(frame, text="x:", fg="black", bg='#ffbb29')
+    # label1.grid(row=0, column=0, padx=(5,0), pady=0, sticky=tk.E)
+    entry1 = tk.Entry(frame, width=10, fg='Gray')
+    entry1.insert(0, 'Enter x...')
+    entry1.bind("<FocusIn>", entry_focus_in)
+    entry1.bind("<FocusOut>", entry_focus_out)
+    entry1.grid(row=0, column=0, padx=(0,1), pady=(0,1))
+    # label2 = tk.Label(frame, text="y:", fg="black", bg='#ffbb29')
+    # label2.grid(row=1, column=0, padx=(5,0), pady=0, sticky=tk.E)
+    entry2 = tk.Entry(frame, width=10, fg='Gray')
+    entry2.insert(0, 'Enter y...')
+    entry2.bind("<FocusIn>", entry2_focus_in)
+    entry2.bind("<FocusOut>", entry2_focus_out)
+    entry2.grid(row=0, column=1, padx=(1,0), pady=(0,1))
+    button2 = tk.Button(frame, text="adjust minimap", command=button_adjustminimap)
+    button2.grid(row=0, column=2, padx=(1,0), pady=(0,1))
     image_path = "minimap.png"  # Replace with the actual path to your image
     img = PhotoImage(file=image_path)
-    # image_label = tk.Label(frame, image=img)
-    # image_label.image = img  # Keep a reference to the image to prevent it from being garbage collected
-    # image_label.grid(row=0, column=2, rowspan=3, padx=5, pady=5)
-    # canvas = tk.Canvas(frame, width=200, height=50, bg="#ADF8A6")
-    canvas = tk.Canvas(frame, width=minimapX-8, height=minimapY-63, bg="#ADF8A6")
-    canvas.grid(row=0, column=2, rowspan=3, padx=10)
+
+    frame2 = tk.Frame(root, bg='orange', bd=0)
+    frame2.pack(padx=0, pady=0)
+    canvas = tk.Canvas(frame2, width=minimapX-8, height=minimapY-63, bg='#fabb29')
+    canvas.grid(row=0, column=0, rowspan=1, padx=10, pady=(10,0))
     canvas.create_image(0, 0, anchor=tk.NW, image=img)
     
     hwnd = gdi_capture.find_window_from_executable_name("MapleStory.exe")
     top, left, bottom, right = 8, 63, minimapX, minimapY
     with gdi_capture.CaptureWindow(hwnd) as gdiimg:            
-        # img_cropped = gdiimg[63:111, 8:333]
         img_cropped = gdiimg[left:right, top:bottom]
         img_cropped = cv2.cvtColor(img_cropped, cv2.COLOR_BGR2RGB)
         img_cropped = Image.fromarray(img_cropped)
         tk_image = ImageTk.PhotoImage(img_cropped)
-        # image_label.config(image=tk_image)
-        # image_label.image = tk_image    
         canvas.delete("all")
         canvas.config(width=minimapX-8,height=minimapY-63) 
         canvas.create_image(0, 0, anchor=tk.NW, image=tk_image)        
@@ -310,32 +383,35 @@ if __name__ == "__main__":
 
     canvas_width=minimapX-8
     canvas_height=minimapY-63
-    # initial_line_position = (minimapX-8) / 2
 
     vertical_line = canvas.create_line(initial_line_position, 0, initial_line_position, minimapY-63, fill="red", width=2)    
-    slider_label = tk.Label(frame, text="left threshold:", bg="#ADD8E6")
-    slider_label.grid(row=3, column=1, pady=5, padx=5)
-    line_position_slider = tk.Scale(frame, from_=2, to=canvas_width, orient=tk.HORIZONTAL, length=canvas_width, resolution=1, command=update_line_position)
+    # slider_label = tk.Label(frame, text="left threshold:", bg='#ffbb29')
+    # slider_label.grid(row=3, column=1, pady=5, padx=5)
+    line_position_slider = tk.Scale(frame2, from_=2, to=canvas_width, orient=tk.HORIZONTAL, length=canvas_width, resolution=1, command=update_line_position)
     line_position_slider.set(initial_line_position)
-    line_position_slider.grid(row=3, column=2, pady=5, padx=5)
+    line_position_slider.grid(row=1, column=0, pady=1, padx=1)
     
     vertical_line2 = canvas.create_line(initial_line_position2, 0, initial_line_position2, minimapY-63, fill="yellow", width=2)    
-    slider_label2 = tk.Label(frame, text="right threshold:", bg="#ADD8E6")
-    slider_label2.grid(row=4, column=1, pady=5, padx=5)
-    line_position_slider2 = tk.Scale(frame, from_=2, to=canvas_width, orient=tk.HORIZONTAL, length=canvas_width, resolution=1, command=update_line_position2)
+    # slider_label2 = tk.Label(frame, text="right threshold:", bg='#ffbb29')
+    # slider_label2.grid(row=4, column=1, pady=5, padx=5)
+    line_position_slider2 = tk.Scale(frame2, from_=2, to=canvas_width, orient=tk.HORIZONTAL, length=canvas_width, resolution=1, command=update_line_position2)
     line_position_slider2.set(initial_line_position2)
-    line_position_slider2.grid(row=4, column=2, pady=5, padx=5)
+    line_position_slider2.grid(row=2, column=0, pady=(0,10), padx=1)
 
     vertical_line3 = canvas.create_line(2, initial_line_position, canvas_height, initial_line_position, fill="lime", width=2)
-    # vertical_line3 = canvas.create_line(initial_line_position3, 0, initial_line_position3, minimapY-63, fill="blue", width=2)    
-    # slider_label3 = tk.Label(frame, text="rope connect:", bg="#ADD8E6")
-    # slider_label3.grid(row=5, column=1, pady=5, padx=5)
-    line_position_slider3 = tk.Scale(frame, from_=2, to=canvas_height, orient=tk.VERTICAL, length=canvas_height*2, resolution=1, command=update_line_position3)
+    line_position_slider3 = tk.Scale(frame2, from_=2, to=canvas_height, orient=tk.VERTICAL, length=canvas_height*2, resolution=1, command=update_line_position3)
     line_position_slider3.set(initial_line_position3)
-    line_position_slider3.grid(row=0, column=3, rowspan=3, pady=5, padx=5)
+    line_position_slider3.grid(row=0, column=1, rowspan=3, pady=(10,10), padx=(0,10))
 
     root.protocol("WM_DELETE_WINDOW", on_close)
     threads = []
+    
+    # start_the_main
+    stop_event = threading.Event()
+    thread = threading.Thread(target=start_the_main, args=(stop_event,))
+    thread.start()
+    threads.append((thread, stop_event))
+    
     root.mainloop()
 
 
