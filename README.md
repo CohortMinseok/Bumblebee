@@ -1,3 +1,7 @@
+# Instructions: 
+- first, go to https://github.com/oblitum/Interception and follow the installation steps there. 
+- 
+
 # Bumblebee
 Bumblebee Bot
 
@@ -10,9 +14,6 @@ a bot for master dungeon 2d.
 # To compile into .exe:
 pyinstaller --clean --onefile --add-binary "./gdi_capture/gdi_capture.dll;." --icon=icon.ico main.py
 
-# Instructions: 
-- first, go to https://github.com/oblitum/Interception and follow the installation steps there. 
-- 
 
 # TODO:
 - runesolver

@@ -175,6 +175,7 @@ async def ropeconnectr(x=31,y=101):
     await sleep(r)
 
 async def goleftattack():
+    print(f'goleftattack')
     await leftp()
     await jumpp()
     await jumpr()    
@@ -185,6 +186,7 @@ async def goleftattack():
     await leftr()
 
 async def gorightattack():
+    print(f'gorightattack')
     await rightp()
     await jumpp()
     await jumpr()    
@@ -195,6 +197,7 @@ async def gorightattack():
     await rightr()
 
 async def goupattack():
+    print(f'goupattack')
     await rightp()
     await ropeconnectp()
     await ropeconnectr()
@@ -203,6 +206,7 @@ async def goupattack():
     await rightr()
 
 async def godownattack():
+    print(f'godownattack')
     await downp()    
     await jumpp()
     await jumpr()
