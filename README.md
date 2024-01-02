@@ -14,6 +14,11 @@ a bot for master dungeon 2d.
 # To compile into .exe:
 pyinstaller --clean --onefile --add-binary "./gdi_capture/gdi_capture.dll;." --icon=icon.ico main.py
 
+pyinstaller --clean --onefile --icon=icon.ico main.py
+
+pyinstaller --clean --noconsole --icon=icon.ico main.py
+
+C:\Users\Screwdriver\AppData\Local\Programs\Python\Python38\Scripts\pyinstaller.exe --clean --onefile --noconsole --icon=icon.ico  main.py
 
 # TODO:
 - runesolver
