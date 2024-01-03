@@ -155,7 +155,6 @@ async def main(stop_event, left, right, top, btm, g):
 
 if __name__ == "__main__":
     
-
     config = ConfigParser()
     config.read('config.ini')
     minimapX = int(config.get('main', 'minimapX'))
@@ -336,48 +335,10 @@ if __name__ == "__main__":
         label_currentright.config(text=f"current right: {line_position_slider2.get()}")
         label_currenttop.config(text=f"current top: {line_position_slider3.get()}")
         label_currentbtm.config(text=f"current btm: {line_position_slider4.get()}")
-        
-
-
-
-
-    
+            
     def on_tab_change(event):
         selected_tab = notebook.index(notebook.select())
         print("Selected Tab:", selected_tab)
-
-    # Create the main window
-    root = tk.Tk()
-    root.title("Tkinter Tabs Example")
-
-    # Create a Notebook widget
-    notebook = ttk.Notebook(root)
-
-    # Create tabs (frames) to be added to the Notebook
-    tab1 = ttk.Frame(notebook)
-    tab2 = ttk.Frame(notebook)
-    tab3 = ttk.Frame(notebook)
-
-    # Add tabs to the Notebook
-    notebook.add(tab1, text="Tab 1")
-    notebook.add(tab2, text="Tab 2")
-    notebook.add(tab3, text="Tab 3")
-
-    # Bind the tab change event
-    notebook.bind("<<NotebookTabChanged>>", on_tab_change)
-
-    # Pack the Notebook widget
-    notebook.pack(expand=1, fill="both")
-
-    # Add content to each tab
-    label1 = tk.Label(tab1, text="Content for Tab 1")
-    label1.pack(padx=10, pady=10)
-
-    label2 = tk.Label(tab2, text="Content for Tab 2")
-    label2.pack(padx=10, pady=10)
-
-    label3 = tk.Label(tab3, text="Content for Tab 3")
-    label3.pack(padx=10, pady=10)
 
 
 
@@ -432,10 +393,37 @@ if __name__ == "__main__":
     # title_bar.bind("<ButtonPress-1>", start_drag)
     # title_bar.bind("<B1-Motion>", drag)
 
-    button = tk.Button(root, text="Resume", command=thepause, width=20, height=5, bg='tomato', font=('Helvetica', 16))
+    
+    notebook = ttk.Notebook(root)
+    # Create tabs (frames) to be added to the Notebook
+    tab1 = ttk.Frame(notebook)
+    tab2 = ttk.Frame(notebook)
+    tab3 = ttk.Frame(notebook)
+    tab4 = ttk.Frame(notebook)
+    # Add tabs to the Notebook
+    notebook.add(tab1, text="Tab 1")
+    notebook.add(tab2, text="Tab 2")
+    notebook.add(tab3, text="Tab 3")
+    notebook.add(tab4, text="Tab 4")
+    # Bind the tab change event
+    notebook.bind("<<NotebookTabChanged>>", on_tab_change)
+    # Pack the Notebook widget
+    notebook.pack(expand=1, fill="both")
+    # Add content to each tab
+    label1 = tk.Label(tab1, text="Rectangular Rotation Method")
+    label1.pack(padx=10, pady=10)
+    label2 = tk.Label(tab2, text="Script Recording Method (Coming Soon .. )")
+    label2.pack(padx=10, pady=10)
+    label3 = tk.Label(tab3, text="Custom Map Rotation Design Method (Coming Soon ..)")
+    label3.pack(padx=10, pady=10)
+    label4 = tk.Label(tab4, text="Settings")
+    label4.pack(padx=10, pady=10)
+
+
+    button = tk.Button(tab1, text="Resume", command=thepause, width=20, height=5, bg='tomato', font=('Helvetica', 16))
     button.pack(pady=(10,20))
 
-    frame = tk.Frame(root, bg='', bd=0)
+    frame = tk.Frame(tab1, bg='', bd=0)
     # frame = tk.Frame(root, bg='#ffbb29')
     frame.pack(padx=0, pady=0)
     # # label1 = tk.Label(frame, text="x:", fg="black", bg='#ffbb29')
@@ -466,7 +454,7 @@ if __name__ == "__main__":
     img = PhotoImage(file=image_path)
 
 
-    frame2 = tk.Frame(root, bg='orange', bd=0)
+    frame2 = tk.Frame(tab1, bg='orange', bd=0)
     frame2.pack(padx=0, pady=0)
     canvas = tk.Canvas(frame2, width=minimapX-8, height=minimapY-63, bg='#fabb29')
     canvas.grid(row=0, column=0, rowspan=1, padx=10, pady=(10,0))
@@ -520,7 +508,7 @@ if __name__ == "__main__":
     line_position_slider4.grid(row=0, column=2, rowspan=3, pady=(10,10), padx=(0,10))
 
     
-    frame3 = tk.Frame(root, bg='', bd=0)
+    frame3 = tk.Frame(tab1, bg='', bd=0)
     frame3.pack(padx=0, pady=0)  
     label_currentleft = tk.Label(frame3, text=f"current left: {line_position_slider.get()}")
     label_currentleft.grid(row=0, column=0, pady=0, padx=5)  
