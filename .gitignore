@@ -6,3 +6,6 @@ build/
 backup/
 dist/
 __pycache__/
+telegram.py
+bot.py
+telegram.ini

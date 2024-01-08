@@ -36,12 +36,12 @@ from theinterception import KeyStroke, MouseStroke, Stroke
 from theinterception import (FilterKeyState, FilterMouseState, KeyState, MouseFlag,
                       MouseRolling, MouseState)
 
-try:
-    interception = Interception()
-    INTERCEPTION_INSTALLED = True
-except Exception:
-    INTERCEPTION_INSTALLED = False
-print(f'{INTERCEPTION_INSTALLED = }')
+# try:
+#     interception = Interception()
+#     INTERCEPTION_INSTALLED = True
+# except Exception:
+#     INTERCEPTION_INSTALLED = False
+# print(f'{INTERCEPTION_INSTALLED = }')
 
 async def sleep(dur):
     now = perf_counter()

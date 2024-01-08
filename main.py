@@ -400,11 +400,15 @@ if __name__ == "__main__":
     tab2 = ttk.Frame(notebook)
     tab3 = ttk.Frame(notebook)
     tab4 = ttk.Frame(notebook)
+    tab5 = ttk.Frame(notebook)
+    tab6 = ttk.Frame(notebook)
     # Add tabs to the Notebook
     notebook.add(tab1, text="Tab 1")
     notebook.add(tab2, text="Tab 2")
     notebook.add(tab3, text="Tab 3")
     notebook.add(tab4, text="Tab 4")
+    notebook.add(tab5, text="Tab 5")
+    notebook.add(tab6, text="Tab 6")
     # Bind the tab change event
     notebook.bind("<<NotebookTabChanged>>", on_tab_change)
     # Pack the Notebook widget
@@ -416,8 +420,12 @@ if __name__ == "__main__":
     label2.pack(padx=10, pady=10)
     label3 = tk.Label(tab3, text="Custom Map Rotation Design Method (Coming Soon ..)")
     label3.pack(padx=10, pady=10)
-    label4 = tk.Label(tab4, text="Settings")
+    label4 = tk.Label(tab4, text="Telegram Setup")
     label4.pack(padx=10, pady=10)
+    label5 = tk.Label(tab5, text="Autoclicker (Monster Life)")
+    label5.pack(padx=10, pady=10)
+    label6 = tk.Label(tab6, text="Settings")
+    label6.pack(padx=10, pady=10)
 
 
     button = tk.Button(tab1, text="Resume", command=thepause, width=20, height=5, bg='tomato', font=('Helvetica', 16))
