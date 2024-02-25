@@ -2,8 +2,12 @@
 - first, go to https://github.com/oblitum/Interception and follow the installation steps there. 
 - 
 
-# Bumblebee
-Bumblebee Bot
+# Bumblebee Introduction
+- always die due to stuck at solving rune?
+- inefficient map rotation?
+- always stuck on rope?
+- bot always have bugs?
+- lie detector and got send back to town hitting air?
 
 # Description: 
 a bot for master dungeon 2d. 

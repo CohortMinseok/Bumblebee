@@ -36,12 +36,12 @@ from theinterception import KeyStroke, MouseStroke, Stroke
 from theinterception import (FilterKeyState, FilterMouseState, KeyState, MouseFlag,
                       MouseRolling, MouseState)
 
-# try:
-#     interception = Interception()
-#     INTERCEPTION_INSTALLED = True
-# except Exception:
-#     INTERCEPTION_INSTALLED = False
-# print(f'{INTERCEPTION_INSTALLED = }')
+try:
+    interception = Interception()
+    INTERCEPTION_INSTALLED = True
+except Exception:
+    INTERCEPTION_INSTALLED = False
+print(f'{INTERCEPTION_INSTALLED = }')
 
 async def sleep(dur):
     now = perf_counter()
@@ -72,11 +72,26 @@ def keyup(key):
 # read player key settings on startup. 
 
 config = ConfigParser()
-config.read('keysettings.ini')
-atk = config.get('main', 'attack')
-jump = config.get('main', 'jump')
-teleport = config.get('main', 'teleport')
-ropeconnect = config.get('main', 'ropeconnect')
+config.read('settings.ini')
+atk = config.get('keybind', 'attack')
+jump = config.get('keybind', 'jump')
+teleport = config.get('keybind', 'teleport')
+ropeconnect = config.get('keybind', 'ropeconnect')
+npc = config.get('keybind', 'npc')
+
+def refreshkeybind():
+    global atk
+    global jump
+    global teleport
+    global ropeconnect
+    global npc
+    config.read('settings.ini')
+    atk = config.get('keybind', 'attack')
+    jump = config.get('keybind', 'jump')
+    teleport = config.get('keybind', 'teleport')
+    ropeconnect = config.get('keybind', 'ropeconnect')
+    npc = config.get('keybind', 'npc')
+
 
 async def leftp(x=31,y=101):
     keydown('left')
@@ -150,6 +165,18 @@ async def teleportr(x=31,y=101):
     r /= 1000
     await sleep(r)
 
+async def npcp(x=31,y=101):
+    keydown(npc)
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def npcr(x=31,y=101):
+    keyup(npc)
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
 async def attackp(x=31,y=101):
     keydown(atk)
     r = random.randint(x, y)
@@ -173,6 +200,12 @@ async def ropeconnectr(x=31,y=101):
     r = random.randint(x, y)
     r /= 1000
     await sleep(r)
+
+async def ropeconnectpr():
+    await ropeconnectp()
+    await ropeconnectr()
+
+# rectangular clockwise rotation
 
 async def goleftattack():
     print(f'goleftattack')
@@ -214,5 +247,124 @@ async def godownattack():
     await attackr()
     await downr()
 
+# temp (not organized) (please delete soon)
 
 
+async def shiftp(x=31, y=119):
+    # send2('01')
+    keydown('shift')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+
+async def shiftr(x=31, y=101):
+    # send3('01')
+    keyup('shift')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def shiftpr():
+    await shiftp()
+    await shiftr()
+
+async def shikigamip(x=31,y=101):
+    # send2('27')
+    keydown('x')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def shikigamir(x=31,y=101):
+    # send3('27')
+    keyup('x')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def shikigamipr3(x=3,y=33):
+    await shikigamip()
+    await shikigamir(x,y)
+    await shikigamip()
+    await shikigamir(x,y)
+    await shikigamip()
+    await shikigamir(x,y)
+
+async def jumpupjumpattack(x=31,y=101):
+    print(f'jumpupjumpattack')
+    # await ep()
+    # await er()
+    await jumpp(111,177)
+    await jumpr()
+    await upp()
+    await jumpp(111,177)
+    await jumpr(3,33)
+    await upr(3,33)
+    # await rp()
+    # await rr()
+    await shikigamip()
+    await shikigamir()
+    await sleep(.2)
+    
+async def downjump():
+    await downp()
+    await jumpp()
+    await jumpr()
+    await downr()
+    # time.await sleep(3)
+    # yinyangp()
+    # yinyangr(555,999)
+
+async def downjumpv2():
+    await downp()
+    await jumpp()
+    await jumpr()
+    await shiftpr()
+    await downr(1333,1999)
+    
+async def yinyangp(x=31, y=101):
+    keydown('s')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def yinyangr(x=31, y=101):
+    keyup('s')
+    r = random.randint(x, y)
+    r /= 1000
+    await sleep(r)
+
+async def leftjumpjumpattack(x=31, y=101):
+    await leftp(111,177)
+    await jumpp()
+    await jumpr(3,33)
+    await jumpp()
+    await jumpr()
+    await jumpp()
+    await jumpr(133, 255)
+    await shikigamip()
+    await shikigamir()
+    await leftr()
+
+async def rightjumpjumpattack(x=31, y=101):
+    await rightp(111,177)
+    await jumpp()
+    await jumpr(3,33)
+    await jumpp()
+    await jumpr()
+    await jumpp()
+    await jumpr(133, 255)
+    await shikigamip()
+    await shikigamir()
+    await rightr()
+
+async def upjumpshift():
+    await jumpp()
+    await jumpr()
+    await upp()
+    await shiftp()
+    await upr()
+    await shiftr(333, 888)
+    await yinyangp()
+    await yinyangr(444, 777)

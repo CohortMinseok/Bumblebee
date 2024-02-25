@@ -64,3 +64,18 @@ class Game:
     def get_other_location(self):
         location = self.locate(ENEMY_BGRA, GUILD_BGRA, BUDDY_BGRA)
         return len(location) > 0
+
+    def get_screenshot(self):
+        with gdi_capture.CaptureWindow(self.hwnd) as img:
+            if img is None:
+                print("MapleStory.exe was not found.")
+                return None
+            return img.copy()
+    
+    def get_screenshot_bytes(self):
+        with gdi_capture.CaptureWindow(self.hwnd) as img:
+            if img is None:
+                print("MapleStory.exe was not found.")
+                return None
+            print(f'{img.size=} {img.shape}')
+            return img.copy().tobytes()
