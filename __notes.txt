@@ -9,3 +9,5 @@ pyinstaller --onefile --noconsole --icon=icon.ico main.py
 pyinstaller --clean --noconsole --onefile --icon=icon.ico main.py
 
 pyinstaller --clean --noconsole --onefile --add-binary "./gdi_capture/gdi_capture.dll;." --icon=icon.ico main.py
+
+C:\Users\Screwdriver\AppData\Local\Programs\Python\Python38\Scripts\pyinstaller.exe --clean --noconsole --onefile --icon=icon.ico main.py
