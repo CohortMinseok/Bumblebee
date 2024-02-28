@@ -11,7 +11,7 @@ Will not trigger lie detector except for midnight 2am-7am server-wide captcha ld
 - **Works on Multiple PC at once** - this bot is free to use on multiple pcs and will not clash with each other!
 - **Oversea Servers Supports** - works on MapleSEA, GMS, KMS, TMS. 
 - **No Square Lie Detector / Floating Lie Detector / Princess Violetta** - this bot utilize real hardware keyboard and mouse to function, unlike other game bot which uses 
-software based / simulation based / microsofft direct input to send keystrokes to the game. 
+software based / simulation based / microsoft direct input to send keystrokes to the game. 
 - **Clockwise / Anti-Clockwise Rotation** - choose from many map farming strategy which best suit your class and training map. 
 - **Works on All Maps** - maps too many complicated platforms? no worries! this bot works on all maps in the game. 
 - **QoL Utilities Functions** - enable auto pet feed, auto revival and more. 
