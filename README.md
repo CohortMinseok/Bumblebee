@@ -20,10 +20,10 @@ software based / simulation based / microsofft direct input to send keystrokes t
 - **Telegram Control** - simply type in slash command /start /stop /pause /resume and many more custom commands to control over your maplestory client when you are away from home / working.
 - **Chat** - use /chat command to type and send chat messages to your maplestory client. 
 - **Go to Town** - use /town command to pause bot and go to town. 
-- **Free-to-use** - this bot is free to use, share and download, you don't need to pay any cents!
+- **Free-To-Use** - this bot is free to use, share or download, you don't need to pay any cents!
 - **Source Code Available** - and nonetheless, the source code for this bot is hosted on https://github.com/agumonlyt/Bumblebee . 
 Simply git clone to download and launch the ready-compiled main.exe to start use the bot immediately! If you are a developer, feel free to edit the code all you want. 
-- **Constant Up-to-date** - this bot is always improving, stay up-to-date to the latest maplestory version, feel free to leave your suggestions and feedbacks in the discord server. 
+- **Constant Up-to-date** - this bot is always improving, stay up-to-date to the latest maplestory version, kindly check back from time to time. Feel free to leave your suggestions and feedbacks in the discord server. 
 
 # Discord Link: 
 https://discord.gg/NbZrhTrc
