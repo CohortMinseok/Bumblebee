@@ -14,6 +14,8 @@ Will not trigger lie detector except for midnight 2am-7am server-wide captcha ld
 software based / simulation based / microsoft direct input to send keystrokes to the game. 
 - **Clockwise / Anti-Clockwise Rotation** - choose from many map farming strategy which best suit your class and training map. 
 - **Works on All Maps** - maps too many complicated platforms? no worries! this bot works on all maps in the game. 
+- **Custom Script Recording Method** - *Coming Soon*, better KPM than clockwise / anti-clockwise rotation. 
+- **Custom Map Design** - best strategy out there to farm a map. Up to 90% KPM efficiency compare to human hand grind. Up to 290 mobs per minute for Shangrila map and above while human can do maximum 300 mobs per minute. 
 - **QoL Utilities Functions** - enable auto pet feed, auto revival and more. 
 - **Exp Buffs Hotkeys** - simply setup your assigned exp buffs hotkey in setting tab to enable auto exp buffs. 
 - **Telegram Binding** - free telegram bot to send you current maplestory status, other player on same map alert, chat alert, and more. 
