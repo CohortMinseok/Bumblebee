@@ -8,7 +8,7 @@ Will not trigger lie detector except for midnight 2am-7am server-wide captcha ld
 - **Auto enter Polo / Especia Portal** - the bot are able to detect which portal are currently on the map, simply enable this option to allow bot to clear polo / especia  portal for you!
 - **Auto Change Channel** - enable this option to auto change channel when other players are detected on your map. 
 - **All Class Skills** - this bot can be used on any class in the game, just assign your skills in settings tab. 
-- **Works on Multi-client** - this bot is free to use on multiple pcs and will not clash with each other!
+- **Works on Multiple PC at once** - this bot is free to use on multiple pcs and will not clash with each other!
 - **Oversea Servers Supports** - works on MapleSEA, GMS, KMS, TMS. 
 - **No Square Lie Detector / Floating Lie Detector / Princess Violetta** - this bot utilize real hardware keyboard and mouse to function, unlike other game bot which uses 
 software based / simulation based / microsofft direct input to send keystrokes to the game. 
