@@ -1,7 +1,7 @@
 # import socket
 # import pyautogui
 # import signal
-# import win32gui
+import win32gui
 # import win32api
 # import win32con
 from io import BytesIO
@@ -18,6 +18,8 @@ from time import perf_counter
 import numpy as np
 import threading
 from pynput import keyboard
+from pynput.keyboard import Listener as KeyListener  # type: ignore[import]
+from pynput.mouse import Listener as MouseListener  # type: ignore[import]
 # from PIL import ImageGrab
 from datetime import datetime
 from game import Game
@@ -50,14 +52,48 @@ from theinterception import exceptions
 from theinterception import KeyStroke, MouseStroke, Stroke
 from theinterception import (FilterKeyState, FilterMouseState, KeyState, MouseFlag,
                       MouseRolling, MouseState)
-
+from theinterception.types import MouseButton
 try:
     interception = Interception()
     INTERCEPTION_INSTALLED = True
 except Exception:
     INTERCEPTION_INSTALLED = False
 print(f'{INTERCEPTION_INSTALLED = }')
+from typing import Literal, Optional
+_TEST_MOUSE_STROKE = MouseStroke(MouseState.MOUSE_MIDDLE_BUTTON_UP, 0, 0, 0, 0, 0)
+_TEST_KEY_STROKE = KeyStroke(KEYBOARD_MAPPING["space"], KeyState.KEY_UP, 0)
+def auto_capture_devices2(*, keyboard: bool = True, mouse: bool = True, verbose: bool = False):
+    mouse_listener = MouseListener(on_click=lambda *args: False)
+    key_listener = KeyListener(on_release=lambda *args: False)
+    for device in ("keyboard", "mouse"):
+        if (device == "keyboard" and not keyboard) or (device == "mouse" and not mouse):
+            continue
+        print(f"Trying {device} device numbers...")
+        stroke: Stroke
+        if device == "mouse":
+            listener, stroke, nums = mouse_listener, _TEST_MOUSE_STROKE, range(10, 20)
+        else:
+            listener, stroke, nums = key_listener, _TEST_KEY_STROKE, range(10)
+        listener.start()
+        for num in nums:
+            interception.send(num, stroke)
+            time.sleep(random.uniform(0.1, 0.3))
+            if listener.is_alive():
+                print(f"No success on {device} {num}...")
+                continue
+            print(f"Success on {device} {num}!")
+            set_devices(**{device: num})
+            break
+    print("Devices set.")    
+def set_devices(keyboard: Optional[int] = None, mouse: Optional[int] = None) -> None:
+    """Sets the devices on the current context. Keyboard devices should be from 0 to 10
+    and mouse devices from 10 to 20 (both non-inclusive).
 
+    If a device out of range is passed, the context will raise a `ValueError`.
+    """
+    interception.keyboard = keyboard or interception.keyboard
+    interception.mouse = mouse or interception.mouse
+auto_capture_devices2()
 
 # global variables
 pause = False
@@ -77,6 +113,7 @@ def _get_keycode(key: str) -> int:
     except KeyError:
         raise exceptions.UnknownKeyError(key)
 
+# extract from theinterception inputs.py
 # key press down function
 def keydown(key):
     keycode = _get_keycode(key)
@@ -88,6 +125,138 @@ def keyup(key):
     keycode = _get_keycode(key)
     stroke = KeyStroke(keycode, KeyState.KEY_UP, 0)
     interception.send_key(stroke)
+
+def _get_button_states(button: str, *, down: bool) -> int:
+    try:
+        states = MouseState.from_string(button)
+        return states[not down]  # first state is down, second state is up
+    except KeyError:
+        raise exceptions.UnknownButtonError(button)
+
+# button :class:`Literal["left", "right", "middle", "mouse4", "mouse5"] | str`:
+def mousedown(button):    
+    button_state = _get_button_states(button, down=True)
+    stroke = MouseStroke(button_state, MouseFlag.MOUSE_MOVE_ABSOLUTE, 0, 0, 0, 0)
+    interception.send_mouse(stroke)
+
+def mouseup(button):    
+    button_state = _get_button_states(button, down=False)
+    stroke = MouseStroke(button_state, MouseFlag.MOUSE_MOVE_ABSOLUTE, 0, 0, 0, 0)
+    interception.send_mouse(stroke)
+    
+from typing import Literal, Optional
+MOUSE_BUTTON_DELAY = 0.03
+def mouse_down(button: MouseButton, delay: Optional[float] = None) -> None:
+    """Holds a mouse button down, will not be released automatically.
+
+    If you want to hold a mouse button while performing an action, please use
+    `hold_mouse`, which offers a context manager.
+    """
+    button_state = _get_button_states(button, down=True)
+    stroke = MouseStroke(button_state, MouseFlag.MOUSE_MOVE_ABSOLUTE, 0, 0, 0, 0)
+    interception.send_mouse(stroke)
+    time.sleep(delay or MOUSE_BUTTON_DELAY)
+
+def mouse_up(button: MouseButton, delay: Optional[float] = None) -> None:
+    """Releases a mouse button."""
+    button_state = _get_button_states(button, down=False)
+    stroke = MouseStroke(button_state, MouseFlag.MOUSE_MOVE_ABSOLUTE, 0, 0, 0, 0)
+    interception.send_mouse(stroke)
+    time.sleep(delay or MOUSE_BUTTON_DELAY)
+
+def move_to(x: int | tuple[int, int], y: Optional[int] = None) -> None:
+    """Moves to a given absolute (x, y) location on the screen.
+
+    The paramters can be passed as a tuple-like `(x, y)` coordinate or
+    seperately as `x` and `y` coordinates, it will be parsed accordingly.
+
+    Due to conversion to the coordinate system the interception driver
+    uses, an offset of 1 pixel in either x or y axis may occur or not.
+
+    ### Examples:
+    ```py
+    # passing x and y seperately, typical when manually calling the function
+    interception.move_to(800, 1200)
+
+    # passing a tuple-like coordinate, typical for dynamic operations.
+    # simply avoids having to unpack the arguments.
+    target_location = (1200, 300)
+    interception.move_to(target_location)
+    ```
+    """
+    x, y = _utils.normalize(x, y)
+    x, y = _utils.to_interception_coordinate(x, y)
+
+    stroke = MouseStroke(0, MouseFlag.MOUSE_MOVE_ABSOLUTE, 0, x, y, 0)
+    interception.send_mouse(stroke)
+
+def move_relative(x: int = 0, y: int = 0) -> None:
+    """Moves relatively from the current cursor position by the given amounts.
+
+    Due to conversion to the coordinate system the interception driver
+    uses, an offset of 1 pixel in either x or y axis may occur or not.
+
+    ### Example:
+    ```py
+    interception.mouse_position()
+    >>> 300, 400
+
+    # move the mouse by 100 pixels on the x-axis and 0 in y-axis
+    interception.move_relative(100, 0)
+    interception.mouse_position()
+    >>> 400, 400
+    """
+    stroke = MouseStroke(0, MouseFlag.MOUSE_MOVE_RELATIVE, 0, x, y, 0)
+    interception.send_mouse(stroke)
+
+def click(
+    x: Optional[int | tuple[int, int]] = None,
+    y: Optional[int] = None,
+    button: MouseButton | str = "left",
+    clicks: int = 1,
+    interval: int | float = 0.1,
+    delay: int | float = 0.3,
+) -> None:
+    """Presses a mouse button at a specific location (if given).
+
+    Parameters
+    ----------
+    button :class:`Literal["left", "right", "middle", "mouse4", "mouse5"] | str`:
+        The button to click once moved to the location (if passed), default "left".
+
+    clicks :class:`int`:
+        The amount of mouse clicks to perform with the given button, default 1.
+
+    interval :class:`int | float`:
+        The interval between multiple clicks, only applies if clicks > 1, default 0.1.
+
+    delay :class:`int | float`:
+        The delay between moving and clicking, default 0.3.
+    """
+    if x is not None:
+        move_to(x, y)
+        time.sleep(delay)
+
+    for _ in range(clicks):
+        mouse_down(button)
+        mouse_up(button)
+
+        if clicks > 1:
+            time.sleep(interval)
+
+# decided against using functools.partial for left_click and right_click
+# because it makes it less clear that the method attribute is a function
+# and might be misunderstood. It also still allows changing the button
+# argument afterall - just adds the correct default.
+def left_click(clicks: int = 1, interval: int | float = 0.1) -> None:
+    """Thin wrapper for the `click` function with the left mouse button."""
+    click(button="left", clicks=clicks, interval=interval)
+
+def right_click(clicks: int = 1, interval: int | float = 0.1) -> None:
+    """Thin wrapper for the `click` function with the right mouse button."""
+    click(button="right", clicks=clicks, interval=interval)
+
+
 
 
 async def main(stop_event, left1, right1, top1, btm1, g):
@@ -254,11 +423,9 @@ class TkinterBot:
         self.initial_line_position3 = float(self.config.get('main', 'initial_line_position3'))
         self.initial_line_position4 = float(self.config.get('main', 'initial_line_position4'))
         self.ipaddress = self.config.get('main', 'ipaddress')
-        self.g = Game((8, 63, self.minimapX, self.minimapY)) #   
-
+        self.g = Game((8, 63, self.minimapX, self.minimapY)) 
         self.TOKEN = self.config.get('telegram', 'TOKEN')
         self.chat_id = self.config.get('telegram', 'chat_id')
-
         self.att = self.config.get('keybind', 'attack')
         self.jump = self.config.get('keybind', 'jump')
         self.teleport = self.config.get('keybind', 'teleport')
@@ -266,15 +433,30 @@ class TkinterBot:
         self.npc = self.config.get('keybind', 'npc')
 
         self.application = None
-
         self.threads = []
         self.stop_event = threading.Event()
-        self.pause = False
+        self.pause = True
         self.telegram_keep_alive = True
+        self.acc_not_bind = False
+        self.telegram_started = False
+        self.tkinter_started = False
+        self.position10 = (480, 370, 481, 371)
+        self.position9 = (445, 405, 446, 406)
+        self.position8 = (430, 375, 431, 376)
+        self.position7 = (25, 10, 26, 11) #
+        self.position6 = (390, 400, 441, 401) #broid 
+        # self.position6 = (440, 400, 441, 401) #no-broid
+        self.position5 = (300, 360, 301, 361)
+        self.position4 = (11, 88, 200, 200)
+        self.position44 = (11, 88, 200, 200)
+        self.position33 = (315, 40, 316, 41) #
+        self.position3 = (405, 75, 406, 76)  # 
+        self.position2 = (701, 472, 702, 473)  # 
         
         self.loop1 = asyncio.new_event_loop()
         self.loop2 = asyncio.new_event_loop()
         self.loop3 = asyncio.new_event_loop()
+        self.loop4 = asyncio.new_event_loop()
         self.thread1 = threading.Thread(target=self.run_thread1)
         self.thread2 = threading.Thread(target=self.run_thread2)
         self.thread3 = threading.Thread(target=self.run_thread3)
@@ -322,34 +504,45 @@ class TkinterBot:
         # self.thread2 = threading.Thread(target=self.start_the_main2, args=(self.stop_event,))
         # self.thread2.start()
         # self.threads.append((self.thread, self.stop_event), (self.thread2, self.stop_event))
+        self.tkinter_started=True
         self.root.mainloop()
         
 
-    async def async_function(self, thread_name, iterations):        
-        self.application = Application.builder().token(self.TOKEN).build()
-        # self.application.add_handler(CommandHandler('start', self.start_command))
-        self.application.add_handler(CommandHandler('status', self.status_command))
-        # app.add_handler(CommandHandler('help', help_command))
-        # app.add_handler(CommandHandler('custom', custom_command))
-        # app.add_handler(MessageHandler(filters.TEXT, handle_message))
-        self.application.add_error_handler(self.error)
-        async with self.application:
-            await self.application.initialize()
-            await self.application.start()
-            await self.application.updater.start_polling()
-            # self.root.mainloop() # press close and this line over
-            # await asyncio.sleep(30)
-            while self.telegram_keep_alive:
-            # for i in range(iterations):
-                print(f"{thread_name} - Iteration i")
-                await asyncio.sleep(1)  # Simulating asynchronous work
-            print(f'finished telegram_run1')
-            await self.application.updater.stop()
-            await self.application.stop()
-            await self.application.shutdown()
-            print(f'finished telegram_run2')
+    async def async_function(self, thread_name, iterations):
+        try:
+            self.application = Application.builder().token(self.TOKEN).build()
+            # self.application.add_handler(CommandHandler('start', self.start_command))
+            self.application.add_handler(CommandHandler('status', self.status_command))
+            # app.add_handler(CommandHandler('help', help_command))
+            # app.add_handler(CommandHandler('custom', custom_command))
+            # app.add_handler(MessageHandler(filters.TEXT, handle_message))
+            self.application.add_error_handler(self.error)
+            async with self.application:
+                await self.application.initialize()
+                await self.application.start()
+                await self.application.updater.start_polling()
+                # self.root.mainloop() # press close and this line over
+                # await asyncio.sleep(30)
+                self.telegram_started = True
+                while self.telegram_keep_alive:
+                # for i in range(iterations):
+                    # print(f"{thread_name} - Iteration i")
+                    await asyncio.sleep(1)  # Simulating asynchronous work
+                print(f'finished telegram_run1')
+                await self.application.updater.stop()
+                await self.application.stop()
+                await self.application.shutdown()
+                print(f'finished telegram_run2')
+        except Exception as e:
+            print(f'{e=}')
+            self.acc_not_bind = True
+            self.telegram_started = True
+        finally:
+            print(f'exiting telegram thread ..')
             
     async def async_function2(self, thread_name, iterations):
+        while not self.telegram_started:
+            time.sleep(1)
         self.init_tkinter()
         # for i in range(iterations):
         #     print(f"{thread_name} - Iteration {i}")
@@ -367,6 +560,10 @@ class TkinterBot:
         asyncio.set_event_loop(self.loop3)
         self.loop3.run_until_complete(self.async_function3("Thread 3", 5))
 
+    def run_thread4(self):
+        asyncio.set_event_loop(self.loop4)
+        self.loop4.run_until_complete(self.async_function4())
+
     def start_threads(self):
         # Start both threads
         self.thread1.start()
@@ -381,7 +578,10 @@ class TkinterBot:
 
     async def async_function3(self, thread_name, iterations):
         print(f'bot has started ..')
-        time.sleep(3.01)        
+        while not self.tkinter_started:
+            time.sleep(1.01)            
+        self.thread4 = threading.Thread(target=self.run_thread4)
+        self.thread4.start()
         left1=self.line_position_slider.get()
         right1=self.line_position_slider2.get()
         top1=self.line_position_slider3.get()
@@ -395,8 +595,7 @@ class TkinterBot:
         checkrune=True
         solverune=False
         now=0
-        xynotfound=0        
-        self.pause = True
+        xynotfound=0
         while True:
             if self.pause:
                 print(f'script is paused .. click resume to resume. ')
@@ -404,6 +603,7 @@ class TkinterBot:
                     # do nothing
                     time.sleep(1)
                     if self.stop_event.is_set():
+                        self.thread4.join()
                         return
                 print(f'script resumed ..')
             #
@@ -462,33 +662,57 @@ class TkinterBot:
             
             print(f'{x=}, {y=} | {left=}, {top=}, {right=}, {btm=} | {left1=}, {top1=}, {right1=}, {btm1=}')
 
+    async def async_function4(self):
+        while True:
+            while self.pause:
+                time.sleep(1)
+                if self.stop_event.is_set():
+                    return
+            print(f'new checking cycle ..')
+            diedcheckerlocations = self.g.died_checker()
+            if diedcheckerlocations is not None:
+                print(f'{diedcheckerlocations=}')
+                hwnd = win32gui.FindWindow(None, "MapleStory")
+                position = win32gui.GetWindowRect(hwnd)
+                x, y, w, h = position
+                move_to(x+self.position6[0],y+self.position6[1])
+                time.sleep(.1)
+                left_click()                
+            polocheckerlocations = self.g.polo_checker() # check for portal on minimap
+            if polocheckerlocations is not None:
+                print(f'{polocheckerlocations=}')
+                # gotoportal like how u go to rune
+                # after pressing up
+                # check if dialogue opened up
+                # start checkinng portal type
+                polo2checkerlocations = self.g.polo2_checker() # check if dialogue is polo portal or frito portal
+                if polo2checkerlocations is not None: # if is polo portal
+                    print(f'{polo2checkerlocations=}')
+                    polo3checkerlocations = self.g.polo3_checker() # check if polo is flamewolf or hunting ground
+                    if polo3checkerlocations is not None:
+                        print(f'{polo3checkerlocations=}')
+                        # if is flamewolf, skip, end chat
+                    else:
+                        # press enter or npc button, enter polo portal
+                        # check what type of hunting ground it is
+                        huntingmapcheckerlocations = self.g.hunting_map_checker() # check if is hidden street bounty hunt
+                        if huntingmapcheckerlocations is not None:
+                            print(f'{huntingmapcheckerlocations=}')
+                        huntingmap2checkerlocations = self.g.hunting_map2_checker() # check if is hidden street guarding the castle wall
+                        if huntingmap2checkerlocations is not None:
+                            print(f'{huntingmap2checkerlocations=}')
+                        huntingmap3checkerlocations = self.g.hunting_map3_checker() # check if is hidden street finding the golden bird
+                        if huntingmap3checkerlocations is not None:
+                            print(f'{huntingmap3checkerlocations=}')
+                else:
+                    polo4checkerlocations = self.g.polo4_checker() # check if portal is especia portal
+                    if polo4checkerlocations is not None: #
+                        print(f'{polo4checkerlocations=}')
+                        # press enter blah and go into especia map
+                        # spam npc until solve
 
-    async def telegram_run(self):
-        
-        self.application = Application.builder().token(self.TOKEN).build()
-        # self.application.add_handler(CommandHandler('start', start_command_class))
-        self.application.add_handler(CommandHandler('start', self.start_command))
-        # app.add_handler(CommandHandler('help', help_command))
-        # app.add_handler(CommandHandler('custom', custom_command))
-        # app.add_handler(MessageHandler(filters.TEXT, handle_message))
-        self.application.add_error_handler(self.error)
-
-        async with self.application:
-            await self.application.initialize()
-            await self.application.start()
-            await self.application.updater.start_polling()
-            # self.root.mainloop() # press close and this line over
-            await asyncio.sleep(30)
-            print(f'finished telegram_run1')
-            await self.application.updater.stop()
-            await self.application.stop()
-            await self.application.shutdown()
-            print(f'finished telegram_run2')
-        
-    def tkinter_run(self):
-        self.root.mainloop()
+            time.sleep(2)
     
-
     async def status_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         message_type: str = update.message.chat.type
         text: str = update.message.text
@@ -718,7 +942,7 @@ class TkinterBot:
         self.label_currentright.grid(row=1, column=0, pady=0, padx=5)  
         self.label_currentbtm = tk.Label(self.frame3, text=f"current btm: {self.line_position_slider4.get()}")
         self.label_currentbtm.grid(row=1, column=1, pady=0, padx=5)  
-        self.button3 = tk.Button(self.frame3, text="Reset", command=self.reset, width=10, height=2, bg='yellow', font=('Helvetica', 8))
+        self.button3 = tk.Button(self.frame3, text="Reset Threshold", command=self.reset, width=10, height=2, bg='yellow', font=('Helvetica', 8))
         self.button3.grid(row=2, column=0, columnspan=2, pady=(10,10), padx=(20,20))
 
 
@@ -742,18 +966,18 @@ class TkinterBot:
         # global initial_line_position
         # global canvas_width
         # global canvas_height
-        minimapX = int(self.entry1.get())
-        minimapY = int(self.entry2.get())
-        if minimapX > 400:
-            minimapX=400
-        if minimapY > 300:
-            minimapY=300
-        if minimapX < 100:
-            minimapX=100
-        if minimapY < 100:
-            minimapY=100
+        self.minimapX = int(self.entry1.get())
+        self.minimapY = int(self.entry2.get())
+        if self.minimapX > 400:
+            self.minimapX=400
+        if self.minimapY > 300:
+            self.minimapY=300
+        if self.minimapX < 100:
+            self.minimapX=100
+        if self.minimapY < 100:
+            self.minimapY=100
         hwnd = gdi_capture.find_window_from_executable_name("MapleStory.exe")
-        top, left, bottom, right = 8, 63, minimapX, minimapY
+        top, left, bottom, right = 8, 63, self.minimapX, self.minimapY
         with gdi_capture.CaptureWindow(hwnd) as img:            
             img_cropped = img[left:right, top:bottom]
             height = (right-left)*2
@@ -789,7 +1013,7 @@ class TkinterBot:
             self.line_position_slider4.config(to=self.canvas_height, length=self.canvas_height*2)
             self.update_line_position4(self.line_position_slider4.get())
         
-        # g = Game((8, 63, minimapX, minimapY)) # 
+        self.g = Game((8, 63, self.minimapX, self.minimapY)) # 
         
         # background_image = Image.open("bumblebee.gif")
         # background_image = background_image.resize((window_width, window_height),  Image.Resampling.LANCZOS)
@@ -849,15 +1073,18 @@ class TkinterBot:
         self.labelchatid2.grid(row=1, column=1, padx=1, pady=1, sticky='w')
         message = ""
         buttondisabled=False
-        if self.TOKEN != '0' and self.chat_id != '0':
+        if not self.acc_not_bind:
+        # if self.TOKEN != '0' and self.chat_id != '0':
             # message += f"Your bot token is: {TOKEN} \n Your telegram chat_id is {chat_id} \n Account is binded with this program. If you can't receive bot message, "
             message += f"Account is binded with this program. \nIf you can't receive bot message, \n"
             buttondisabled=True
         else:
-            if self.TOKEN == '0':
-                message += f"Bot TOKEN not found. \n"
-            if self.chat_id == '0':
-                message += f'Telegram account not binded. \n'
+            # if self.TOKEN == '0':
+            #     message += f"Bot TOKEN not found. \n"
+            # if self.chat_id == '0':
+            #     message += f'Telegram account not binded. \n'
+            message += f'Telegram account not binded, \n'
+            pass
         message += "kindly rebind your account. \n1. Create your telegram bot at BotFather. \n2. Paste your telegram bot token here. \n3. Search your telegram bot name on telegram. \
             \n4. Type something in that telegram bot. \n5. Press bind button below. "
         self.labelmessage = tk.Label(self.frametelegram, anchor='w', justify='left', text=message)
@@ -999,6 +1226,8 @@ class TkinterBot:
                     self.labelmessage2.config(text='')
                     self.buttonbind.config(state=tk.DISABLED)
                     self.buttonrebind.config(state=tk.NORMAL)
+                    self.TOKEN = token
+                    self.chat_id = chat_id
                 else:
                     print(f"Request failed with status code_: {response.status_code}")
             else:
@@ -1121,7 +1350,9 @@ class TkinterBot:
         self.config.set('main', 'initial_line_position2', str(self.line_position_slider2.get()))
         self.config.set('main', 'initial_line_position3', str(self.line_position_slider3.get()))
         self.config.set('main', 'initial_line_position4', str(self.line_position_slider4.get()))
-        with open('config.ini', 'w') as f:
+        self.config.set('telegram', 'token', str(self.TOKEN))
+        self.config.set('telegram', 'chat_id', str(self.chat_id))
+        with open('settings.ini', 'w') as f:
             self.config.write(f)
         self.stop_event.set()
         # for _, stop_event in self.threads:
