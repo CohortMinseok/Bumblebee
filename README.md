@@ -12,6 +12,7 @@ Will not trigger lie detector except for midnight 2am-7am server-wide captcha ld
 - **Oversea Servers Supports** - works on MapleSEA, GMS, KMS, TMS. 
 - **No Square Lie Detector / Floating Lie Detector / Princess Violetta** - this bot utilize real hardware keyboard and mouse to function, unlike other game bot which uses 
 software based / simulation based / microsoft direct input to send keystrokes to the game. 
+- **Will Not Dancing In Town** - this bot will stop all actions when players are sent back to town, no need to worry of getting caught / mega-ed / youtube-ed / ibox-ed / OBS-recorded. 
 - **Clockwise / Anti-Clockwise Rotation** - choose from many map farming strategy which best suit your class and training map. 
 - **Works on All Maps** - maps too many complicated platforms? no worries! this bot works on all maps in the game. 
 - **Custom Script Recording Method** - *Coming Soon*, better KPM than clockwise / anti-clockwise rotation. 
@@ -25,7 +26,7 @@ software based / simulation based / microsoft direct input to send keystrokes to
 - **Free-To-Use** - this bot is free to use, share or download, you don't need to pay any cents!
 - **Source Code Available** - and nonetheless, the source code for this bot is hosted on https://github.com/agumonlyt/Bumblebee . 
 Simply git clone to download and launch the ready-compiled main.exe to start use the bot immediately! If you are a developer, feel free to edit the code all you want. 
-- **Constant Up-to-date** - this bot is always improving, stay up-to-date to the latest maplestory version, kindly check back from time to time. Feel free to leave your suggestions and feedbacks in the discord server. 
+- **Constant Up-to-date** - this bot is always improving, stay up-to-date to the latest maplestory version, kindly check back from time to time. Feel free to leave your suggestions and feedbacks in the discord server! 
 
 # Discord Link: 
 https://discord.gg/NbZrhTrc
