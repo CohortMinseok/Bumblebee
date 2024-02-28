@@ -11,12 +11,14 @@
 # import uuid
 import random
 # import cv2
-# import time
+import time
 # from math import log10, floor
 from time import perf_counter
 # import numpy as np
 # import threading
 # from pynput import keyboard
+from pynput.keyboard import Listener as KeyListener  # type: ignore[import]
+from pynput.mouse import Listener as MouseListener  # type: ignore[import]
 # from PIL import ImageGrab
 # from datetime import datetime
 # from game import Game
@@ -42,6 +44,41 @@ try:
 except Exception:
     INTERCEPTION_INSTALLED = False
 print(f'{INTERCEPTION_INSTALLED = }')
+from typing import Literal, Optional
+_TEST_MOUSE_STROKE = MouseStroke(MouseState.MOUSE_MIDDLE_BUTTON_UP, 0, 0, 0, 0, 0)
+_TEST_KEY_STROKE = KeyStroke(KEYBOARD_MAPPING["space"], KeyState.KEY_UP, 0)
+def auto_capture_devices2(*, keyboard: bool = True, mouse: bool = True, verbose: bool = False):
+    mouse_listener = MouseListener(on_click=lambda *args: False)
+    key_listener = KeyListener(on_release=lambda *args: False)
+    for device in ("keyboard", "mouse"):
+        if (device == "keyboard" and not keyboard) or (device == "mouse" and not mouse):
+            continue
+        print(f"Trying {device} device numbers...")
+        stroke: Stroke
+        if device == "mouse":
+            listener, stroke, nums = mouse_listener, _TEST_MOUSE_STROKE, range(10, 20)
+        else:
+            listener, stroke, nums = key_listener, _TEST_KEY_STROKE, range(10)
+        listener.start()
+        for num in nums:
+            interception.send(num, stroke)
+            time.sleep(random.uniform(0.1, 0.3))
+            if listener.is_alive():
+                print(f"No success on {device} {num}...")
+                continue
+            print(f"Success on {device} {num}!")
+            set_devices(**{device: num})
+            break
+    print("Devices set.")    
+def set_devices(keyboard: Optional[int] = None, mouse: Optional[int] = None) -> None:
+    """Sets the devices on the current context. Keyboard devices should be from 0 to 10
+    and mouse devices from 10 to 20 (both non-inclusive).
+
+    If a device out of range is passed, the context will raise a `ValueError`.
+    """
+    interception.keyboard = keyboard or interception.keyboard
+    interception.mouse = mouse or interception.mouse
+auto_capture_devices2()
 
 async def sleep(dur):
     now = perf_counter()

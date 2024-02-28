@@ -35,7 +35,7 @@ from typing import Final
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from attack import refreshkeybind, goleftattack, gorightattack, goupattack, godownattack
-from runesolver import runechecker, gotorune, enablerune, disablerune
+from runesolver import runechecker, gotorune, enablerune, disablerune, gotopoloportal
 
 # from theinterception.interception import Interception
 # from theinterception._keycodes import KEYBOARD_MAPPING
@@ -452,6 +452,7 @@ class TkinterBot:
         self.position33 = (315, 40, 316, 41) #
         self.position3 = (405, 75, 406, 76)  # 
         self.position2 = (701, 472, 702, 473)  # 
+        self.polochecker = False
         
         self.loop1 = asyncio.new_event_loop()
         self.loop2 = asyncio.new_event_loop()
@@ -656,7 +657,8 @@ class TkinterBot:
 
                 if solverune:
                     await gotorune(self.g)
-                    pass
+                elif self.polochecker:
+                    await gotopoloportal(self.g)
                 else:
                     pass
             
@@ -681,6 +683,7 @@ class TkinterBot:
             polocheckerlocations = self.g.polo_checker() # check for portal on minimap
             if polocheckerlocations is not None:
                 print(f'{polocheckerlocations=}')
+                self.polochecker = True
                 # gotoportal like how u go to rune
                 # after pressing up
                 # check if dialogue opened up
