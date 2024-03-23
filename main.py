@@ -20,7 +20,7 @@ import threading
 from pynput import keyboard
 from pynput.keyboard import Listener as KeyListener  # type: ignore[import]
 from pynput.mouse import Listener as MouseListener  # type: ignore[import]
-# from PIL import ImageGrab
+from PIL import ImageGrab
 from datetime import datetime
 from game import Game
 import asyncio
@@ -34,380 +34,15 @@ from configparser import ConfigParser
 from typing import Final
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
-from attack import refreshkeybind, goleftattack, gorightattack, goupattack, godownattack
-from runesolver import runechecker, gotorune, enablerune, disablerune, gotopoloportal
+from attack import leftp, leftr, rightp, rightr, sleep, npcp, npcr, refreshkeybind, goleftattack, gorightattack, goleftattackk, gorightattackk, \
+    goupattack, upjumpattack, godownattack, rightjumpjumpattack, \
+    stormwingrotation, castlewallrotation, bountyhuntrotation, send2, send3, goupattackv3, goupattackv2
+# from runesolver import runechecker, gotorune, enablerune, disablerune, gotopoloportal, set_hwnd
+from runesolver import RuneSolver
 
-# from theinterception.interception import Interception
-# from theinterception._keycodes import KEYBOARD_MAPPING
-# import theinterception._utils as _utils
-# import theinterception.exceptions as exceptions
-# from theinterception.strokes import KeyStroke, MouseStroke, Stroke
-# from theinterception._consts import (FilterKeyState, FilterMouseState, KeyState, MouseFlag,
-#                       MouseRolling, MouseState)
+from initinterception import interception, move_to, move_relative, left_click, mouse_position, mousedown, mouseup, hold_mouse, custommoveto, initiate_move, \
+    auto_capture_devices2
 
-from theinterception import Interception
-from theinterception import KEYBOARD_MAPPING
-from theinterception import _utils
-from theinterception import exceptions
-from theinterception import KeyStroke, MouseStroke, Stroke
-from theinterception import (FilterKeyState, FilterMouseState, KeyState, MouseFlag,
-                      MouseRolling, MouseState)
-from theinterception.types import MouseButton
-try:
-    interception = Interception()
-    INTERCEPTION_INSTALLED = True
-except Exception:
-    INTERCEPTION_INSTALLED = False
-print(f'{INTERCEPTION_INSTALLED = }')
-from typing import Literal, Optional
-_TEST_MOUSE_STROKE = MouseStroke(MouseState.MOUSE_MIDDLE_BUTTON_UP, 0, 0, 0, 0, 0)
-_TEST_KEY_STROKE = KeyStroke(KEYBOARD_MAPPING["space"], KeyState.KEY_UP, 0)
-def auto_capture_devices2(*, keyboard: bool = True, mouse: bool = True, verbose: bool = False):
-    mouse_listener = MouseListener(on_click=lambda *args: False)
-    key_listener = KeyListener(on_release=lambda *args: False)
-    for device in ("keyboard", "mouse"):
-        if (device == "keyboard" and not keyboard) or (device == "mouse" and not mouse):
-            continue
-        print(f"Trying {device} device numbers...")
-        stroke: Stroke
-        if device == "mouse":
-            listener, stroke, nums = mouse_listener, _TEST_MOUSE_STROKE, range(10, 20)
-        else:
-            listener, stroke, nums = key_listener, _TEST_KEY_STROKE, range(10)
-        listener.start()
-        for num in nums:
-            interception.send(num, stroke)
-            time.sleep(random.uniform(0.1, 0.3))
-            if listener.is_alive():
-                print(f"No success on {device} {num}...")
-                continue
-            print(f"Success on {device} {num}!")
-            set_devices(**{device: num})
-            break
-    print("Devices set.")    
-def set_devices(keyboard: Optional[int] = None, mouse: Optional[int] = None) -> None:
-    """Sets the devices on the current context. Keyboard devices should be from 0 to 10
-    and mouse devices from 10 to 20 (both non-inclusive).
-
-    If a device out of range is passed, the context will raise a `ValueError`.
-    """
-    interception.keyboard = keyboard or interception.keyboard
-    interception.mouse = mouse or interception.mouse
-auto_capture_devices2()
-
-# global variables
-pause = False
-
-
-# essential functions
-async def sleep(dur):
-    now = perf_counter()
-    end = now + dur
-    while perf_counter() < end:
-        pass
-
-# to convert keycode
-def _get_keycode(key: str) -> int:
-    try:
-        return KEYBOARD_MAPPING[key]
-    except KeyError:
-        raise exceptions.UnknownKeyError(key)
-
-# extract from theinterception inputs.py
-# key press down function
-def keydown(key):
-    keycode = _get_keycode(key)
-    stroke = KeyStroke(keycode, KeyState.KEY_DOWN, 0)
-    interception.send_key(stroke)
-
-# key release function
-def keyup(key):
-    keycode = _get_keycode(key)
-    stroke = KeyStroke(keycode, KeyState.KEY_UP, 0)
-    interception.send_key(stroke)
-
-def _get_button_states(button: str, *, down: bool) -> int:
-    try:
-        states = MouseState.from_string(button)
-        return states[not down]  # first state is down, second state is up
-    except KeyError:
-        raise exceptions.UnknownButtonError(button)
-
-# button :class:`Literal["left", "right", "middle", "mouse4", "mouse5"] | str`:
-def mousedown(button):    
-    button_state = _get_button_states(button, down=True)
-    stroke = MouseStroke(button_state, MouseFlag.MOUSE_MOVE_ABSOLUTE, 0, 0, 0, 0)
-    interception.send_mouse(stroke)
-
-def mouseup(button):    
-    button_state = _get_button_states(button, down=False)
-    stroke = MouseStroke(button_state, MouseFlag.MOUSE_MOVE_ABSOLUTE, 0, 0, 0, 0)
-    interception.send_mouse(stroke)
-    
-from typing import Literal, Optional
-MOUSE_BUTTON_DELAY = 0.03
-def mouse_down(button: MouseButton, delay: Optional[float] = None) -> None:
-    """Holds a mouse button down, will not be released automatically.
-
-    If you want to hold a mouse button while performing an action, please use
-    `hold_mouse`, which offers a context manager.
-    """
-    button_state = _get_button_states(button, down=True)
-    stroke = MouseStroke(button_state, MouseFlag.MOUSE_MOVE_ABSOLUTE, 0, 0, 0, 0)
-    interception.send_mouse(stroke)
-    time.sleep(delay or MOUSE_BUTTON_DELAY)
-
-def mouse_up(button: MouseButton, delay: Optional[float] = None) -> None:
-    """Releases a mouse button."""
-    button_state = _get_button_states(button, down=False)
-    stroke = MouseStroke(button_state, MouseFlag.MOUSE_MOVE_ABSOLUTE, 0, 0, 0, 0)
-    interception.send_mouse(stroke)
-    time.sleep(delay or MOUSE_BUTTON_DELAY)
-
-def move_to(x: int | tuple[int, int], y: Optional[int] = None) -> None:
-    """Moves to a given absolute (x, y) location on the screen.
-
-    The paramters can be passed as a tuple-like `(x, y)` coordinate or
-    seperately as `x` and `y` coordinates, it will be parsed accordingly.
-
-    Due to conversion to the coordinate system the interception driver
-    uses, an offset of 1 pixel in either x or y axis may occur or not.
-
-    ### Examples:
-    ```py
-    # passing x and y seperately, typical when manually calling the function
-    interception.move_to(800, 1200)
-
-    # passing a tuple-like coordinate, typical for dynamic operations.
-    # simply avoids having to unpack the arguments.
-    target_location = (1200, 300)
-    interception.move_to(target_location)
-    ```
-    """
-    x, y = _utils.normalize(x, y)
-    x, y = _utils.to_interception_coordinate(x, y)
-
-    stroke = MouseStroke(0, MouseFlag.MOUSE_MOVE_ABSOLUTE, 0, x, y, 0)
-    interception.send_mouse(stroke)
-
-def move_relative(x: int = 0, y: int = 0) -> None:
-    """Moves relatively from the current cursor position by the given amounts.
-
-    Due to conversion to the coordinate system the interception driver
-    uses, an offset of 1 pixel in either x or y axis may occur or not.
-
-    ### Example:
-    ```py
-    interception.mouse_position()
-    >>> 300, 400
-
-    # move the mouse by 100 pixels on the x-axis and 0 in y-axis
-    interception.move_relative(100, 0)
-    interception.mouse_position()
-    >>> 400, 400
-    """
-    stroke = MouseStroke(0, MouseFlag.MOUSE_MOVE_RELATIVE, 0, x, y, 0)
-    interception.send_mouse(stroke)
-
-def click(
-    x: Optional[int | tuple[int, int]] = None,
-    y: Optional[int] = None,
-    button: MouseButton | str = "left",
-    clicks: int = 1,
-    interval: int | float = 0.1,
-    delay: int | float = 0.3,
-) -> None:
-    """Presses a mouse button at a specific location (if given).
-
-    Parameters
-    ----------
-    button :class:`Literal["left", "right", "middle", "mouse4", "mouse5"] | str`:
-        The button to click once moved to the location (if passed), default "left".
-
-    clicks :class:`int`:
-        The amount of mouse clicks to perform with the given button, default 1.
-
-    interval :class:`int | float`:
-        The interval between multiple clicks, only applies if clicks > 1, default 0.1.
-
-    delay :class:`int | float`:
-        The delay between moving and clicking, default 0.3.
-    """
-    if x is not None:
-        move_to(x, y)
-        time.sleep(delay)
-
-    for _ in range(clicks):
-        mouse_down(button)
-        mouse_up(button)
-
-        if clicks > 1:
-            time.sleep(interval)
-
-# decided against using functools.partial for left_click and right_click
-# because it makes it less clear that the method attribute is a function
-# and might be misunderstood. It also still allows changing the button
-# argument afterall - just adds the correct default.
-def left_click(clicks: int = 1, interval: int | float = 0.1) -> None:
-    """Thin wrapper for the `click` function with the left mouse button."""
-    click(button="left", clicks=clicks, interval=interval)
-
-def right_click(clicks: int = 1, interval: int | float = 0.1) -> None:
-    """Thin wrapper for the `click` function with the right mouse button."""
-    click(button="right", clicks=clicks, interval=interval)
-
-
-
-
-async def main(stop_event, left1, right1, top1, btm1, g):
-    
-    print(f'bot has started ..')
-
-    time.sleep(.01)
-    left=left1/2+0
-    right=right1/2+0
-    top=top1/2-8
-    btm=btm1/2-8
-
-
-    runetimer0=0
-    runetimer=0
-    checkrune=True
-    solverune=False
-    now=0
-    xynotfound=0
-    global pause
-    pause = True
-    while True:
-        if pause:
-            print(f'script is paused .. click resume to resume. ')
-            while pause:
-                # do nothing
-                time.sleep(1)
-                if stop_event.is_set():
-                    return
-            print(f'script resumed ..')
-        #
-        time.sleep(.411) # when testing ..
-        # time.sleep(.011) # when real botting ..
-        g_variable = g.get_player_location()
-        x, y = (None, None) if g_variable is None else g_variable
-        if x == None or y == None:
-            xynotfound+=1
-            if xynotfound > 30:
-                t = time.localtime()
-                currenttime = time.strftime("%H:%M:%S", t)
-                print(f'something is wrong .. character not found .. exiting .. {currenttime}')
-                # stop_flag = True
-                # randompicker_thread.join()
-                return
-            print(f'x==None, pass ..')
-            time.sleep(.1)
-            pass
-        else:
-            xynotfound=0
-            if y > top and (y > btm-10 and y <= btm+5):
-                if x > left+15:
-                    await goleftattack()
-                elif x < left-15:
-                    await gorightattack()
-                elif x >= left-15 and x <= left+15:
-                    await goupattack()            
-            elif y <= top+5 and y > top-10:
-                if x < right-15:
-                    await gorightattack()
-                elif x > right+15:
-                    await goleftattack()
-                elif x >= right-15 and x <= right+15:
-                    await godownattack()
-            elif y > top and not (y > btm-10 and y <= btm+5):
-                await godownattack()
-            else:
-                await godownattack()
-
-            
-            now = perf_counter()
-            runetimer = now - runetimer0
-            if runetimer > 600: # change to 600 when haste
-            # if runetimer > 900: # change to 600 when haste
-                checkrune = True
-            if checkrune:
-                solverune = runechecker(g)
-            # print(f'{x=} {y=} {statuetimer=} {fountaintimer=}, {runetimer=}, {cctimer=}')
-            print(f'{x=} {y=} {runetimer=} {solverune=}')
-
-            if solverune:
-                await gotorune(g)
-                pass
-            else:
-                pass
-        
-        print(f'{x=}, {y=} | {left=}, {top=}, {right=}, {btm=} | {left1=}, {top1=}, {right1=}, {btm1=}')
-
-
-        #
-        #
-
-
-async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    message_type: str = update.message.chat.type
-    text: str = update.message.text
-    print(f'{update.message}')
-    # global chat_id
-    # print(f'{chat_id =}')
-    if update.message.chat.id == 5630992696:
-        print(f'Access User ({update.message.chat.id}) in {message_type}: "{text}"')
-        pass
-    elif update.message.chat.id == 1125332211:
-        print(f'Access User ({update.message.chat.id}) in {message_type}: "{text}"')
-        pass
-    else:
-        print(f'Denied User ({update.message.chat.id}) in {message_type}: "{text}"')
-        return
-    print(f'User ({update.message.chat.id}) in {message_type}: "{text}"')
-    # if message_type == 'group':
-    #     if BOT_USERNAME in text:
-    #         new_text: str = text.replace(BOT_USERNAME, '').strip()
-    #         response: str = handle_response(new_text)
-    #     else:
-    #         return
-    # else:
-    #     response: str = handle_response(text)    
-    await update.message.reply_text('Hello! Thanks for chatting with me! I am a banana!')
-
-async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    print(f'Update {update} caused error {context.error}')
-
-async def telegrammain(stop_event):
-    print(f'Starting bot ..')
-    application = Application.builder().token(TOKEN).build()
-    application.add_handler(CommandHandler('start', start_command))
-    # app.add_handler(CommandHandler('help', help_command))
-    # app.add_handler(CommandHandler('custom', custom_command))
-    # app.add_handler(MessageHandler(filters.TEXT, handle_message))
-    application.add_error_handler(error)
-    print(f'Polling ..')
-    application.run_polling(poll_interval=3)
-    ##
-    ##    
-    await application.initialize()
-    await application.start()
-    # await application.updater.start_{webhook, polling}()
-    # Start other asyncio frameworks here
-    # Add some logic that keeps the event loop running until you want to shutdown
-    # Stop the other asyncio frameworks here
-    await application.updater.stop()
-    await application.stop()
-    await application.shutdown()
-    pass
-
-
-async def start_command_class(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    message_type: str = update.message.chat.type
-    text: str = update.message.text
-    print(f'{update.message}')
-    print(f'User ({update.message.chat.id}) in {message_type}: "{text}"')
-    await update.message.reply_text('Hello! Thanks for chatting with me! I am a banana2!')
 
 
 class TkinterBot:
@@ -432,6 +67,8 @@ class TkinterBot:
         self.ropeconnect = self.config.get('keybind', 'ropeconnect')
         self.npc = self.config.get('keybind', 'npc')
 
+        self.runesolver = RuneSolver()
+
         self.application = None
         self.threads = []
         self.stop_event = threading.Event()
@@ -453,18 +90,32 @@ class TkinterBot:
         self.position3 = (405, 75, 406, 76)  # 
         self.position2 = (701, 472, 702, 473)  # 
         self.polochecker = False
+        self.portaldialogueX = 222
+        self.portaldialogueY = 410
+        self.wolfdialogueY = 435
+        self.chathwnd=None
+        self.maplehwnd=None
+        self.whitedotoccur=False
+        self.gotoportal=True
+        self.pausepolochecker=False
+        self.replaceropeconnect=False        
+        self.triggermousetest=False
+        self.init_maple_windows()
         
         self.loop1 = asyncio.new_event_loop()
         self.loop2 = asyncio.new_event_loop()
         self.loop3 = asyncio.new_event_loop()
         self.loop4 = asyncio.new_event_loop()
+        self.loop5 = asyncio.new_event_loop()
+        self.loop6 = asyncio.new_event_loop()
         self.thread1 = threading.Thread(target=self.run_thread1)
         self.thread2 = threading.Thread(target=self.run_thread2)
         self.thread3 = threading.Thread(target=self.run_thread3)
+        self.thread6 = threading.Thread(target=self.run_thread6)
 
     def init_tkinter(self):        
         self.root = tk.Tk()
-        self.root.title("Bumblebee")
+        self.root.title("chrome")
         photo=PhotoImage(file='icon.ico')
         self.root.iconphoto(False,photo)
         screen_width = self.root.winfo_screenwidth()
@@ -476,6 +127,7 @@ class TkinterBot:
         self.root.geometry(f"{window_width}x{window_height}+{window_x}+{window_y}")        
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
+        # self.root.resizable(False,False)
         # # background_image = tk.PhotoImage(file="bumblebee.gif")
         # background_image = Image.open("bumblebee.gif")
         # background_image = background_image.resize((window_width, window_height),  Image.Resampling.LANCZOS)
@@ -518,22 +170,22 @@ class TkinterBot:
             # app.add_handler(CommandHandler('custom', custom_command))
             # app.add_handler(MessageHandler(filters.TEXT, handle_message))
             self.application.add_error_handler(self.error)
-            async with self.application:
-                await self.application.initialize()
-                await self.application.start()
-                await self.application.updater.start_polling()
-                # self.root.mainloop() # press close and this line over
-                # await asyncio.sleep(30)
-                self.telegram_started = True
-                while self.telegram_keep_alive:
-                # for i in range(iterations):
-                    # print(f"{thread_name} - Iteration i")
-                    await asyncio.sleep(1)  # Simulating asynchronous work
-                print(f'finished telegram_run1')
-                await self.application.updater.stop()
-                await self.application.stop()
-                await self.application.shutdown()
-                print(f'finished telegram_run2')
+            # async with self.application:
+            await self.application.initialize()
+            await self.application.start()
+            await self.application.updater.start_polling()
+            # self.root.mainloop() # press close and this line over
+            # await asyncio.sleep(30)
+            self.telegram_started = True
+            while self.telegram_keep_alive:
+            # for i in range(iterations):
+                # print(f"{thread_name} - Iteration i")
+                await asyncio.sleep(1)  # Simulating asynchronous work
+            print(f'finished telegram_run1')
+            await self.application.updater.stop()
+            await self.application.stop()
+            await self.application.shutdown()
+            print(f'finished telegram_run2')
         except Exception as e:
             print(f'{e=}')
             self.acc_not_bind = True
@@ -551,38 +203,100 @@ class TkinterBot:
 
     def run_thread1(self):
         asyncio.set_event_loop(self.loop1)
-        self.loop1.run_until_complete(self.async_function("Thread 1", 5))
+        self.loop1.run_until_complete(self.async_function("Thread 1", 5)) # telegram thread
 
     def run_thread2(self):
         asyncio.set_event_loop(self.loop2)
-        self.loop2.run_until_complete(self.async_function2("Thread 2", 5))
+        self.loop2.run_until_complete(self.async_function2("Thread 2", 5)) # tkinter init thread
 
     def run_thread3(self):
         asyncio.set_event_loop(self.loop3)
-        self.loop3.run_until_complete(self.async_function3("Thread 3", 5))
+        self.loop3.run_until_complete(self.async_function3("Thread 3", 5)) # main thread
 
     def run_thread4(self):
+        print(f'run_thread4 started')
         asyncio.set_event_loop(self.loop4)
-        self.loop4.run_until_complete(self.async_function4())
+        self.loop4.run_until_complete(self.async_function4()) # checker thread
+        print(f'run_thread4 endeded')
+
+    def run_thread5(self):
+        print(f'run_thread5 started')
+        asyncio.set_event_loop(self.loop5)
+        self.loop5.run_until_complete(self.async_function5()) # gma thread
+        print(f'run_thread5 endeded')
+    
+    def run_thread6(self):
+        asyncio.set_event_loop(self.loop6)
+        self.loop6.run_until_complete(self.async_function6()) # just a button loop
 
     def start_threads(self):
         # Start both threads
         self.thread1.start()
         self.thread2.start()
         self.thread3.start()
+        self.thread6.start()
 
     def wait_for_threads(self):
         # Wait for both threads to finish
         self.thread1.join()
         self.thread2.join()
         self.thread3.join()
+        self.thread6.join()
 
     async def async_function3(self, thread_name, iterations):
         print(f'bot has started ..')
         while not self.tkinter_started:
-            time.sleep(1.01)            
+            time.sleep(1.01)
+        # while True: # testing purpose
+        #     if self.pause:
+        #         print(f'script is paused .. click resume to resume. ')
+        #         while self.pause:
+        #             # do nothing
+        #             time.sleep(1)
+        #             if self.stop_event.is_set():
+        #                 # self.thread4.join()
+        #                 return
+        #         print(f'script resumed ..')
+        #     # # whitedot = self.g.white_dot_checker()
+        #     hwnd = win32gui.FindWindow(None, "MapleStory")
+        #     position = win32gui.GetWindowRect(hwnd)
+        #     x, y, w, h = position
+        #     # # print(f'{x=} {y=} {w=} {h=}') # 8 left right 5 up down 29 title bar | minus left 8 | minus top 34
+        #     # # print(f'{x=} {y=} {w=} {h=}') # 8 left right 1 up 8 down 30 title bar | minus left 8 | minus top 31
+        #     # # # x+222, y+410 
+        #     # # # move_to(x+self.position5[0],y+self.position5[1])
+        #     # move_to(x+self.portaldialogueX,y+self.portaldialogueY)
+        #     # move_relative(100)
+        #     # time.sleep(.5)
+        #     targetx=500
+        #     targety=600
+        #     # with hold_mouse('left'):
+        #     #     for i in range(10):
+        #     #         print(f'{i=}')
+        #     #         move_relative(20,0)
+        #     #         move_relative(0,20)
+        #     #         time.sleep(.5)
+        #     await custommoveto(targetx,targety)
+        #     left_click()
+        #     time.sleep(2.411) # when testing ..
+        #     #
+        #     # await rightjumpjumpattack()
+        #     # time.sleep(1.011) # when testing ..                 
+        #     #
+        #     # # huntingmapcheckerlocations = self.g.hunting_map_timer_checker() # check if is hidden street bounty hunt
+        #     # huntingmapcheckerlocations = self.g.hunting_map2_checker()
+        #     # # huntingmapcheckerlocations = self.g.gma_detector() # 
+        #     # # huntingmapcheckerlocations = self.seperate_gma_detector() # 
+        #     # if huntingmapcheckerlocations is not None:
+        #     #     print(f'{huntingmapcheckerlocations=}')
+        #     #
+
+        #     #
+        #     time.sleep(1.011) # when testing ..
         self.thread4 = threading.Thread(target=self.run_thread4)
         self.thread4.start()
+        self.thread5 = threading.Thread(target=self.run_thread5)
+        self.thread5.start()
         left1=self.line_position_slider.get()
         right1=self.line_position_slider2.get()
         top1=self.line_position_slider3.get()
@@ -591,12 +305,23 @@ class TkinterBot:
         right=self.line_position_slider2.get()/2+0
         top=self.line_position_slider3.get()/2-8
         btm=self.line_position_slider4.get()/2-8
+        randomlist = ['z', 'x', 'c', 'space', '2', '3', '0', 'f9', 'w', 'e', 'r', 't', 's', 'd', 'f', 'v']
+        offsetx=10
+        offsety=10
+        randommtimer0=0
+        randommtimer=0
+        replaceropeconnecttimer0=0
+        replaceropeconnecttimer=0
+        runonce=True
+        self.polocheckertimer0=0
+        polocheckertimer=0
         runetimer0=0
         runetimer=0
         checkrune=True
         solverune=False
-        now=0
+        self.now=0
         xynotfound=0
+        await initiate_move()
         while True:
             if self.pause:
                 print(f'script is paused .. click resume to resume. ')
@@ -605,6 +330,7 @@ class TkinterBot:
                     time.sleep(1)
                     if self.stop_event.is_set():
                         self.thread4.join()
+                        self.thread5.join()
                         return
                 print(f'script resumed ..')
             #
@@ -614,107 +340,412 @@ class TkinterBot:
             x, y = (None, None) if g_variable is None else g_variable
             if x == None or y == None:
                 xynotfound+=1
-                if xynotfound > 30:
+                if xynotfound > 50:
                     t = time.localtime()
                     currenttime = time.strftime("%H:%M:%S", t)
                     print(f'something is wrong .. character not found .. exiting .. {currenttime}')
                     # stop_flag = True
                     # randompicker_thread.join()
-                    return
+                    self.pause=True
+                    # return
                 print(f'x==None, pass ..')
                 time.sleep(.1)
                 pass
             else:
                 xynotfound=0
-                if y > top and (y > btm-10 and y <= btm+5):
-                    if x > left+15:
-                        await goleftattack()
-                    elif x < left-15:
-                        await gorightattack()
-                    elif x >= left-15 and x <= left+15:
-                        await goupattack()            
-                elif y <= top+5 and y > top-10:
-                    if x < right-15:
-                        await gorightattack()
-                    elif x > right+15:
-                        await goleftattack()
-                    elif x >= right-15 and x <= right+15:
-                        await godownattack()
-                elif y > top and not (y > btm-10 and y <= btm+5):
-                    await godownattack()
+                if y > top and (y > btm-offsety and y <= btm+offsety):
+                    if x > left+offsetx:
+                        await random.choice([goleftattack, goleftattackk])()
+                    elif x < left-offsetx:
+                        await random.choice([gorightattack, gorightattackk])()
+                    elif x >= left-offsetx and x <= left+offsetx:
+                        if self.replaceropeconnect:
+                            await random.choice([goupattackv3])()
+                        else:
+                            await random.choice([goupattack])()
+                elif y <= top+offsety and y > top-offsety:
+                    if x < right-offsetx:
+                        await random.choice([gorightattack, gorightattackk])()
+                    elif x > right+offsetx:
+                        await random.choice([goleftattack, goleftattackk])()
+                    elif x >= right-offsetx and x <= right+offsetx:
+                        await random.choice([godownattack])()
+                elif y > top and not (y > btm-offsety and y <= btm+offsety):
+                    if x >= left-offsetx and x <= left+offsetx:
+                        if self.replaceropeconnect:
+                            await random.choice([goupattackv3])()
+                        else:
+                            await random.choice([goupattack])()
+                    elif x >= right-offsetx and x <= right+offsetx:
+                        await random.choice([godownattack])()
                 else:
-                    await godownattack()
+                    await random.choice([godownattack])()
                 
-                now = perf_counter()
-                runetimer = now - runetimer0
+                self.now = perf_counter()
+                randommtimer = self.now - randommtimer0
+                if randommtimer > 15:
+                    randommtimer0 = self.now
+                    p = random.randint(0, len(randomlist)-1)
+                    code = random.choice(randomlist)
+                    if code is not None:
+                        print(f'randomiser {code=}')
+                        await send2(code)
+                        await send3(code)
+                if self.replaceropeconnect==True:
+                    if runonce:
+                        replaceropeconnecttimer0=self.now
+                        runonce=False
+                    replaceropeconnecttimer = self.now - replaceropeconnecttimer0
+                    if replaceropeconnecttimer > 90:
+                        self.replaceropeconnect=False
+                        runonce=True
+                polocheckertimer = self.now - self.polocheckertimer0
+                if polocheckertimer > 90:
+                    self.pausepolochecker=False
+                runetimer = self.now - runetimer0
                 if runetimer > 600: # change to 600 when haste
                 # if runetimer > 900: # change to 600 when haste
-                    checkrune = True
+                    # checkrune = True
+                    checkrune = False
                 if checkrune:
-                    solverune = runechecker(self.g)
+                    solverune = self.runesolver.runechecker(self.g)
                 # print(f'{x=} {y=} {statuetimer=} {fountaintimer=}, {runetimer=}, {cctimer=}')
-                print(f'{x=} {y=} {runetimer=} {solverune=}')
+                print(f'{x=} {y=} {runetimer=} {solverune=} | {left=}, {top=}, {right=}, {btm=} | {left1=}, {top1=}, {right1=}, {btm1=}')
+                # print(f'{x=}, {y=} | {left=}, {top=}, {right=}, {btm=} | {left1=}, {top1=}, {right1=}, {btm1=}')
 
                 if solverune:
-                    await gotorune(self.g)
+                    await self.runesolver.gotorune(self.g)
                 elif self.polochecker:
-                    await gotopoloportal(self.g)
+                    if self.whitedotoccur:
+                        if not await self.polocheckerfunc(self.gotoportal):
+                            self.replaceropeconnect=True
+                        self.whitedotoccur=False
+                    else:
+                        await self.polocheckerfunc(self.gotoportal)
                 else:
                     pass
             
-            print(f'{x=}, {y=} | {left=}, {top=}, {right=}, {btm=} | {left1=}, {top1=}, {right1=}, {btm1=}')
+            # print(f'{x=}, {y=} | {left=}, {top=}, {right=}, {btm=} | {left1=}, {top1=}, {right1=}, {btm1=}')
 
     async def async_function4(self):
+        whitedotcounter=0
         while True:
             while self.pause:
                 time.sleep(1)
                 if self.stop_event.is_set():
                     return
-            print(f'new checking cycle ..')
+            # print(f'new checking cycle ..')
             diedcheckerlocations = self.g.died_checker()
             if diedcheckerlocations is not None:
                 print(f'{diedcheckerlocations=}')
-                hwnd = win32gui.FindWindow(None, "MapleStory")
-                position = win32gui.GetWindowRect(hwnd)
+                # hwnd = win32gui.FindWindow(None, "MapleStory")
+                position = win32gui.GetWindowRect(self.maplehwnd)
                 x, y, w, h = position
-                move_to(x+self.position6[0],y+self.position6[1])
+                print(f'moving to x, y')
+                await custommoveto(x+self.position6[0],y+self.position6[1])
                 time.sleep(.1)
-                left_click()                
-            polocheckerlocations = self.g.polo_checker() # check for portal on minimap
-            if polocheckerlocations is not None:
-                print(f'{polocheckerlocations=}')
-                self.polochecker = True
-                # gotoportal like how u go to rune
-                # after pressing up
-                # check if dialogue opened up
-                # start checkinng portal type
-                polo2checkerlocations = self.g.polo2_checker() # check if dialogue is polo portal or frito portal
-                if polo2checkerlocations is not None: # if is polo portal
-                    print(f'{polo2checkerlocations=}')
-                    polo3checkerlocations = self.g.polo3_checker() # check if polo is flamewolf or hunting ground
-                    if polo3checkerlocations is not None:
-                        print(f'{polo3checkerlocations=}')
-                        # if is flamewolf, skip, end chat
-                    else:
-                        # press enter or npc button, enter polo portal
-                        # check what type of hunting ground it is
-                        huntingmapcheckerlocations = self.g.hunting_map_checker() # check if is hidden street bounty hunt
-                        if huntingmapcheckerlocations is not None:
-                            print(f'{huntingmapcheckerlocations=}')
-                        huntingmap2checkerlocations = self.g.hunting_map2_checker() # check if is hidden street guarding the castle wall
-                        if huntingmap2checkerlocations is not None:
-                            print(f'{huntingmap2checkerlocations=}')
-                        huntingmap3checkerlocations = self.g.hunting_map3_checker() # check if is hidden street finding the golden bird
-                        if huntingmap3checkerlocations is not None:
-                            print(f'{huntingmap3checkerlocations=}')
-                else:
-                    polo4checkerlocations = self.g.polo4_checker() # check if portal is especia portal
-                    if polo4checkerlocations is not None: #
-                        print(f'{polo4checkerlocations=}')
-                        # press enter blah and go into especia map
-                        # spam npc until solve
-
+                print(f'clicking x, y')
+                left_click()
+                print(f'done clicking')
+                move_relative(10,0)
+                time.sleep(.1)
+            if not self.pausepolochecker:
+                polocheckerlocations = self.g.polo_checker() # check for portal on minimap
+                if polocheckerlocations is not None:
+                    print(f'{polocheckerlocations=}')
+                    self.polochecker = True
+                    self.gotoportal=True
+            whitedotlocations = self.g.white_dot_checker()
+            if whitedotlocations is not None:
+                whitedotcounter+=1
+                if whitedotcounter>1:
+                    self.whitedotoccur=True
+                    self.polochecker=True
+                    self.gotoportal=False
+                    # if not await self.polocheckerfunc(False):
+                    #     self.replaceropeconnect=True
+                    # position = win32gui.GetWindowRect(self.maplehwnd)
+                    # x, y, w, h = position
+                    # print(f'moving to x, y')
+                    # await custommoveto(x+self.portaldialogueX,y+self.wolfdialogueY)
+                    # time.sleep(.1)
+                    # print(f'clicking x, y')
+                    # left_click()
+                    # print(f'done clicking')
+                    # move_relative(10,0)
+                    # time.sleep(.1)
+            elif whitedotlocations is None:
+                whitedotcounter=0
+            
             time.sleep(2)
+            
+    async def async_function5(self): # gma_checker
+        while True:
+            while self.pause:
+                time.sleep(1)
+                if self.stop_event.is_set():
+                    return
+            if self.chathwnd:
+                gmacheckerlocations = self.seperate_gma_detector()
+                if gmacheckerlocations:
+                    print(f'got GM')
+                else:
+                    print(f'no GM')
+            else:
+                print(f'chat window not found. ')
+
+            time.sleep(5)
+
+    async def async_function6(self): # just a button loop
+        while True:
+            time.sleep(1)
+            if self.stop_event.is_set():
+                print(f'async_function6 return. ')
+                return
+            if self.triggermousetest:
+                await initiate_move()
+                self.triggermousetest=False
+
+
+    # def find_maplestory_windows(self, hwnd, lParam):
+    #     title = win32gui.GetWindowText(hwnd)
+    #     if 'MapleStory' in title:
+    #         print(f"Window Title: {title}, Handle: {hwnd}")
+
+    def init_maple_windows(self):
+        # win32gui.EnumWindows(self.find_maplestory_windows, 0)
+        # hwnd = win32gui.FindWindow(None, "MapleStory")
+        hwnd = 0
+        windows=[]
+        while True:
+            print(f'{hwnd}')
+            hwnd = win32gui.FindWindowEx(0,hwnd,None, "MapleStory")
+            if hwnd == 0:
+                break
+            windows.append(hwnd)
+        for windowhwnd in windows:
+            position = win32gui.GetWindowRect(windowhwnd)
+            x, y, w, h = position
+            if w-x == 410:
+                self.chathwnd=windowhwnd
+            else:
+                self.maplehwnd=windowhwnd
+                self.runesolver.set_maplehwnd(self.maplehwnd)
+                print(f'{self.maplehwnd}')
+            print(f'{x} {y} {w} {h}')
+            # screenshot = ImageGrab.grab(position)
+            # screenshot = np.array(screenshot)
+            # img = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
+        #     cv2.imshow(f'{windowhwnd}', img)
+        #     cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+
+    def seperate_gma_detector(self):
+        if self.chathwnd == None:
+            print(f'chat window not found. ')
+            return
+        try:
+            position = win32gui.GetWindowRect(self.chathwnd)
+            x, y, w, h = position
+            print(f'{x} {y} {w} {h}')
+            chatposition = (x,y+385,w-15,h-25)
+            screenshot = ImageGrab.grab(chatposition)
+            screenshot = np.array(screenshot)
+            img = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
+            # cv2.imshow('img', img)
+            # cv2.waitKey(0)
+            # cv2.destroyAllWindows()
+            height, width = img.shape[0], img.shape[1]
+            # print(f'{img=}')
+            # img_reshaped = np.reshape(img, ((width * height), 4), order="C")
+            img_reshaped = np.reshape(img, ((width * height), 3), order="C")
+            # print(f'{img_reshaped=}')
+            # print(f'{img_reshaped[:,0]=}')
+            locations = []
+            sum_x, sum_y, count = 0, 0, 0
+            matches = np.where(
+                (img_reshaped[:,0] >= 201) & (img_reshaped[:,0] <= 225) &
+                (img_reshaped[:,1] >= 201) & (img_reshaped[:,1] <= 225) &
+                (img_reshaped[:,2] >= 201) & (img_reshaped[:,2] <= 225) 
+                )[0]
+            # print(f'{matches=}')
+            for idx in matches:
+                # Calculate the original (x, y) position of each matching index.
+                sum_x += idx % width
+                sum_y += idx // width
+                count += 1
+                # print(f'{idx % width=} {idx // width=} {width=} {img_reshaped[idx]} {count=}')
+            if count > 0:
+                x_pos = sum_x / count
+                y_pos = sum_y / count
+                locations.append((x_pos, y_pos))
+            return locations
+        except Exception as e:
+            print(f'{e=}')
+
+    async def polocheckerfunc(self, gotoportal):
+        truefalse=True
+        if gotoportal:
+            portaltype = await self.runesolver.gotopoloportal(self.g)
+        else:
+            portaltype = await self.runesolver.checkportaltype(self.g)
+        if portaltype == 'b':
+            print(f'dobountyhuntrotation')
+            # do bountyhunt rotation for maybe 30sec
+            for i in range(6):
+                await bountyhuntrotation()
+            while True:
+                huntingmaptimerchecker = self.g.hunting_map_timer_checker()
+                if huntingmaptimerchecker is not None:
+                    # do bountyhunt rotation
+                    print(f'stillinportal')
+                    await bountyhuntrotation()
+                    pass
+                else:
+                    print(f'notinportal')
+                    while self.g.dark_checker() is not None:
+                        print(f'map transitioning ..')
+                        time.sleep(1)
+                    await rightp()
+                    time.sleep(1.5)
+                    await rightr()
+                    break
+            # press npc button 5 times to exit
+            await leftp()
+            time.sleep(.8)
+            await leftr()
+            for i in range(6):
+                await npcp()
+                await npcr()
+                time.sleep(.1)
+            time.sleep(2.)
+        elif portaltype == 'g':
+            print(f'doguardingrotation')
+            # do guardingthecastlewall rotation
+            for i in range(10):
+                await castlewallrotation()
+            while True:
+                huntingmaptimerchecker = self.g.hunting_map_timer_checker()
+                if huntingmaptimerchecker is not None:
+                    # do guardingthecastlewall rotation
+                    print(f'stillinportal')
+                    await castlewallrotation()
+                    pass
+                else:
+                    print(f'notinportal')
+                    while self.g.dark_checker() is not None:
+                        print(f'map transitioning ..')
+                        time.sleep(1)
+                    await rightp()
+                    time.sleep(1.5)
+                    await rightr()
+                    break
+            # press npc button 5 times to exit
+            await leftp()
+            time.sleep(.8)
+            await leftr()
+            for i in range(8):
+                await npcp()
+                await npcr()
+                await sleep(.1)
+        elif portaltype == 'd':
+            print(f'dostormwingrotation')
+            # do stormwing rotation
+            # for i in range(7):
+                # await stormwingrotation()
+            await self.stormwing(100)
+            while True:
+                huntingmaptimerchecker = self.g.hunting_map_timer_checker()
+                if huntingmaptimerchecker is not None:
+                    # do stormwing rotation
+                    print(f'stillinportal')
+                    # await stormwingrotation()
+                    await self.stormwing(10)
+                    pass
+                else:
+                    print(f'notinportal')
+                    while self.g.dark_checker() is not None:
+                        print(f'map transitioning ..')
+                        time.sleep(1)
+                    await rightp()
+                    time.sleep(1.5)
+                    await rightr()
+                    break
+            # press npc button 5 times to exit
+            await leftp()
+            time.sleep(.8)
+            await leftr()
+            for i in range(7):
+                await npcp()
+                await npcr()
+                time.sleep(.1)
+        elif portaltype == 'e':
+            print(f'doespeciaspam')
+            # do especia spam
+            for i in range(5):
+            #     await npcp()
+            #     await npcr()
+            #     r = random.randint(500,1000)
+            #     r /= 1000
+            #     await sleep(r)
+                await self.especia()
+            # check if timer still there
+            # if timer no longer there, press npc x4 to get out. 
+            for count in range(100): # for testing
+            # while True:
+                huntingmaptimerchecker = self.g.especia_dot_checker()
+                if huntingmaptimerchecker is not None:
+                    # do especia spam
+                    print(f'stillinportal, {count=}')
+                    # await npcp()
+                    # await npcr()
+                    # r = random.randint(500,1000)
+                    # r /= 1000
+                    # await sleep(r)
+                    await self.especia()
+                    pass
+                else:
+                    print(f'notinportal')
+                    while self.g.dark_checker() is not None:
+                        print(f'map transitioning ..')
+                        time.sleep(1)
+                    time.sleep(1.5)
+                    break
+            # press npc button 5 times to exit
+            for i in range(7):
+                await npcp()
+                await npcr()
+                time.sleep(.1)
+        elif portaltype == 'r':
+            print(f'fritoportalendchat')
+            # hwnd = win32gui.FindWindow(None, "MapleStory")
+            position = win32gui.GetWindowRect(self.maplehwnd)
+            x, y, w, h = position
+            time.sleep(.1)
+            await custommoveto(x+self.portaldialogueX,y+self.portaldialogueY)
+            time.sleep(.1)
+            left_click()
+            self.pausepolochecker=True
+            self.polocheckertimer0 = self.now
+            truefalse=False
+        elif portaltype == 'f':
+            print(f'clickendchat')
+            # click end chat cause flamewolf
+            # hwnd = win32gui.FindWindow(None, "MapleStory")
+            position = win32gui.GetWindowRect(self.maplehwnd)
+            x, y, w, h = position
+            time.sleep(.1)
+            await custommoveto(x+self.portaldialogueX,y+self.wolfdialogueY)
+            time.sleep(.1)
+            left_click()
+            self.pausepolochecker=True
+            self.polocheckertimer0 = self.now
+            truefalse=False
+        else:
+            print(f'enterportalfailedorerror')
+            # means enter portal failed, or error, back to training. 
+        self.polochecker=False
+        return truefalse
     
     async def status_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         message_type: str = update.message.chat.type
@@ -751,6 +782,97 @@ class TkinterBot:
         # await update.message.reply_text('Hello! Thanks for chatting with me! I am a banana!')
         await update.message.reply_photo(photo0_bytes)
         print(f'{perf_counter()-now =}')
+    
+    async def especia(self):
+        for i in range(1):
+            await npcp()
+            await npcr()
+            r = random.randint(500,1000)
+            r /= 1000
+            await sleep(r)
+            if self.pause:
+                print(f'script is paused .. click resume to resume. ')
+                while self.pause:
+                    # do nothing
+                    time.sleep(1)
+                    if self.stop_event.is_set():
+                        # self.thread4.join()
+                        return
+                print(f'script resumed ..')
+
+    async def stormwing(self, count):
+        goleft=False
+        goright=True
+        ## 1.8 165.2 (top=24.5?) (btm=62.5) (right=138.5?)
+        top=29.0
+        left=35.0 # 18.0 # 27.0
+        right=130 # 125.0 # 135.0 140.0 132.5
+        btm=58.0 # 54.5
+        for i in range(count):            
+            huntingmaptimerchecker = self.g.hunting_map_timer_checker()
+            if huntingmaptimerchecker is None:
+                return
+            # time.sleep(.4) # running test
+            time.sleep(.3) # running real
+            # time.sleep(.2) # running real
+            g_variable = self.g.get_player_location()
+            x, y = (None, None) if g_variable is None else g_variable
+            if x == None or y == None:
+                xynotfound+=1
+                if xynotfound > 50:
+                    t = time.localtime()
+                    currenttime = time.strftime("%H:%M:%S", t)
+                    print(f'something is wrong .. character not found .. exiting .. {currenttime}')
+                    # stop_flag = True
+                    # randompicker_thread.join()
+                    return
+                print(f'x==None, pass ..')
+                time.sleep(.1)
+                pass
+            else:
+                xynotfound=0
+                print(f'{x=} {y=} {goleft=} {goright=}')
+                # time.sleep(.1)
+                if goright:
+                    if x > right:
+                        if y < btm:
+                            await godownattack()
+                            time.sleep(.3)
+                            await goleftattack()
+                            time.sleep(.1)
+                        elif y > top:
+                            await upjumpattack()
+                            time.sleep(.3)
+                        goright=False
+                        goleft=True
+                    else:
+                        await gorightattack()
+                        time.sleep(.3)
+                    if x < left: # only if x < left
+                        if y < btm:
+                            await godownattack()
+                            time.sleep(.3)
+                elif goleft:
+                    if x < left: # only if x < left
+                        if y > top:
+                            time.sleep(.1)
+                            await upjumpattack()
+                            time.sleep(.3)
+                        elif y < top:
+                            await godownattack()
+                            time.sleep(.3)
+                            await gorightattack()
+                            time.sleep(.3)
+                        goright=True
+                        goleft=False
+                    else:
+                        await goleftattack()
+                        time.sleep(.3)
+                    if x > right: # only if x > right
+                        if y < btm:
+                            await godownattack()
+                            time.sleep(.3)
+
 
     async def start_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         message_type: str = update.message.chat.type
@@ -823,12 +945,12 @@ class TkinterBot:
         self.tab5 = ttk.Frame(self.notebook)
         self.tab6 = ttk.Frame(self.notebook)
         # Add tabs to the Notebook
-        self.notebook.add(self.tab1, text="Tab 1")
+        self.notebook.add(self.tab1, text="Rotation")
         self.notebook.add(self.tab2, text="Tab 2")
         self.notebook.add(self.tab3, text="Tab 3")
-        self.notebook.add(self.tab4, text="Tab 4")
+        self.notebook.add(self.tab4, text="Telegram")
         self.notebook.add(self.tab5, text="Tab 5")
-        self.notebook.add(self.tab6, text="Tab 6")
+        self.notebook.add(self.tab6, text="Settings")
         # Bind the tab change event
         self.notebook.bind("<<NotebookTabChanged>>", self.on_tab_change)
         # Pack the Notebook widget
@@ -881,7 +1003,8 @@ class TkinterBot:
         img = PhotoImage(file=image_path)
 
 
-        self.frame2 = tk.Frame(self.tab1, bg='orange', bd=0)
+        # self.frame2 = tk.Frame(self.tab1, bg='orange', bd=0)
+        self.frame2 = tk.Frame(self.tab1, bg='', bd=0)
         self.frame2.pack(padx=0, pady=0)
         self.canvas = tk.Canvas(self.frame2, width=self.minimapX-8, height=self.minimapY-63, bg='#fabb29')
         self.canvas.grid(row=0, column=0, rowspan=1, padx=10, pady=(10,0))
@@ -945,8 +1068,23 @@ class TkinterBot:
         self.label_currentright.grid(row=1, column=0, pady=0, padx=5)  
         self.label_currentbtm = tk.Label(self.frame3, text=f"current btm: {self.line_position_slider4.get()}")
         self.label_currentbtm.grid(row=1, column=1, pady=0, padx=5)  
-        self.button3 = tk.Button(self.frame3, text="Reset Threshold", command=self.reset, width=10, height=2, bg='yellow', font=('Helvetica', 8))
+        self.button3 = tk.Button(self.frame3, text="  Confirm New Threshold  ", command=self.reset, bg='yellow', font=('Helvetica', 8))
         self.button3.grid(row=2, column=0, columnspan=2, pady=(10,10), padx=(20,20))
+
+        self.frame4 = tk.Frame(self.tab1, bg='yellow', bd=0, height=50, width=100)
+        self.frame4.pack(padx=0, pady=0, side='bottom', fill='x')
+        self.button4 = tk.Button(self.frame4, text="Test Mouse", command=self.testmouse, font=('Helvetica', 8))
+        self.button4.grid(row=0, column=0, pady=(0,0), padx=(1,1))
+        self.button4 = tk.Button(self.frame4, text="Rebind Mouse", command=self.rebindmouse, font=('Helvetica', 8))
+        self.button4.grid(row=0, column=1, pady=(0,0), padx=(1,1))
+
+    def testmouse(self):
+        self.triggermousetest=True
+        print(f'{self.triggermousetest=}')
+
+    def rebindmouse(self):
+        print(f'rebind mouse. ')
+        auto_capture_devices2()
 
 
     def resumebutton(self):
@@ -954,12 +1092,13 @@ class TkinterBot:
         print(f'resumebutton pressed .. {self.pause}')
         if self.pause:
             self.button.config(text='Resume', bg='tomato')
-            disablerune()
+            self.runesolver.disablerune()
         else:
             self.button.config(text='Pause', bg='lime')
-            enablerune()
+            self.runesolver.enablerune()
 
-    def button_adjustminimap(self):
+    def button_adjustminimap(self):        
+        # self.root.resizable(True,True)
         # global minimapX    
         # global minimapY
         # global vertical_line
@@ -1016,8 +1155,7 @@ class TkinterBot:
             self.line_position_slider4.config(to=self.canvas_height, length=self.canvas_height*2)
             self.update_line_position4(self.line_position_slider4.get())
         
-        self.g = Game((8, 63, self.minimapX, self.minimapY)) # 
-        
+        self.g = Game((8, 63, self.minimapX, self.minimapY)) #         
         # background_image = Image.open("bumblebee.gif")
         # background_image = background_image.resize((window_width, window_height),  Image.Resampling.LANCZOS)
         # background_photo = ImageTk.PhotoImage(background_image)
@@ -1026,6 +1164,7 @@ class TkinterBot:
         # background_label.image = background_photo
         # root.configure(bg='orange')
         # frame2.config(bg='', bd=0)
+        # self.root.resizable(False,False)
 
 
     def update_line_position(self, value):
@@ -1044,18 +1183,27 @@ class TkinterBot:
         global pause
         pause=True
         # self.pause=True
-        for _, stop_event in self.threads:
-            stop_event.set()
-        for thread, _ in self.threads:
-            thread.join()
-        stop_event = threading.Event()
-        thread = threading.Thread(target=self.start_the_main, args=(stop_event,))
-        thread.start()
-        self.threads.append((thread, stop_event))
+        # for _, stop_event in self.threads:
+        #     stop_event.set()
+        self.stop_event.set()
+        time.sleep(.1)
+        # for thread, _ in self.threads:
+        #     thread.join()
+        # stop_event = threading.Event()
+        # thread = threading.Thread(target=self.start_the_main, args=(stop_event,))
+        # thread.start()
+        # self.threads.append((thread, stop_event))
         self.label_currentleft.config(text=f"current left: {self.line_position_slider.get()}")
         self.label_currentright.config(text=f"current right: {self.line_position_slider2.get()}")
         self.label_currenttop.config(text=f"current top: {self.line_position_slider3.get()}")
         self.label_currentbtm.config(text=f"current btm: {self.line_position_slider4.get()}")
+        print(f'thread3 joining. ')
+        self.thread3.join()
+        print(f'thread3 joined. ')
+        self.thread3 = threading.Thread(target=self.run_thread3)
+        self.stop_event.clear()
+        self.thread3.start()
+        print(f'thread3 started. ')
             
     def on_tab_change(self, event):
         selected_tab = self.notebook.index(self.notebook.select())
@@ -1118,7 +1266,7 @@ class TkinterBot:
         self.buttonpause.grid(row=1, column=0, pady=2, padx=2, sticky='nsew')
         self.buttontown = tk.Button(self.framecommands, text="Town", height=2, bg='#91f2f3', command=self.telegramtown, state=tk.DISABLED)
         self.buttontown.grid(row=1, column=1, pady=2, padx=2, sticky='nsew')
-        self.buttonmessage = tk.Button(self.framecommands, text="Message", height=2, bg='#81f2f3', command=self.telegrammessage, state=tk.DISABLED)
+        self.buttonmessage = tk.Button(self.framecommands, text="Message", height=2, bg='#81f2f3', command=self.telegrammessage, state=tk.NORMAL)
         self.buttonmessage.grid(row=2, column=0, pady=2, padx=2, sticky='nsew')
         self.buttonstatus = tk.Button(self.framecommands, text="Status", height=2, bg='#71f2f3', command=self.telegramstatus)
         self.buttonstatus.grid(row=2, column=1, pady=2, padx=2, sticky='nsew')
@@ -1252,12 +1400,61 @@ class TkinterBot:
 
     def telegrammessage(self):
         print(f'telegrammessage')
-        pass
+        now = perf_counter()
+        photo0 = self.g.get_screenshot()
+        position = win32gui.GetWindowRect(self.chathwnd)
+        x, y, w, h = position
+        print(f'{x} {y} {w} {h}')
+        screenshot = ImageGrab.grab(position)
+        screenshot2 = np.array(screenshot)
+        img = cv2.cvtColor(screenshot2, cv2.COLOR_RGB2BGR)
+        imgchat=img[530:777,:400]
+        imgmega=img[220:369,:400]
+        # print(f'{imgchat.shape[0]=} {imgchat.shape[1]=} {photo0.shape=} {img.shape=}')
+        # print(f'{imgmega.shape[0]=} {imgmega.shape[1]=} {y=} {h=}')
+        photo0 = photo0[:,:,:3]
+        photo0[photo0.shape[0]-imgchat.shape[0]:photo0.shape[0],:imgchat.shape[1]] = imgchat
+        photo0[photo0.shape[0]-imgmega.shape[0]:photo0.shape[0],photo0.shape[1]-imgmega.shape[1]:photo0.shape[1]] = imgmega
+        # cv2.imshow('photo0', photo0)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+        # cv2.imshow('imgchat', imgchat)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+        # cv2.imshow('imgmega', imgmega)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+        # chatposition2 = (x,y+200,w-15,h-400)
+        # screenshot = ImageGrab.grab(chatposition2)
+        # screenshot2 = np.array(screenshot)
+        # img = cv2.cvtColor(screenshot2, cv2.COLOR_RGB2BGR)
+        # photo0[photo0.shape[0]-img.shape[0]:photo0.shape[0],photo0.shape[1]-img.shape[1]:photo0.shape[1]] = img
+        # cv2.imshow('photo0', photo0)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+
+        height, width = img.shape[0], img.shape[1]
+        success, photo0_encoded = cv2.imencode('.png', photo0)
+        photo0_bytes = photo0_encoded.tobytes()
+        files = {'photo': photo0_bytes}
+        payload = {
+            'chat_id': self.chat_id,
+            # 'photo': 'https://picsum.photos/200/300',
+            'caption': 'dummy photo test'
+        }
+        response = requests.post('https://api.telegram.org/bot'+self.TOKEN+'/sendPhoto', data=payload, files=files)
+        if response.status_code == 200:
+            print(f'{perf_counter()-now =}')
+            print(f"success {response.json().get('description')}")
+            print(f"success {response.json()}")
+        else:
+            print(f"Request failed with status code_: {response.status_code}")
+            print(f"{response.json().get('description')}")
 
     def telegramstatus(self):
-        print(f'telegramstatus')        
+        print(f'telegramstatus')
         now = perf_counter()
-        photo0 = self.g.get_screenshot()        
+        photo0 = self.g.get_screenshot()
         # photo = g.get_screenshot_bytes()        
         # photo3 = Image.open('minimap.PNG')
         # photo2 = ''
@@ -1297,7 +1494,7 @@ class TkinterBot:
         payload = {
             'chat_id': self.chat_id,
             # 'photo': 'https://picsum.photos/200/300',
-            'caption': 'dummy photo'
+            'caption': 'dummy photo test'
         }
         response = requests.post('https://api.telegram.org/bot'+self.TOKEN+'/sendPhoto', data=payload, files=files)
         # response = requests.post('https://api.telegram.org/bot'+TOKEN+'/sendPhoto', params=payload, files=files)

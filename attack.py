@@ -30,80 +30,7 @@ from pynput.mouse import Listener as MouseListener  # type: ignore[import]
 # from PIL import Image, ImageTk   
 from configparser import ConfigParser
 
-from theinterception import Interception
-from theinterception import KEYBOARD_MAPPING
-from theinterception import _utils
-from theinterception import exceptions
-from theinterception import KeyStroke, MouseStroke, Stroke
-from theinterception import (FilterKeyState, FilterMouseState, KeyState, MouseFlag,
-                      MouseRolling, MouseState)
-
-try:
-    interception = Interception()
-    INTERCEPTION_INSTALLED = True
-except Exception:
-    INTERCEPTION_INSTALLED = False
-print(f'{INTERCEPTION_INSTALLED = }')
-from typing import Literal, Optional
-_TEST_MOUSE_STROKE = MouseStroke(MouseState.MOUSE_MIDDLE_BUTTON_UP, 0, 0, 0, 0, 0)
-_TEST_KEY_STROKE = KeyStroke(KEYBOARD_MAPPING["space"], KeyState.KEY_UP, 0)
-def auto_capture_devices2(*, keyboard: bool = True, mouse: bool = True, verbose: bool = False):
-    mouse_listener = MouseListener(on_click=lambda *args: False)
-    key_listener = KeyListener(on_release=lambda *args: False)
-    for device in ("keyboard", "mouse"):
-        if (device == "keyboard" and not keyboard) or (device == "mouse" and not mouse):
-            continue
-        print(f"Trying {device} device numbers...")
-        stroke: Stroke
-        if device == "mouse":
-            listener, stroke, nums = mouse_listener, _TEST_MOUSE_STROKE, range(10, 20)
-        else:
-            listener, stroke, nums = key_listener, _TEST_KEY_STROKE, range(10)
-        listener.start()
-        for num in nums:
-            interception.send(num, stroke)
-            time.sleep(random.uniform(0.1, 0.3))
-            if listener.is_alive():
-                print(f"No success on {device} {num}...")
-                continue
-            print(f"Success on {device} {num}!")
-            set_devices(**{device: num})
-            break
-    print("Devices set.")    
-def set_devices(keyboard: Optional[int] = None, mouse: Optional[int] = None) -> None:
-    """Sets the devices on the current context. Keyboard devices should be from 0 to 10
-    and mouse devices from 10 to 20 (both non-inclusive).
-
-    If a device out of range is passed, the context will raise a `ValueError`.
-    """
-    interception.keyboard = keyboard or interception.keyboard
-    interception.mouse = mouse or interception.mouse
-auto_capture_devices2()
-
-async def sleep(dur):
-    now = perf_counter()
-    end = now + dur
-    while perf_counter() < end:
-        pass
-
-# to convert keycode
-def _get_keycode(key: str) -> int:
-    try:
-        return KEYBOARD_MAPPING[key]
-    except KeyError:
-        raise exceptions.UnknownKeyError(key)
-
-# key press down function
-def keydown(key):
-    keycode = _get_keycode(key)
-    stroke = KeyStroke(keycode, KeyState.KEY_DOWN, 0)
-    interception.send_key(stroke)
-
-# key release function
-def keyup(key):
-    keycode = _get_keycode(key)
-    stroke = KeyStroke(keycode, KeyState.KEY_UP, 0)
-    interception.send_key(stroke)
+from initinterception import interception, move_to, move_relative, left_click, keydown, keyup, sleep
 
 
 # read player key settings on startup. 
@@ -244,8 +171,42 @@ async def ropeconnectpr():
 
 # rectangular clockwise rotation
 
+async def leftattack():
+    print(f'leftattack')
+    await leftp()
+    await attackp()
+    await attackr()
+    await leftr()
+
+async def rightattack():
+    print(f'rightattack')
+    await rightp()
+    await attackp()
+    await attackr()
+    await rightr()
+
 async def goleftattack():
     print(f'goleftattack')
+    await leftp()
+    await teleportp()
+    await teleportr()
+    await attackp()
+    await attackr()
+    await leftr()
+
+async def goleftattackk():
+    print(f'goleftattackk')
+    await leftp()
+    await teleportp()
+    await teleportr()
+    await attackp()
+    await attackr()
+    await attackp()
+    await attackr()
+    await leftr()
+
+async def goleftattackv2():
+    print(f'goleftattackv2')
     await leftp()
     await jumpp()
     await jumpr()    
@@ -255,8 +216,28 @@ async def goleftattack():
     await attackr()
     await leftr()
 
+async def gorightattackk():
+    print(f'gorightattackk')
+    await rightp()
+    await teleportp()
+    await teleportr()
+    await attackp()
+    await attackr()
+    await attackp()
+    await attackr()
+    await rightr()
+
 async def gorightattack():
     print(f'gorightattack')
+    await rightp()
+    await teleportp()
+    await teleportr()
+    await attackp()
+    await attackr()
+    await rightr()
+
+async def gorightattackv2():
+    print(f'gorightattackv2')
     await rightp()
     await jumpp()
     await jumpr()    
@@ -266,8 +247,8 @@ async def gorightattack():
     await attackr()
     await rightr()
 
-async def goupattack():
-    print(f'goupattack')
+async def goupattackv2():
+    print(f'goupattackv2')
     await rightp()
     await ropeconnectp()
     await ropeconnectr()
@@ -275,14 +256,188 @@ async def goupattack():
     await attackr()
     await rightr()
 
+async def goupattack():
+    print(f'goupattack')
+    await sleep(.1)
+    await upp()
+    await teleportp()
+    await teleportr()
+    await upr()
+    await attackp()
+    await attackr()
+    await sleep(.1)
+
+async def goupattackv3():
+    print(f'goupattackv3')
+    await sleep(.1)
+    await jumpp()
+    await jumpr()
+    await ropeconnectp(31,101)
+    await ropeconnectr(31,101)
+    await sleep(.333)
+    await attackp()
+    await attackr()
+    await attackp()
+    await attackr()
+    await sleep(.1)
+
+async def upjumpattack():
+    print(f'upjumpattack')
+    await sleep(.1)
+    await upp()
+    await teleportp()
+    await teleportr()
+    await upr()
+    await attackp()
+    await attackr()
+    await sleep(.1)
+
+async def upjumpattackv2(): # adele upjump
+    print(f'upjumpattackv2')
+    await sleep(.1)
+    await jumpp()
+    await jumpr()
+    await upp()
+    await jumpp()
+    await jumpr()
+    await upr()
+    await attackp()
+    await attackr()
+    await attackp()
+    await attackr()
+    await sleep(.1)
+
 async def godownattack():
     print(f'godownattack')
+    await downp()
+    await teleportp()
+    await teleportr()
+    await downr()
+    await attackp()
+    await attackr()
+    await sleep(.1)
+
+async def godownattackv2():
+    print(f'godownattackv2')
     await downp()    
     await jumpp()
     await jumpr()
     await attackp()
     await attackr()
     await downr()
+
+
+# polo portal hunting map rotation patch
+
+async def upjumpup():
+    print(f'upjumpup')
+    await jumpp()
+    await jumpr()
+    await upp()
+    await jumpp()
+    await jumpr()
+    await upr()
+
+async def bountyhuntrotation():
+    print(f'bountyhuntrotation')
+    for i in range(5):
+        await goleftattack()
+        time.sleep(.502)
+    for i in range(5):
+        await gorightattack()
+        time.sleep(.502)
+
+async def bountyhuntrotationv2(): # adele flash jump
+    print(f'bountyhuntrotationv2')
+    for i in range(4):
+        await goleftattack()
+        time.sleep(.502)
+    for i in range(4):
+        await gorightattack()
+        time.sleep(.502)
+
+async def castlewallrotation():
+    print(f'castlewallrotation')
+    await leftattack()
+    time.sleep(.5)
+    await rightattack()
+    time.sleep(.5)
+    # await goleftattack()
+    # time.sleep(.502)
+    await upjumpup()
+    time.sleep(.802)
+    await leftattack()
+    time.sleep(.5)
+    await rightattack()
+    time.sleep(.5)
+    # await gorightattack()
+    # time.sleep(.502)
+    await downjump()
+    time.sleep(.702)
+
+async def castlewallrotationv3():
+    print(f'castlewallrotationv3')
+    await leftattack()
+    time.sleep(.5)
+    await rightattack()
+    time.sleep(.5)
+    # await goleftattack()
+    # time.sleep(.502)
+    await ropeconnectpr()
+    time.sleep(.802)
+    await leftattack()
+    time.sleep(.5)
+    await rightattack()
+    time.sleep(.5)
+    # await gorightattack()
+    # time.sleep(.502)
+    await downjump()
+    time.sleep(.702)
+
+async def castlewallrotationv2():
+    print(f'castlewallrotationv2')
+    for i in range(2):
+        await goleftattack()
+        time.sleep(.502)
+    await ropeconnectpr()
+    time.sleep(.802)
+    for i in range(2):
+        await gorightattack()
+        time.sleep(.502)
+    await downjump()
+    time.sleep(.702)
+    await attackp()
+    await attackr()
+    time.sleep(.502)
+
+async def stormwingrotation():
+    print(f'stormwingrotation')
+    for i in range(5):
+        await goleftattack()
+        time.sleep(.502)
+    await ropeconnectpr()
+    time.sleep(.602)
+    for i in range(5):
+        await gorightattack()
+        time.sleep(.502)
+    for i in range(5):
+        await downjump()
+        time.sleep(.302)
+
+# randomiser patch
+
+async def send2(code):
+    keydown(code)
+    r = random.randint(31, 131)
+    r /= 1000
+    await sleep(r)
+
+async def send3(code):
+    keyup(code)
+    r = random.randint(31, 131)
+    r /= 1000
+    await sleep(r)
+
 
 # temp (not organized) (please delete soon)
 
@@ -373,27 +528,31 @@ async def yinyangr(x=31, y=101):
     await sleep(r)
 
 async def leftjumpjumpattack(x=31, y=101):
-    await leftp(111,177)
-    await jumpp()
-    await jumpr(3,33)
+    await leftp()
     await jumpp()
     await jumpr()
+    # await jumpp()
+    # await jumpr()
     await jumpp()
-    await jumpr(133, 255)
-    await shikigamip()
-    await shikigamir()
+    await jumpr()
+    # await shikigamip()
+    # await shikigamir()
+    await attackp()
+    await attackr()
     await leftr()
 
 async def rightjumpjumpattack(x=31, y=101):
-    await rightp(111,177)
-    await jumpp()
-    await jumpr(3,33)
+    await rightp()
     await jumpp()
     await jumpr()
+    # await jumpp()
+    # await jumpr()
     await jumpp()
-    await jumpr(133, 255)
-    await shikigamip()
-    await shikigamir()
+    await jumpr()
+    # await shikigamip()
+    # await shikigamir()
+    await attackp()
+    await attackr()
     await rightr()
 
 async def upjumpshift():

@@ -4,7 +4,7 @@ Also works on Global MapleStory/Korean MapleStory/Taiwan MapleStory.
 Will not trigger lie detector except for midnight 2am-7am server-wide captcha ld. 
 
 # Features:
-- **Auto Rune Solver** - 99.99% accuracy AI Rune Solver included free. 
+- **Auto Rune Solver** - 99.99% accuracy AI Rune Solver included free, works on red orange runes, works on blue purple runes too, doesn't work in jiggling runes. 
 - **Auto Enter Polo / Especia Portal** - the bot are able to detect which portal are currently on the map, simply enable this option to allow bot to clear polo / especia  portal for you! *able to distinguish between bounty hunt / guarding the castle wall / golden bird*
 - **Auto Change Channel** - enable this option to auto change channel when other players are detected on your map. 
 - **All Class Skills** - this bot can be used on any class in the game, just assign your skills in settings tab. 
@@ -30,3 +30,7 @@ Simply git clone to download and launch the ready-compiled main.exe to start use
 
 # Discord Link: 
 https://discord.gg/NbZrhTrc
+
+# Credits:
+This project is developed based on following code:
+- https://github.com/qlvbrknp/maple-bot
