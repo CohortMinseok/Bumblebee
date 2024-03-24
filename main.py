@@ -51,6 +51,8 @@ class TkinterBot:
 
         self.config = ConfigParser()
         self.config.read('settings.ini')
+        self.config2 = ConfigParser()
+        self.config2.read('secret.ini')
         self.minimapX = int(self.config.get('main', 'minimapX'))
         self.minimapY = int(self.config.get('main', 'minimapY'))
         self.initial_line_position = float(self.config.get('main', 'initial_line_position'))
@@ -59,8 +61,8 @@ class TkinterBot:
         self.initial_line_position4 = float(self.config.get('main', 'initial_line_position4'))
         self.ipaddress = self.config.get('main', 'ipaddress')
         self.g = Game((8, 63, self.minimapX, self.minimapY)) 
-        self.TOKEN = self.config.get('telegram', 'TOKEN')
-        self.chat_id = self.config.get('telegram', 'chat_id')
+        self.TOKEN = self.config2.get('telegram', 'TOKEN')
+        self.chat_id = self.config2.get('telegram', 'chat_id')
         self.att = self.config.get('keybind', 'attack')
         self.jump = self.config.get('keybind', 'jump')
         self.teleport = self.config.get('keybind', 'teleport')
@@ -1572,10 +1574,12 @@ class TkinterBot:
         self.config.set('main', 'initial_line_position2', str(self.line_position_slider2.get()))
         self.config.set('main', 'initial_line_position3', str(self.line_position_slider3.get()))
         self.config.set('main', 'initial_line_position4', str(self.line_position_slider4.get()))
-        self.config.set('telegram', 'token', str(self.TOKEN))
-        self.config.set('telegram', 'chat_id', str(self.chat_id))
+        self.config2.set('telegram', 'token', str(self.TOKEN))
+        self.config2.set('telegram', 'chat_id', str(self.chat_id))
         with open('settings.ini', 'w') as f:
             self.config.write(f)
+        with open('secret.ini', 'w') as f:
+            self.config2.write(f)
         self.stop_event.set()
         # for _, stop_event in self.threads:
         #     stop_event.set()
