@@ -540,6 +540,24 @@ class TkinterBot:
         #     cv2.waitKey(0)
         # cv2.destroyAllWindows()
 
+    def rebindchathwnd(self):
+        hwnd = 0
+        windows=[]
+        while True:
+            print(f'{hwnd}')
+            hwnd = win32gui.FindWindowEx(0,hwnd,None, "MapleStory")
+            if hwnd == 0:
+                break
+            windows.append(hwnd)
+        for windowhwnd in windows:
+            position = win32gui.GetWindowRect(windowhwnd)
+            x, y, w, h = position
+            if w-x == 410:
+                self.chathwnd=windowhwnd
+                return True
+        return False
+
+
     def seperate_gma_detector(self):
         if self.chathwnd == None:
             print(f'chat window not found. ')
@@ -1389,7 +1407,6 @@ class TkinterBot:
         else:
             print(f"Request failed with status code: {response.status_code}")
 
-
     def telegrampause(self):
         print(f'telegrampause')
         pass
@@ -1400,6 +1417,11 @@ class TkinterBot:
 
     def telegrammessage(self):
         print(f'telegrammessage')
+        if not self.chathwnd:
+            print(f'chat window not found')
+            if not self.rebindchathwnd():
+                return
+            print(f'chat window found')
         now = perf_counter()
         photo0 = self.g.get_screenshot()
         position = win32gui.GetWindowRect(self.chathwnd)
@@ -1680,4 +1702,5 @@ if __name__ == "__main__":
     mytkinter.start_threads()
     mytkinter.wait_for_threads()
     # asyncio.run(main2())
+    time.sleep(10)
     pass
